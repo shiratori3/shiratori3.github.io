@@ -6,15 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://shinadori.github.io">
-  <title>Archives | mlstars</title>
+  <title>mlstars</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Record and share the growth of my programming skills">
-<meta property="og:type" content="website">
+  <meta name="description" content="hexo建站Hexo建站：部署到github_MichaelX的专栏-CSDN博客 工具列表 123git v2.28.0.windows.1node.js v14.16.0hexo-cli v4.2.0  hexo官方文档 1、安装node.js安装：直接下载安装包，运行即可 hexo安装：powershell执行以下指令 12345678910111213# 安装cnmpnpm install">
+<meta property="og:type" content="article">
 <meta property="og:title" content="mlstars">
-<meta property="og:url" content="https://shinadori.github.io/archives/index.html">
+<meta property="og:url" content="https://shinadori.github.io/uncategorized/hexo%E5%BB%BA%E7%AB%99/index.html">
 <meta property="og:site_name" content="mlstars">
-<meta property="og:description" content="Record and share the growth of my programming skills">
+<meta property="og:description" content="hexo建站Hexo建站：部署到github_MichaelX的专栏-CSDN博客 工具列表 123git v2.28.0.windows.1node.js v14.16.0hexo-cli v4.2.0  hexo官方文档 1、安装node.js安装：直接下载安装包，运行即可 hexo安装：powershell执行以下指令 12345678910111213# 安装cnmpnpm install">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-28T07:53:52.756Z">
+<meta property="article:modified_time" content="2021-03-28T07:58:21.696Z">
 <meta property="article:author" content="Billy Zhou">
 <meta property="article:tag" content="blog sql python coding">
 <meta name="twitter:card" content="summary">
@@ -143,70 +145,158 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-hexo建站" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="hexo建站"><a href="#hexo建站" class="headerlink" title="hexo建站"></a>hexo建站</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Xiong_IT/article/details/55193816">Hexo建站：部署到github_MichaelX的专栏-CSDN博客</a></p>
+<p>工具列表</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git v2.28.0.windows.1</span><br><span class="line">node.js v14.16.0</span><br><span class="line">hexo-cli v4.2.0</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">hexo官方文档</a></p>
+<h2 id="1、安装"><a href="#1、安装" class="headerlink" title="1、安装"></a>1、安装</h2><p>node.js安装：直接下载安装包，运行即可</p>
+<p>hexo安装：powershell执行以下指令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装cnmp</span></span><br><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br><span class="line"><span class="comment"># 需设置用户环境变量</span></span><br><span class="line"><span class="variable">$addPath</span>=<span class="string">&#x27;D:\Program Files\nodejs\node_global&#x27;</span>; <span class="variable">$target</span>=<span class="string">&#x27;User&#x27;</span>;</span><br><span class="line"><span class="variable">$path</span>=[Environment]::GetEnvironmentVariable(<span class="string">&#x27;Path&#x27;</span>, <span class="variable">$target</span>);</span><br><span class="line"><span class="variable">$newPath</span> = <span class="variable">$path</span> + <span class="string">&quot;;&quot;</span> + <span class="variable">$addPath</span>;</span><br><span class="line">[Environment]::SetEnvironmentVariable(<span class="string">&quot;Path&quot;</span>, <span class="variable">$newPath</span>, <span class="variable">$target</span>)</span><br><span class="line"><span class="comment"># 查看环境变量</span></span><br><span class="line">[Environment]::GetEnvironmentVariable(<span class="string">&#x27;Path&#x27;</span>, <span class="string">&#x27;User&#x27;</span>) -split<span class="string">&quot;;&quot;</span></span><br><span class="line"></span><br><span class="line">cnpm -v </span><br><span class="line"><span class="comment"># cnpm指令需执行以上步骤</span></span><br><span class="line">cnpm install -g hexo-cli </span><br></pre></td></tr></table></figure>
+
+<h2 id="2、建站"><a href="#2、建站" class="headerlink" title="2、建站"></a>2、建站</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hexo init <span class="string">&#x27;E:\\myblog&#x27;</span></span><br><span class="line"><span class="comment"># npx hexo init &#x27;E:\\myblog&#x27;</span></span><br><span class="line"><span class="built_in">cd</span> <span class="string">&quot;E:\\myblog&quot;</span></span><br><span class="line">cnpm install</span><br><span class="line">cnpm install hexo-generator-index --save</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2019/02/npx.html"></a></p>
+<h2 id="3、配置"><a href="#3、配置" class="headerlink" title="3、配置"></a>3、配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改_config.yml</span></span><br><span class="line"><span class="comment"># 参数参照：https://hexo.io/zh-cn/docs/configuration</span></span><br><span class="line"><span class="comment"># Site</span></span><br><span class="line">title: mlstars</span><br><span class="line">subtitle: <span class="string">&#x27;To the million stars&#x27;</span></span><br><span class="line">description: <span class="string">&#x27;Record and share the growth of my programming skills&#x27;</span></span><br><span class="line">keywords: blog sql python coding</span><br><span class="line">author: Billy Zhou</span><br><span class="line">language: zh-CN</span><br><span class="line">timezone: <span class="string">&#x27;Asia/Shanghai&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># https://hexo.io/themes/</span></span><br><span class="line"><span class="comment"># 安装主题</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/litten/hexo-theme-yilia.git themes/yilia</span><br><span class="line"><span class="comment"># 修改_config.yml: theme: yilia</span></span><br><span class="line"><span class="built_in">cd</span> themes/yilia</span><br><span class="line">cnpm install</span><br><span class="line"><span class="comment"># 更新主题</span></span><br><span class="line"><span class="built_in">cd</span> themes/yilia</span><br><span class="line">git pull</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.notion.so/theme-yilia-378e59a14b7147a484c83d11e7e4c36a">theme: yilia</a></p>
+<h2 id="4、部署"><a href="#4、部署" class="headerlink" title="4、部署"></a>4、部署</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">cnpm install hexo-deployer-git --save</span><br><span class="line"><span class="comment"># 根目录_config.yml 配置deploy</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment"># repo must be public in a free-plan github account</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://github.com/shiratori3/shiratori3.github.io</span><br><span class="line">  <span class="comment"># example, https://github.com/hexojs/hexojs.github.io</span></span><br><span class="line">  <span class="comment"># branch: gh-pages</span></span><br><span class="line">  branch: master</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送</span></span><br><span class="line"><span class="built_in">cd</span> <span class="string">&quot;E:\\myblog&quot;</span></span><br><span class="line">hexo clean; hexo deploy</span><br><span class="line"><span class="comment"># wait some seconds</span></span><br></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/uncategorized/hexo%E5%BB%BA%E7%AB%99/" class="archive-article-date">
-  	<time datetime="2021-03-28T07:53:52.756Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-28</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://shinadori.github.io/uncategorized/hexo%E5%BB%BA%E7%AB%99/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/uncategorized/hello-world/" class="archive-article-date">
-  	<time datetime="2021-03-25T14:08:24.457Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-25</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/uncategorized/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/uncategorized/hello-world/">Hello World</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -229,8 +319,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
