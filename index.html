@@ -145,6 +145,537 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-运用公用表表达式(CTE)优化查询语句 867ec13d97204cd59c0909ba5f5fbb42" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/data-science/sql/%E8%BF%90%E7%94%A8%E5%85%AC%E7%94%A8%E8%A1%A8%E8%A1%A8%E8%BE%BE%E5%BC%8F(CTE)%E4%BC%98%E5%8C%96%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5%20867ec13d97204cd59c0909ba5f5fbb42/">运用公用表表达式(CTE)优化查询语句</a>
+    </h1>
+  
+
+        
+        <a href="/data-science/sql/%E8%BF%90%E7%94%A8%E5%85%AC%E7%94%A8%E8%A1%A8%E8%A1%A8%E8%BE%BE%E5%BC%8F(CTE)%E4%BC%98%E5%8C%96%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5%20867ec13d97204cd59c0909ba5f5fbb42/" class="archive-article-date">
+  	<time datetime="2021-03-29T14:55:35.104Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="自关联查询"><a href="#自关联查询" class="headerlink" title="自关联查询"></a>自关联查询</h3><p>在关系型数据库中，数据以二维数据表的形式进行存储，我们在查询的时候也往往只能以记录（一行）或者字段（一列）的形式对数据进行筛选。当需要比对不在同一条记录上的两个数据时，我们可以通过表关联自身的形式来拼接这两个数据，来实现对比目的。</p>
+<p>比如说，我们想知道某行的下一行的对应数值是什么（不在同一条记录上），这种情况可以写成：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 创建测试数据-SQL Server */</span></span><br><span class="line">IF <span class="keyword">EXISTS</span> ( <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> tempdb.dbo.sysobjects <span class="keyword">WHERE</span> id <span class="operator">=</span> object_id( N<span class="string">&#x27;tempdb..#temp_sheet&#x27;</span> ) <span class="keyword">AND</span> type <span class="operator">=</span> <span class="string">&#x27;U&#x27;</span> ) <span class="keyword">DROP</span> <span class="keyword">TABLE</span> #temp_sheet</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> #temp_sheet(</span><br><span class="line">    ID <span class="type">INT</span> <span class="keyword">IDENTITY</span>(<span class="number">1</span>,<span class="number">1</span>) <span class="keyword">PRIMARY</span> KEY,</span><br><span class="line">    HBM <span class="type">INT</span>,</span><br><span class="line">    ZBSZ <span class="type">VARCHAR</span>(<span class="number">100</span>)</span><br><span class="line">)</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> #temp_sheet (HBM, ZBSZ) <span class="keyword">VALUES</span> (<span class="number">1</span>, <span class="string">&#x27;111&#x27;</span>), (<span class="number">2</span>, <span class="string">&#x27;2222&#x27;</span>), (<span class="number">3</span>, <span class="string">&#x27;33333&#x27;</span>)</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> #temp_sheet</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 自关联测试-SQL Server */</span></span><br><span class="line"><span class="keyword">SELECT</span> A.HBM, B.HBM, A.ZBSZ, B.ZBSZ</span><br><span class="line"><span class="keyword">FROM</span> #temp_sheet A</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> #temp_sheet B <span class="keyword">ON</span> A.HBM <span class="operator">=</span> B.HBM<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+
+<p>以上这种情况就是自关联，通过将一个表关联自身来实现同一张二维数据表下，不同行列的数据比对。</p>
+<h3 id="查询结果的自关联查询"><a href="#查询结果的自关联查询" class="headerlink" title="查询结果的自关联查询"></a>查询结果的自关联查询</h3><p>上面的情况中，表是现成的。但当我们需要把某个查询结果作为自关联的基表时，语句就会变得十分臃肿、难看。</p>
+<p>下面通过嵌套的方式来实现一个看起来很长但没啥实际意思的自关联查询：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* SQL Server */</span></span><br><span class="line"><span class="keyword">SELECT</span> D.HBM_2, E.HBM_2, D.ZBSZ, E.ZBSZ</span><br><span class="line"><span class="keyword">FROM</span> (</span><br><span class="line">    <span class="keyword">SELECT</span> </span><br><span class="line">        ID, HBM_2 <span class="operator">=</span> HBM_1, ZBSZ</span><br><span class="line">    <span class="keyword">FROM</span> (</span><br><span class="line">        <span class="keyword">SELECT</span> </span><br><span class="line">            ID, HBM_1 <span class="operator">=</span> HBM, ZBSZ</span><br><span class="line">        <span class="keyword">FROM</span> (</span><br><span class="line">            <span class="keyword">SELECT</span></span><br><span class="line">                ID, A.HBM, ZBSZ</span><br><span class="line">            <span class="keyword">FROM</span> </span><br><span class="line">                #temp_sheet A</span><br><span class="line">        ) B</span><br><span class="line">    ) C</span><br><span class="line">) D</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> (</span><br><span class="line">    <span class="keyword">SELECT</span> </span><br><span class="line">        ID, HBM_2 <span class="operator">=</span> HBM_1, ZBSZ</span><br><span class="line">    <span class="keyword">FROM</span> (</span><br><span class="line">        <span class="keyword">SELECT</span> </span><br><span class="line">            ID, HBM_1 <span class="operator">=</span> HBM, ZBSZ</span><br><span class="line">        <span class="keyword">FROM</span> (</span><br><span class="line">            <span class="keyword">SELECT</span></span><br><span class="line">                ID, A.HBM, ZBSZ</span><br><span class="line">            <span class="keyword">FROM</span> </span><br><span class="line">                #temp_sheet A</span><br><span class="line">        ) B</span><br><span class="line">    ) C</span><br><span class="line">) E <span class="keyword">ON</span> D.HBM_2 <span class="operator">=</span> E.HBM_2 <span class="operator">-</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看到我们把D表的查询语句重复了一次，并命名为E表，来实现查询结果的自关联查询。</p>
+<h3 id="运用CTE（WITH-AS语句）来简化查询结果的自关联查询"><a href="#运用CTE（WITH-AS语句）来简化查询结果的自关联查询" class="headerlink" title="运用CTE（WITH AS语句）来简化查询结果的自关联查询"></a>运用CTE（WITH AS语句）来简化查询结果的自关联查询</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* SQL Server */</span></span><br><span class="line"><span class="keyword">WITH</span> temp_with(ID, HBM_2, ZBSZ) <span class="keyword">AS</span> (</span><br><span class="line">    <span class="keyword">SELECT</span> </span><br><span class="line">        ID, HBM_2 <span class="operator">=</span> HBM_1, ZBSZ</span><br><span class="line">    <span class="keyword">FROM</span> (</span><br><span class="line">        <span class="keyword">SELECT</span> </span><br><span class="line">            ID, HBM_1 <span class="operator">=</span> HBM, ZBSZ</span><br><span class="line">        <span class="keyword">FROM</span> (</span><br><span class="line">            <span class="keyword">SELECT</span></span><br><span class="line">                ID, A.HBM, ZBSZ</span><br><span class="line">            <span class="keyword">FROM</span> </span><br><span class="line">                #temp_sheet A</span><br><span class="line">        ) B</span><br><span class="line">    ) C</span><br><span class="line">)</span><br><span class="line"><span class="keyword">SELECT</span> A.HBM_2, B.HBM_2, A.ZBSZ, B.ZBSZ</span><br><span class="line"><span class="keyword">FROM</span> temp_with A</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> temp_with B <span class="keyword">ON</span> A.HBM_2 <span class="operator">=</span> B.HBM_2<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+
+<p>通过把查询结果放入WITH AS语句，可以省去后半的重复部分，提高了整体语句的可读性。</p>
+<p>上述查询中的WITH AS部分被称为公用表表达式(CTE)。其本质是一个临时表，具体的细节可进一步参照下方的sqlserver官方文档解释。在MySQL中，8.0版本也开始支持WITH语句。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* SQL Server */</span></span><br><span class="line">[ <span class="keyword">WITH</span> <span class="operator">&lt;</span>common_table_expression<span class="operator">&gt;</span> [ ,...n ] ]  </span><br><span class="line">  </span><br><span class="line"><span class="operator">&lt;</span>common_table_expression<span class="operator">&gt;</span>::<span class="operator">=</span>  </span><br><span class="line">    expression_name [ ( column_name [ ,...n ] ) ]  </span><br><span class="line">    <span class="keyword">AS</span>  </span><br><span class="line">    ( CTE_query_definition )</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/sql/t-sql/queries/with-common-table-expression-transact-sql?view=sql-server-ver15">WITH common_table_expression (Transact-SQL) - SQL Server</a></p>
+<p>另外，多个查询结果的关联也可以通过CTE来实现拼接，来优化语句的阅读体验。例子如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* SQL Server */</span></span><br><span class="line"><span class="keyword">WITH</span> temp_with(ID, HBM_2, ZBSZ) <span class="keyword">AS</span> (</span><br><span class="line">    <span class="keyword">SELECT</span> </span><br><span class="line">        ID, HBM_2 <span class="operator">=</span> HBM_1, ZBSZ</span><br><span class="line">    <span class="keyword">FROM</span> (</span><br><span class="line">        <span class="keyword">SELECT</span> </span><br><span class="line">            ID, HBM_1 <span class="operator">=</span> HBM, ZBSZ</span><br><span class="line">        <span class="keyword">FROM</span> (</span><br><span class="line">            <span class="keyword">SELECT</span></span><br><span class="line">                ID, A.HBM, ZBSZ</span><br><span class="line">            <span class="keyword">FROM</span> </span><br><span class="line">                #temp_sheet A</span><br><span class="line">        ) B</span><br><span class="line">    ) C</span><br><span class="line">), temp_with2(ID, HBM_3, ZBSZ_3) <span class="keyword">AS</span> (</span><br><span class="line">    <span class="keyword">SELECT</span> </span><br><span class="line">        ID, HBM_3 <span class="operator">=</span> HBM, ZBSZ_3 <span class="operator">=</span> ZBSZ </span><br><span class="line">    <span class="keyword">FROM</span> (</span><br><span class="line">        <span class="keyword">SELECT</span></span><br><span class="line">            ID, A.HBM, ZBSZ</span><br><span class="line">        <span class="keyword">FROM</span> </span><br><span class="line">            #temp_sheet A</span><br><span class="line">    ) B</span><br><span class="line">)</span><br><span class="line"><span class="keyword">SELECT</span> A.HBM_2, B.HBM_3, A.ZBSZ, B.ZBSZ_3</span><br><span class="line"><span class="keyword">FROM</span> temp_with A</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> temp_with2 B <span class="keyword">ON</span> A.HBM_2 <span class="operator">=</span> B.HBM_3</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">sql</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/data-science//" class="article-tag-list-link color3">data science</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/data-science/sql//" class="article-tag-list-link color4">sql</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/data-science/sql/%E8%BF%90%E7%94%A8%E5%85%AC%E7%94%A8%E8%A1%A8%E8%A1%A8%E8%BE%BE%E5%BC%8F(CTE)%E4%BC%98%E5%8C%96%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5%20867ec13d97204cd59c0909ba5f5fbb42/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Jupyter Notebook 预加载 cece6a5b9e994b949c839a870b651d5e" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/coding/python/Jupyter%20Notebook%20%E9%A2%84%E5%8A%A0%E8%BD%BD%20cece6a5b9e994b949c839a870b651d5e/">Jupyter Notebook 预加载</a>
+    </h1>
+  
+
+        
+        <a href="/coding/python/Jupyter%20Notebook%20%E9%A2%84%E5%8A%A0%E8%BD%BD%20cece6a5b9e994b949c839a870b651d5e/" class="archive-article-date">
+  	<time datetime="2021-03-29T14:53:09.402Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://towardsdatascience.com/how-to-automatically-import-your-favorite-libraries-into-ipython-or-a-jupyter-notebook-9c69d89aa343">How to Automatically Import Your Favorite Libraries into IPython or a Jupyter Notebook</a></p>
+<p>Jupyter的python内核实际为Ipython，因此需要在C:\Users\yourusrname.ipython\profile_default\startup\中添加py启动文件实现自动加载。</p>
+<p>文件名格式为XX-filename.py，XX前缀为纯数字，代表加载顺序。下文为该目录的README文件内容，解释了如何读取。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">This is the IPython startup directory</span><br><span class="line"></span><br><span class="line">.py and .ipy files in this directory will be run *prior* to any code or files specified via the exec_lines or exec_files configurables whenever you load this profile.</span><br><span class="line"></span><br><span class="line">Files will be run in lexicographical order, so you can control the execution order of files with a prefix, e.g.::</span><br><span class="line"></span><br><span class="line">    00-first.py</span><br><span class="line">    50-middle.py</span><br><span class="line">    99-last.ipy</span><br></pre></td></tr></table></figure>
+
+<p>以下为个人的通用启动文件 00-start.py 设置，具体项目的加载项可以另外设置对应 XX-XXX.py 启动文件，在通用文件后再进行加载：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- encoding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># flake8: noqa</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">@File    :   start.py</span></span><br><span class="line"><span class="string">@Author  :   Billy Zhou</span></span><br><span class="line"><span class="string">@Time    :   2021/03/12</span></span><br><span class="line"><span class="string">@Version :   1.1.0</span></span><br><span class="line"><span class="string">@Desc    :   None</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">pd.options.display.max_columns = <span class="number">500</span></span><br><span class="line">pd.options.display.max_rows = <span class="number">500</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 让notebook展示的区域更加宽</span></span><br><span class="line"><span class="keyword">from</span> IPython.core.display <span class="keyword">import</span> display, HTML</span><br><span class="line">WIDTH_85 = HTML(<span class="string">&quot;&lt;style&gt;.container &#123; width:85% !important; &#125;&lt;/style&gt;&quot;</span>)</span><br><span class="line">WIDTH_100 = HTML(<span class="string">&quot;&lt;style&gt;.container &#123; width:100% !important; &#125;&lt;/style&gt;&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> IPython <span class="keyword">import</span> get_ipython</span><br><span class="line">ipython = get_ipython()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 每次底层包有变动，会自动加载</span></span><br><span class="line"><span class="keyword">if</span> <span class="string">&#x27;ipython&#x27;</span> <span class="keyword">in</span> <span class="built_in">globals</span>() <span class="keyword">and</span> ipython:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;\nWelcome to IPython!&#x27;</span>)</span><br><span class="line">    ipython.magic(<span class="string">&#x27;load_ext autoreload&#x27;</span>)</span><br><span class="line">    ipython.magic(<span class="string">&#x27;autoreload 2&#x27;</span>)</span><br><span class="line">    ipython.magic(<span class="string">&#x27;matplotlib inline&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> IPython.core.interactiveshell <span class="keyword">import</span> InteractiveShell</span><br><span class="line">InteractiveShell.ast_node_interactivity = <span class="string">&#x27;all&#x27;</span></span><br><span class="line"><span class="comment"># ‘all’, ‘last’, ‘last_expr’ or ‘none’, ‘last_expr_or_assign’ specifying which nodes should be run interactively (displaying output from expressions).</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="keyword">import</span> logging</span><br><span class="line">    logging.basicConfig(</span><br><span class="line">        level=logging.INFO,</span><br><span class="line">        <span class="built_in">format</span>=<span class="string">&#x27;%(asctime)s %(name)s %(levelname)s %(message)s&#x27;</span>,</span><br><span class="line">        datefmt=<span class="string">&#x27;%Y-%m-%d %H:%M:%S&#x27;</span>)</span><br><span class="line">    logging.debug(<span class="string">&#x27;start DEBUG&#x27;</span>)</span><br><span class="line">    logging.debug(<span class="string">&#x27;==========================================================&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">import</span> os</span><br><span class="line">    <span class="keyword">from</span> pathlib <span class="keyword">import</span> Path</span><br><span class="line"></span><br><span class="line">    usr_path = os.path.expanduser(<span class="string">&#x27;~&#x27;</span>)</span><br><span class="line">    filepath = Path(os.path.expanduser(<span class="string">&#x27;~&#x27;</span>)).joinpath(<span class="string">&#x27;.ipython\profile_default\startup&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;path_to_put: &#123;0&#125;&#x27;</span>.<span class="built_in">format</span>(filepath))</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;dir: &#123;0&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="built_in">dir</span>()))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;globals: &#123;0&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="built_in">globals</span>()))</span><br><span class="line"></span><br><span class="line">    logging.debug(<span class="string">&#x27;==========================================================&#x27;</span>)</span><br><span class="line">    logging.debug(<span class="string">&#x27;end DEBUG&#x27;</span>)</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">data science</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Jupyter</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/coding/python//" class="article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/coding/python/Jupyter%20Notebook%20%E9%A2%84%E5%8A%A0%E8%BD%BD%20cece6a5b9e994b949c839a870b651d5e/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-xlwings f6a07dce195c4c07a72076b158f95afc" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/coding/python/xlwings%20f6a07dce195c4c07a72076b158f95afc/">xlwings</a>
+    </h1>
+  
+
+        
+        <a href="/coding/python/xlwings%20f6a07dce195c4c07a72076b158f95afc/" class="archive-article-date">
+  	<time datetime="2021-03-29T14:40:23.911Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1、安装"><a href="#1、安装" class="headerlink" title="1、安装"></a>1、安装</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install xlwings</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、excel插件安装"><a href="#2、excel插件安装" class="headerlink" title="2、excel插件安装"></a>2、excel插件安装</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xlwings addin install</span><br></pre></td></tr></table></figure>
+
+<h3 id="启用UDFs（用户定义函数）及RunPython"><a href="#启用UDFs（用户定义函数）及RunPython" class="headerlink" title="启用UDFs（用户定义函数）及RunPython"></a>启用UDFs（用户定义函数）及RunPython</h3><p>使用UDFs（用户定义函数）需要进一步设置加载项及VB引用。xlwings.xlam文件的默认安装位置为<code>C:\Users\yourusrname\AppData\Roaming\Microsoft\Excel\XLSTART</code>。</p>
+<p>设置加载项：菜单栏”开发工具”-“加载项”-“加载项”，可用加载宏一栏中，点击Xlwings，点击浏览，点击以上路径中的xlwings.xlam文件。</p>
+<p>设置VB引用项：菜单栏”开发工具”-“代码”-“Visual Basic”，打开VB设置页面，随后菜单栏”工具”-“引用”，可使用的引用一栏中，点击xlwings，点击浏览，点击以上路径中的xlwings.xlam文件。</p>
+<h3 id="避免“文件已打开”警告"><a href="#避免“文件已打开”警告" class="headerlink" title="避免“文件已打开”警告"></a>避免“文件已打开”警告</h3><p>一般而言，PERSONAL.xlsb文件也会在xlwings.xlam文件的默认安装路径中。excel在启动时会自动加载XLSTART文件夹下的文件。因此，xlwings.xlam会先被excel启动，然后再被已添加Xlwings脚本的PERSONAL文件启动一次，导致报错“文件已打开”。</p>
+<p>为避免这个问题，需要把xlwings.xlam文件挪至插件加载项位置。加载项文件夹的路径为：<code>C:\Users\yourusrname\AppData\Roaming\Microsoft\AddIns</code>。修改方式同上。需要修改加载项文件位置及Visual Basic引用文件位置。</p>
+<p>设置完两个引用后，删除原文件夹内的xlwings.xlam文件即可。</p>
+<p>如果更新了xlwings版本，需要重新设置以上步骤。</p>
+<h2 id="3、插件设置"><a href="#3、插件设置" class="headerlink" title="3、插件设置"></a>3、插件设置</h2><p><img src="/coding/python/xlwings%20f6a07dce195c4c07a72076b158f95afc/Untitled.png" alt="xlwings%20f6a07dce195c4c07a72076b158f95afc/Untitled.png"></p>
+<p><a target="_blank" rel="noopener" href="https://docs.xlwings.org/en/stable/addin.html">Add-in &amp; Settings - xlwings dev documentation</a></p>
+<h3 id="主要配置项："><a href="#主要配置项：" class="headerlink" title="主要配置项："></a>主要配置项：</h3><ul>
+<li>interpreter：python解释器位置。推荐用conda独立设置xlwings用的环境，以便维护，如<code>D:\Miniconda3\envs\pyexcel\pythonw.exe</code>。如果用conda，可以只配置Conda Path及Conda Env项，interpreter留空。</li>
+<li>Conda Path：conda安装路径，如配置interpreter则可留空，如<code>D:\Miniconda3</code></li>
+<li>Conda Env：conda环境名，如配置interpreter则可留空，如<code>pyexcel</code></li>
+<li>PYTHONPATH：脚本文件路径。与后面的UDFs相关。如<code>D:\pycharm\py_for_excel</code></li>
+<li>UDF Modules：用户定义模块的文件名称。不需要录入.py后缀，多个文件名用；隔开。如<code>D:\pycharm\py_for_excel\common_udfs.py</code>自定义文件，在PYTHONPATH里配置<code>D:\pycharm\py_for_excel</code> ，在UDF Modules里配置 <code>common_udfs</code></li>
+</ul>
+<h3 id="按钮："><a href="#按钮：" class="headerlink" title="按钮："></a>按钮：</h3><ul>
+<li>Run main：运行与当前工作簿同名的python函数。这允许你在不启用宏的情况下保存你的工作簿为xlsx文件。<code>xlwings quickstart</code> 指令会创建一个工作簿可自动执行该Run按钮。</li>
+<li>Import Functions：导入用户定义模块文件中的函数至当前工作簿为宏。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">excel</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">xlwings</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/coding/python//" class="article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/coding/python/xlwings%20f6a07dce195c4c07a72076b158f95afc/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-文件加密 7064c54fa38b45318a6881d09baeb106" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/coding/python/%E6%96%87%E4%BB%B6%E5%8A%A0%E5%AF%86%207064c54fa38b45318a6881d09baeb106/">文件加密</a>
+    </h1>
+  
+
+        
+        <a href="/coding/python/%E6%96%87%E4%BB%B6%E5%8A%A0%E5%AF%86%207064c54fa38b45318a6881d09baeb106/" class="archive-article-date">
+  	<time datetime="2021-03-29T14:37:56.128Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2013/07/rsa_algorithm_part_two.html">RSA算法原理（二）</a></p>
+<h2 id="python实现"><a href="#python实现" class="headerlink" title="python实现"></a>python实现</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RSA测试文本：abc123456789def</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- encoding: utf-8 -*-</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">@File    :   RSA_encrypt.py</span></span><br><span class="line"><span class="string">@Author  :   Billy Zhou</span></span><br><span class="line"><span class="string">@Time    :   2021/03/12</span></span><br><span class="line"><span class="string">@Version :   1.2.0</span></span><br><span class="line"><span class="string">@Desc    :   None</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"><span class="keyword">import</span> rsa</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">from</span> pathlib <span class="keyword">import</span> Path</span><br><span class="line"></span><br><span class="line">cwdPath = PATH(<span class="string">&quot;D\&quot;)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">def CheckRSAKeys(savepath=&#x27;&#x27;):</span></span><br><span class="line"><span class="string">    # 对应文件夹是否存在</span></span><br><span class="line"><span class="string">    if Path(savepath) != Path(&#x27;&#x27;) and Path(savepath).is_dir():</span></span><br><span class="line"><span class="string">        savepath = Path(savepath)</span></span><br><span class="line"><span class="string">    else:</span></span><br><span class="line"><span class="string">        print(&#x27;Error. Unvaild Path. Will save to default path&#x27;)</span></span><br><span class="line"><span class="string">        savepath = cwdPath.joinpath(&#x27;gitignore\\rsa&#x27;)</span></span><br><span class="line"><span class="string">    logging.debug(savepath)</span></span><br><span class="line"><span class="string">    if not Path(savepath).exists():</span></span><br><span class="line"><span class="string">        Path.mkdir(savepath, parents=True)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    kfdict = &#123;</span></span><br><span class="line"><span class="string">        &#x27;pubfile&#x27;: savepath.joinpath(&#x27;public.pem&#x27;),</span></span><br><span class="line"><span class="string">        &#x27;prifile&#x27;: savepath.joinpath(&#x27;private.pem&#x27;),</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    if not (kfdict[&#x27;pubfile&#x27;].exists() and kfdict[&#x27;prifile&#x27;].exists()):</span></span><br><span class="line"><span class="string">        kfdict = CreateRSAKeys(savepath)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    # git上传忽略对应文件</span></span><br><span class="line"><span class="string">    with open(cwdPath.joinpath(&#x27;.gitignore&#x27;), &#x27;a+&#x27;, encoding=&#x27;utf-8&#x27;) as f:</span></span><br><span class="line"><span class="string">        rsa_ignore = False</span></span><br><span class="line"><span class="string">        f.seek(0, 0)  # back to the start</span></span><br><span class="line"><span class="string">        for i in f.readlines():</span></span><br><span class="line"><span class="string">            logging.debug(i.replace(&#x27;\n&#x27;, &#x27;&#x27;))</span></span><br><span class="line"><span class="string">            if i.replace(&#x27;\n&#x27;, &#x27;&#x27;) in [&#x27;/gitignore/&#x27;, &#x27;/gitignore/rsa/&#x27;]:</span></span><br><span class="line"><span class="string">                rsa_ignore = True</span></span><br><span class="line"><span class="string">                break</span></span><br><span class="line"><span class="string">        if not rsa_ignore:</span></span><br><span class="line"><span class="string">            f.write(&#x27;\n/gitignore/rsa/\n&#x27;)</span></span><br><span class="line"><span class="string">    return kfdict[&#x27;pubfile&#x27;], kfdict[&#x27;prifile&#x27;]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">def CreateRSAKeys(savepath):</span></span><br><span class="line"><span class="string">    # 先生成一对密钥，然后保存.pem格式文件</span></span><br><span class="line"><span class="string">    print(&#x27;Creating RSA keys.&#x27;)</span></span><br><span class="line"><span class="string">    (pubkey, privkey) = rsa.newkeys(2048)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    with open(savepath.joinpath(&#x27;public.pem&#x27;), &#x27;w+&#x27;) as pubfile:</span></span><br><span class="line"><span class="string">        logging.debug(type(pubkey.save_pkcs1()))</span></span><br><span class="line"><span class="string">        pubfile.write(pubkey.save_pkcs1().decode(&#x27;utf-8&#x27;))</span></span><br><span class="line"><span class="string">    with open(savepath.joinpath(&#x27;private.pem&#x27;), &#x27;w+&#x27;) as prifile:</span></span><br><span class="line"><span class="string">        logging.debug(type(privkey.save_pkcs1()))</span></span><br><span class="line"><span class="string">        prifile.write(privkey.save_pkcs1().decode(&#x27;utf-8&#x27;))</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    return &#123;</span></span><br><span class="line"><span class="string">        &#x27;pubfile&#x27;: savepath.joinpath(&#x27;public.pem&#x27;),</span></span><br><span class="line"><span class="string">        &#x27;prifile&#x27;: savepath.joinpath(&#x27;private.pem&#x27;),</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">def Encrypt(pubkeyfile, data, savefile=&#x27;&#x27;):</span></span><br><span class="line"><span class="string">    if not isinstance(data, bytes):</span></span><br><span class="line"><span class="string">        if os.path.isabs(data):</span></span><br><span class="line"><span class="string">            if Path(data):</span></span><br><span class="line"><span class="string">                if Path(data).is_file():</span></span><br><span class="line"><span class="string">                    with open(data, encoding=&quot;</span>utf-<span class="number">8</span><span class="string">&quot;) as df:</span></span><br><span class="line"><span class="string">                        data = df.read()</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    logging.debug(&#x27;data_plain:&#x27;)</span></span><br><span class="line"><span class="string">    logging.debug(data)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    with open(pubkeyfile) as publicfile:</span></span><br><span class="line"><span class="string">        pubkey = rsa.PublicKey.load_pkcs1(publicfile.read().encode(&#x27;utf-8&#x27;))</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        crypto = rsa.encrypt(data.encode(&#x27;utf-8&#x27;), pubkey)</span></span><br><span class="line"><span class="string">        crypto_decode_utf8 = base64.b64encode(crypto).decode(&#x27;utf-8&#x27;)</span></span><br><span class="line"><span class="string">        logging.debug(&#x27;cry: %s&#x27;, crypto)  # bytes</span></span><br><span class="line"><span class="string">        logging.debug(&#x27;cry_base64: %s&#x27;, base64.b64encode(crypto))  # bytes</span></span><br><span class="line"><span class="string">        logging.debug(&#x27;cry_base64_utf8: %s&#x27;, crypto_decode_utf8)  # str</span></span><br><span class="line"><span class="string">        logging.debug(&#x27;data_encrypted: %s&#x27;, crypto_decode_utf8)  # str</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    if savefile:</span></span><br><span class="line"><span class="string">        if not Path.exists(Path(savefile).parent):</span></span><br><span class="line"><span class="string">            Path.mkdir(Path(savefile).parent, parents=True)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        with open(savefile, &#x27;w+&#x27;, encoding=&quot;</span>utf-<span class="number">8</span><span class="string">&quot;) as sf:</span></span><br><span class="line"><span class="string">            sf.write(crypto_decode_utf8)</span></span><br><span class="line"><span class="string">    else:</span></span><br><span class="line"><span class="string">        return crypto_decode_utf8</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">def Decrypt(prikeyfile, data, savefile=&#x27;&#x27;):</span></span><br><span class="line"><span class="string">    if not isinstance(data, bytes) and os.path.isabs(data):</span></span><br><span class="line"><span class="string">        if Path(data).is_file():</span></span><br><span class="line"><span class="string">            with open(data, encoding=&quot;</span>utf-<span class="number">8</span><span class="string">&quot;) as df:</span></span><br><span class="line"><span class="string">                data = df.read()</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    crypto_tra = base64.b64decode(data.encode(&#x27;utf-8&#x27;))</span></span><br><span class="line"><span class="string">    logging.debug(&#x27;data_undecrypted: %s&#x27;, data)  # str</span></span><br><span class="line"><span class="string">    logging.debug(&#x27;data: %s&#x27;, data)  # str</span></span><br><span class="line"><span class="string">    logging.debug(&#x27;cry_utf8:  %s&#x27;, data.encode(&#x27;utf-8&#x27;))  # bytes</span></span><br><span class="line"><span class="string">    logging.debug(&#x27;cry_utf8_base64:  %s&#x27;, crypto_tra)  # bytes</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    with open(prikeyfile) as privatefile:</span></span><br><span class="line"><span class="string">        privkey = rsa.PrivateKey.load_pkcs1(privatefile.read().encode(&#x27;utf-8&#x27;))</span></span><br><span class="line"><span class="string">        plaintext = rsa.decrypt(crypto_tra, privkey).decode(&#x27;utf-8&#x27;)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    if savefile:</span></span><br><span class="line"><span class="string">        if not Path.exists(Path(savefile).parent):</span></span><br><span class="line"><span class="string">            Path.mkdir(Path(savefile).parent, parents=True)</span></span><br><span class="line"><span class="string">        with open(savefile, &#x27;w+&#x27;, encoding=&quot;</span>utf-<span class="number">8</span><span class="string">&quot;) as sf:</span></span><br><span class="line"><span class="string">            sf.write(plaintext)</span></span><br><span class="line"><span class="string">    else:</span></span><br><span class="line"><span class="string">        logging.debug(&#x27;data_decrypted: %s&#x27;, plaintext)</span></span><br><span class="line"><span class="string">        return plaintext</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">if __name__ == &#x27;__main__&#x27;:</span></span><br><span class="line"><span class="string">    logging.basicConfig(</span></span><br><span class="line"><span class="string">        level=logging.INFO,</span></span><br><span class="line"><span class="string">        format=&#x27;%(asctime)s %(name)s %(levelname)s %(message)s&#x27;,</span></span><br><span class="line"><span class="string">        datefmt=&#x27;%Y-%m-%d %H:%M:%S&#x27;)</span></span><br><span class="line"><span class="string">    logging.debug(&#x27;start DEBUG&#x27;)</span></span><br><span class="line"><span class="string">    logging.debug(&#x27;==========================================================&#x27;)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    # create test file</span></span><br><span class="line"><span class="string">    with open(cwdPath.joinpath(&#x27;rsa_test.txt&#x27;), &#x27;a+&#x27;) as test_file:</span></span><br><span class="line"><span class="string">        test_file.seek(0, 0)  # back to the start</span></span><br><span class="line"><span class="string">        f = test_file.read()</span></span><br><span class="line"><span class="string">        logging.debug(f)</span></span><br><span class="line"><span class="string">        if f == &#x27;&#x27;:</span></span><br><span class="line"><span class="string">            logging.info(&#x27;测试文件为空&#x27;)</span></span><br><span class="line"><span class="string">            test_file.write(&#x27;abc123456789&#x27;)</span></span><br><span class="line"><span class="string">    datafile = cwdPath.joinpath(&#x27;rsa_test.txt&#x27;)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    pubkeyfile, prikeyfile = CheckRSAKeys(</span></span><br><span class="line"><span class="string">        cwdPath.joinpath(&#x27;gitignore\\rsa&#x27;))</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    # datafile_encrypted = cwdPath.joinpath(&#x27;rsa_encrypted.txt&#x27;)</span></span><br><span class="line"><span class="string">    # datafile_decrypted = cwdPath.joinpath(&#x27;rsa_decrypted.txt&#x27;)</span></span><br><span class="line"><span class="string">    # text_encrypted = Encrypt(pubkeyfile, datafile, datafile_encrypted)</span></span><br><span class="line"><span class="string">    # text_decryed = Decrypt(</span></span><br><span class="line"><span class="string">    #             prikeyfile, datafile_encrypted, datafile_decrypted)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    with open(datafile, encoding=&quot;</span>utf-<span class="number">8</span><span class="string">&quot;) as df:</span></span><br><span class="line"><span class="string">        data = df.read()</span></span><br><span class="line"><span class="string">    text_encrypted = Encrypt(pubkeyfile, data)</span></span><br><span class="line"><span class="string">    text_decryed = Decrypt(prikeyfile, text_encrypted)</span></span><br><span class="line"><span class="string">    logging.info(text_decryed)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    logging.debug(&#x27;==========================================================&#x27;)</span></span><br><span class="line"><span class="string">    logging.debug(&#x27;end DEBUG&#x27;)</span></span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">rsa</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">encrypt</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/coding/python//" class="article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/coding/python/%E6%96%87%E4%BB%B6%E5%8A%A0%E5%AF%86%207064c54fa38b45318a6881d09baeb106/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-用conda-pack打包制作独立环境 b9e4d01cf03e4d15bd936c14c46ea59f" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/coding/python/%E7%94%A8conda-pack%E6%89%93%E5%8C%85%E5%88%B6%E4%BD%9C%E7%8B%AC%E7%AB%8B%E7%8E%AF%E5%A2%83%20b9e4d01cf03e4d15bd936c14c46ea59f/">用conda-pack打包制作独立环境</a>
+    </h1>
+  
+
+        
+        <a href="/coding/python/%E7%94%A8conda-pack%E6%89%93%E5%8C%85%E5%88%B6%E4%BD%9C%E7%8B%AC%E7%AB%8B%E7%8E%AF%E5%A2%83%20b9e4d01cf03e4d15bd936c14c46ea59f/" class="archive-article-date">
+  	<time datetime="2021-03-29T14:34:02.241Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://conda.github.io/conda-pack/">conda-pack</a></p>
+<p>Conda-pack 是一个命令行工具，用于打包 conda 环境，其中包括该环境中安装的软件包的所有二进制文件。 当您想在有限或没有网络访问的系统中重现环境时，此功能很有用。</p>
+<p>要安装 conda-pack，请确保您位于 root 或 base 环境中，以便 conda-pack 在子环境中可用。Conda-pack 可通过 conda-forge 或者 PyPI 安装。</p>
+<p>需要注意的是：</p>
+<ul>
+<li>conda必须已安装且在 PATH 环境变量中</li>
+<li>conda-pack 指定平台和操作系统，目标计算机必须具有与源计算机相同的平台和操作系统。</li>
+</ul>
+<h2 id="在源机器上执行："><a href="#在源机器上执行：" class="headerlink" title="在源机器上执行："></a>在源机器上执行：</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># install</span></span><br><span class="line">conda install -c conda-forge conda-pack</span><br><span class="line"></span><br><span class="line"><span class="comment"># Pack</span></span><br><span class="line"><span class="comment"># 打包至 my_env.tar.gz</span></span><br><span class="line">conda pack -n my_env</span><br><span class="line"><span class="comment"># 指定包名称 out_name.tar.gz</span></span><br><span class="line">conda pack -n my_env -o out_name.tar.gz</span><br><span class="line"><span class="comment"># 指定路径 /explicit/path/to/my_env</span></span><br><span class="line">conda pack -p /explicit/path/to/my_env</span><br></pre></td></tr></table></figure>
+
+<h2 id="在目标机器上执行："><a href="#在目标机器上执行：" class="headerlink" title="在目标机器上执行："></a>在目标机器上执行：</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建目录 `my_env`</span></span><br><span class="line">mkdir -p my_env</span><br><span class="line"><span class="comment"># Unpack</span></span><br><span class="line"><span class="comment"># 解压至目录 `my_env`</span></span><br><span class="line">tar -xzf my_env.tar.gz -C my_env</span><br><span class="line"></span><br><span class="line"><span class="comment"># 激活环境，会添加 `my_env/bin` 至环境变量 PATH</span></span><br><span class="line">source my_env/<span class="built_in">bin</span>/activate</span><br><span class="line"></span><br><span class="line"><span class="comment"># Run Python from in the environment</span></span><br><span class="line">(my_env) $ python</span><br><span class="line"></span><br><span class="line"><span class="comment"># Cleanup prefixes from in the active environment. Note that this command can also be run without activating the environment as long as some version of Python is already installed on the machine.</span></span><br><span class="line">(my_env) $ conda-unpack</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这时候已经和用conda安装一样了</span></span><br><span class="line">(my_env) $ ipython --version</span><br><span class="line"></span><br><span class="line"><span class="comment"># 卸载该安装包</span></span><br><span class="line">(my_env) $ source my_env/<span class="built_in">bin</span>/deactivate</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">conda</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/coding/python//" class="article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/coding/python/%E7%94%A8conda-pack%E6%89%93%E5%8C%85%E5%88%B6%E4%BD%9C%E7%8B%AC%E7%AB%8B%E7%8E%AF%E5%A2%83%20b9e4d01cf03e4d15bd936c14c46ea59f/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-theme：yilia定制 d9b0f87daa304b289ea00c6867070da2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -186,10 +717,6 @@
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">coding</a>
-        		</li>
-      		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">blog</a>
         		</li>
@@ -282,10 +809,6 @@
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">coding</a>
-        		</li>
-      		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">blog</a>
         		</li>
@@ -429,10 +952,6 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">coding</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">blog</a>
         		</li>
       		
@@ -538,10 +1057,6 @@
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">coding</a>
-        		</li>
-      		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">blog</a>
         		</li>
@@ -687,11 +1202,43 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">coding</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">data science</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Jupyter</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">excel</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">xlwings</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">rsa</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">encrypt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">conda</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">sql</a>
               </li>
             
             <div class="clearfix"></div>
