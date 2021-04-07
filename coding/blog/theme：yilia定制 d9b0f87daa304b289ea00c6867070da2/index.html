@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://shiratori3.github.io">
   <title>theme：yilia定制 | mlstars</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="添加分类目录Hexo yilia 添加目录页面 12# 新建页面hexo new page categories  123456# 修改 &#x2F;source&#x2F;categories&#x2F;index.md---title: 分类目录type: &quot;categories&quot;layout: &quot;categories&quot;---  123456789101112131415161718">
+  <meta name="description" content="添加分类目录Hexo yilia 添加目录页面 12# 新建页面hexo new page categories  123456# 修改 &#x2F;source&#x2F;categories&#x2F;index.md---title: 分类目录type: &quot;categories&quot;layout: &quot;categories&quot;---">
 <meta property="og:type" content="article">
 <meta property="og:title" content="theme：yilia定制">
 <meta property="og:url" content="https://shiratori3.github.io/coding/blog/theme%EF%BC%9Ayilia%E5%AE%9A%E5%88%B6%20d9b0f87daa304b289ea00c6867070da2/index.html">
 <meta property="og:site_name" content="mlstars">
-<meta property="og:description" content="添加分类目录Hexo yilia 添加目录页面 12# 新建页面hexo new page categories  123456# 修改 &#x2F;source&#x2F;categories&#x2F;index.md---title: 分类目录type: &quot;categories&quot;layout: &quot;categories&quot;---  123456789101112131415161718">
+<meta property="og:description" content="添加分类目录Hexo yilia 添加目录页面 12# 新建页面hexo new page categories  123456# 修改 &#x2F;source&#x2F;categories&#x2F;index.md---title: 分类目录type: &quot;categories&quot;layout: &quot;categories&quot;---">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-28T13:51:26.761Z">
-<meta property="article:modified_time" content="2021-03-29T14:39:06.006Z">
+<meta property="article:modified_time" content="2021-04-07T12:05:42.999Z">
 <meta property="article:author" content="Billy Zhou">
 <meta property="article:tag" content="blog">
 <meta name="twitter:card" content="summary">
@@ -170,6 +170,7 @@
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改 /source/categories/index.md</span></span><br><span class="line">---</span><br><span class="line">title: 分类目录</span><br><span class="line"><span class="built_in">type</span>: <span class="string">&quot;categories&quot;</span></span><br><span class="line">layout: <span class="string">&quot;categories&quot;</span></span><br><span class="line">---</span><br></pre></td></tr></table></figure>
 
+<span id="more"></span>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 多层分类</span></span><br><span class="line"><span class="comment"># 新建 themes/yilia/layout/categories.ejs</span></span><br><span class="line">&lt;article class=<span class="string">&quot;article article-type-post show&quot;</span>&gt;</span><br><span class="line">  &lt;header class=<span class="string">&quot;article-header&quot;</span> style=<span class="string">&quot;border-bottom: 1px solid #ccc&quot;</span>&gt;</span><br><span class="line">  &lt;h1 class=<span class="string">&quot;article-title&quot;</span> itemprop=<span class="string">&quot;name&quot;</span>&gt;</span><br><span class="line">    &lt;%= page.title %&gt;</span><br><span class="line">  &lt;/h1&gt;</span><br><span class="line">  &lt;/header&gt;</span><br><span class="line"></span><br><span class="line">  &lt;% <span class="keyword">if</span> (site.categories.length)&#123; %&gt;</span><br><span class="line">  &lt;div class=<span class="string">&quot;category-all-page&quot;</span>&gt;</span><br><span class="line">    &lt;h2&gt;共计&amp;nbsp;&lt;%= site.categories.length %&gt;&amp;nbsp;个分类&lt;/h2&gt;</span><br><span class="line">    &lt;%- list_categories(site.categories, &#123;</span><br><span class="line">      show_count: <span class="literal">true</span>,</span><br><span class="line">      class: <span class="string">&#x27;category-list-item&#x27;</span>,</span><br><span class="line">      style: <span class="string">&#x27;list&#x27;</span>,</span><br><span class="line">      depth: 2,</span><br><span class="line">      separator: <span class="string">&#x27;&#x27;</span></span><br><span class="line">    &#125;) %&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;% &#125; %&gt;</span><br><span class="line">&lt;/article&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改css文件 themes/yilia/source/main.0cf68a.css</span></span><br><span class="line"><span class="comment"># 添加以下样式：</span></span><br><span class="line">category-all-page &#123;</span><br><span class="line">    margin: 30px 40px 30px 40px;</span><br><span class="line">    position: relative;</span><br><span class="line">    min-height: 70vh;</span><br><span class="line">  &#125;</span><br><span class="line">  .category-all-page h2 &#123;</span><br><span class="line">    margin: 20px 0;</span><br><span class="line">  &#125;</span><br><span class="line">  .category-all-page .category-all-title &#123;</span><br><span class="line">    text-align: center;</span><br><span class="line">  &#125;</span><br><span class="line">  .category-all-page .category-all &#123;</span><br><span class="line">    margin-top: 20px;</span><br><span class="line">  &#125;</span><br><span class="line">  .category-all-page .category-list &#123;</span><br><span class="line">    margin: 0;</span><br><span class="line">    padding: 0;</span><br><span class="line">    list-style: none;</span><br><span class="line">  &#125;</span><br><span class="line">  .category-all-page .category-list-item-list-item &#123;</span><br><span class="line">    margin: 10px 15px;</span><br><span class="line">  &#125;</span><br><span class="line">  .category-all-page .category-list-item-list-count &#123;</span><br><span class="line">    color: grey;</span><br><span class="line">  &#125;</span><br><span class="line">  .category-all-page .category-list-item-list-count:before &#123;</span><br><span class="line">    display: inline;</span><br><span class="line">    content: <span class="string">&quot; (&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  .category-all-page .category-list-item-list-count:after &#123;</span><br><span class="line">    display: inline;</span><br><span class="line">    content: <span class="string">&quot;) &quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  .category-all-page .category-list-item &#123;</span><br><span class="line">    margin: 10px 10px;</span><br><span class="line">  &#125;</span><br><span class="line">  .category-all-page .category-list-count &#123;</span><br><span class="line">    color: grey;</span><br><span class="line">  &#125;</span><br><span class="line">  .category-all-page .category-list-count:before &#123;</span><br><span class="line">    display: inline;</span><br><span class="line">    content: <span class="string">&quot; (&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  .category-all-page .category-list-count:after &#123;</span><br><span class="line">    display: inline;</span><br><span class="line">    content: <span class="string">&quot;) &quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  .category-all-page .category-list-child &#123;</span><br><span class="line">    padding-left: 10px;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="部分组件css颜色修改"><a href="#部分组件css颜色修改" class="headerlink" title="部分组件css颜色修改"></a>部分组件css颜色修改</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 左侧右滑侧边栏的渐变色修改</span></span><br><span class="line"><span class="comment"># 修改 themes/yilia/_config.yml</span></span><br><span class="line">style:</span><br><span class="line">  <span class="comment"># 头像上面的背景颜色</span></span><br><span class="line">  header: <span class="string">&#x27;#4d4d4d&#x27;</span></span><br><span class="line">  <span class="comment"># 右滑板块背景</span></span><br><span class="line">  slider: <span class="string">&#x27;linear-gradient(200deg,#a9a9a9,#e8c37e)&#x27;</span></span><br><span class="line"><span class="comment"># 浅暗蓝色 a0cfe4 改为浅灰色 a9a9a9，更有一种晚霞的感觉</span></span><br></pre></td></tr></table></figure>
@@ -449,11 +450,43 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">data science</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Jupyter</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Cygwin</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">flake8</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">vscode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">proxy</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -465,11 +498,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">data science</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jupyter</a>
+                <a href="javascript:void(0)" class="js-tag color4">wsl</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -485,15 +514,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">telegram</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sql</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">math</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">

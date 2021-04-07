@@ -16,7 +16,7 @@
 <meta property="og:description" content="自关联查询在关系型数据库中，数据以二维数据表的形式进行存储，我们在查询的时候也往往只能以记录（一行）或者字段（一列）的形式对数据进行筛选。当需要比对不在同一条记录上的两个数据时，我们可以通过表关联自身的形式来拼接这两个数据，来实现对比目的。 比如说，我们想知道某行的下一行的对应数值是什么（不在同一条记录上），这种情况可以写成： 123456789&#x2F;* 创建测试数据-SQL Server *&#x2F;IF">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-29T14:55:35.104Z">
-<meta property="article:modified_time" content="2021-03-29T14:56:18.778Z">
+<meta property="article:modified_time" content="2021-04-07T12:04:28.863Z">
 <meta property="article:author" content="Billy Zhou">
 <meta property="article:tag" content="sql">
 <meta name="twitter:card" content="summary">
@@ -172,6 +172,7 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 自关联测试-SQL Server */</span></span><br><span class="line"><span class="keyword">SELECT</span> A.HBM, B.HBM, A.ZBSZ, B.ZBSZ</span><br><span class="line"><span class="keyword">FROM</span> #temp_sheet A</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> #temp_sheet B <span class="keyword">ON</span> A.HBM <span class="operator">=</span> B.HBM<span class="number">-1</span></span><br></pre></td></tr></table></figure>
 
 <p>以上这种情况就是自关联，通过将一个表关联自身来实现同一张二维数据表下，不同行列的数据比对。</p>
+<span id="more"></span>
 <h3 id="查询结果的自关联查询"><a href="#查询结果的自关联查询" class="headerlink" title="查询结果的自关联查询"></a>查询结果的自关联查询</h3><p>上面的情况中，表是现成的。但当我们需要把某个查询结果作为自关联的基表时，语句就会变得十分臃肿、难看。</p>
 <p>下面通过嵌套的方式来实现一个看起来很长但没啥实际意思的自关联查询：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* SQL Server */</span></span><br><span class="line"><span class="keyword">SELECT</span> D.HBM_2, E.HBM_2, D.ZBSZ, E.ZBSZ</span><br><span class="line"><span class="keyword">FROM</span> (</span><br><span class="line">    <span class="keyword">SELECT</span> </span><br><span class="line">        ID, HBM_2 <span class="operator">=</span> HBM_1, ZBSZ</span><br><span class="line">    <span class="keyword">FROM</span> (</span><br><span class="line">        <span class="keyword">SELECT</span> </span><br><span class="line">            ID, HBM_1 <span class="operator">=</span> HBM, ZBSZ</span><br><span class="line">        <span class="keyword">FROM</span> (</span><br><span class="line">            <span class="keyword">SELECT</span></span><br><span class="line">                ID, A.HBM, ZBSZ</span><br><span class="line">            <span class="keyword">FROM</span> </span><br><span class="line">                #temp_sheet A</span><br><span class="line">        ) B</span><br><span class="line">    ) C</span><br><span class="line">) D</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> (</span><br><span class="line">    <span class="keyword">SELECT</span> </span><br><span class="line">        ID, HBM_2 <span class="operator">=</span> HBM_1, ZBSZ</span><br><span class="line">    <span class="keyword">FROM</span> (</span><br><span class="line">        <span class="keyword">SELECT</span> </span><br><span class="line">            ID, HBM_1 <span class="operator">=</span> HBM, ZBSZ</span><br><span class="line">        <span class="keyword">FROM</span> (</span><br><span class="line">            <span class="keyword">SELECT</span></span><br><span class="line">                ID, A.HBM, ZBSZ</span><br><span class="line">            <span class="keyword">FROM</span> </span><br><span class="line">                #temp_sheet A</span><br><span class="line">        ) B</span><br><span class="line">    ) C</span><br><span class="line">) E <span class="keyword">ON</span> D.HBM_2 <span class="operator">=</span> E.HBM_2 <span class="operator">-</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
@@ -460,11 +461,43 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">data science</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Jupyter</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Cygwin</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">flake8</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">vscode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">proxy</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -476,11 +509,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">data science</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jupyter</a>
+                <a href="javascript:void(0)" class="js-tag color4">wsl</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -496,15 +525,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">telegram</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sql</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">math</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -16,7 +16,7 @@
 <meta property="og:description" content="SQL对一个字段或一条记录（行）进行一次查询。如果想同时查询某个字段中多个不同的属性，如同时满足长度以及数值上的要求，则需要用AND以及OR来进行条件的拼接。 如希望查询某个存放各种终止时间的字段ENDTIME，查询条件为长度小于11，且为数值，则可以写成LEN(NUM) ≤ 11 AND ISNUMERIC(NUM) &#x3D; 1。 但如果希望进一步查询NUM里不同条件下具体的异常值，如当长度小于等于">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-04-07T08:46:06.130Z">
-<meta property="article:modified_time" content="2021-04-07T08:55:27.678Z">
+<meta property="article:modified_time" content="2021-04-07T12:02:59.051Z">
 <meta property="article:author" content="Billy Zhou">
 <meta property="article:tag" content="sql">
 <meta property="article:tag" content="math">
@@ -173,7 +173,7 @@
 
 <p>如果再加入之前的数值判断，则写成如下形式：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">    (</span><br><span class="line">        (</span><br><span class="line">            LEN(NUM) <span class="operator">&lt;=</span> <span class="number">11</span></span><br><span class="line">            <span class="keyword">AND</span> (NUM <span class="keyword">NOT</span> <span class="keyword">LIKE</span> <span class="string">&#x27;该范围内的各种正常表达&#x27;</span>)</span><br><span class="line">    ) <span class="keyword">OR</span> (</span><br><span class="line">            LEN(NUM) <span class="operator">&gt;</span> <span class="number">11</span></span><br><span class="line">            <span class="keyword">AND</span> (NUM <span class="keyword">NOT</span> <span class="keyword">LIKE</span> <span class="string">&#x27;该范围内的各种正常表达&#x27;</span>)</span><br><span class="line">    ) </span><br><span class="line">) <span class="keyword">AND</span> (</span><br><span class="line">        (</span><br><span class="line">            ISNUMERIC(NUM) <span class="operator">=</span> <span class="number">0</span></span><br><span class="line">            <span class="keyword">AND</span> (NUM <span class="keyword">NOT</span> <span class="keyword">LIKE</span> <span class="string">&#x27;该范围内的各种正常表达&#x27;</span>)</span><br><span class="line">    ) <span class="keyword">OR</span> (</span><br><span class="line">            ISNUMERIC(NUM) <span class="operator">=</span> <span class="number">1</span></span><br><span class="line">            <span class="keyword">AND</span> (NUM <span class="keyword">NOT</span> <span class="keyword">LIKE</span> <span class="string">&#x27;该范围内的各种正常表达&#x27;</span>)</span><br><span class="line">    ) </span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
+<span id="more"></span>
 <h1 id="理论基础：集合论的分配律"><a href="#理论基础：集合论的分配律" class="headerlink" title="理论基础：集合论的分配律"></a>理论基础：集合论的分配律</h1><p>$$\begin{aligned}A\cup\left(B\cap C\right)&amp;=(A\cup B)\cap\left(A\cup C\right)\A\cap\left(B\cup C\right)&amp;=(A\cap B)\cup\left(A\cap C\right)\end{aligned}$$</p>
 <h1 id="多条件复合查询拆解"><a href="#多条件复合查询拆解" class="headerlink" title="多条件复合查询拆解"></a>多条件复合查询拆解</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    ( </span><br><span class="line">        (条件<span class="number">1.1</span> <span class="keyword">OR</span> 条件<span class="number">1.2</span> <span class="keyword">OR</span> ... <span class="keyword">OR</span> 条件<span class="number">1.</span>X) # 条件<span class="number">1.1</span>至条件<span class="number">1.</span>X的并集应构成全集</span><br><span class="line">    <span class="keyword">AND</span> (条件<span class="number">2.1</span> <span class="keyword">OR</span> 条件<span class="number">2.2</span> <span class="keyword">OR</span> ... <span class="keyword">OR</span> 条件<span class="number">2.</span>Y) # 条件<span class="number">2.1</span>至条件<span class="number">2.</span>Y的并集应构成全集</span><br><span class="line">    <span class="keyword">AND</span> (条件<span class="number">3.1</span> <span class="keyword">OR</span> 条件<span class="number">3.2</span> <span class="keyword">OR</span> ... <span class="keyword">OR</span> 条件<span class="number">3.</span>Z) # 条件<span class="number">3.1</span>至条件<span class="number">3.</span>Z的并集应构成全集</span><br><span class="line">)</span><br><span class="line"># 条件X.X可进一步用<span class="keyword">AND</span>及<span class="keyword">OR</span>划分</span><br><span class="line"># 等价于</span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">    ( </span><br><span class="line">        (条件<span class="number">1.1</span> <span class="keyword">AND</span> 条件<span class="number">2.1</span> <span class="keyword">AND</span> 条件<span class="number">3.1</span>)</span><br><span class="line">    <span class="keyword">OR</span> (条件<span class="number">1.2</span> <span class="keyword">AND</span> 条件<span class="number">2.1</span> <span class="keyword">AND</span> 条件<span class="number">3.1</span>)</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">OR</span> (条件<span class="number">1.</span>X <span class="keyword">AND</span> 条件<span class="number">2.1</span> <span class="keyword">AND</span> 条件<span class="number">3.1</span>)</span><br><span class="line">    <span class="keyword">OR</span> (条件<span class="number">1.1</span> <span class="keyword">AND</span> 条件<span class="number">2.2</span> <span class="keyword">AND</span> 条件<span class="number">3.1</span>)</span><br><span class="line">    <span class="keyword">OR</span> (条件<span class="number">1.1</span> <span class="keyword">AND</span> 条件<span class="number">2.3</span> <span class="keyword">AND</span> 条件<span class="number">3.1</span>)</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">OR</span> (条件<span class="number">1.1</span> <span class="keyword">AND</span> 条件<span class="number">2.</span>Y <span class="keyword">AND</span> 条件<span class="number">3.1</span>)</span><br><span class="line">    <span class="keyword">OR</span> (条件<span class="number">1.1</span> <span class="keyword">AND</span> 条件<span class="number">2.1</span> <span class="keyword">AND</span> 条件<span class="number">3.2</span>)</span><br><span class="line">    <span class="keyword">OR</span> (条件<span class="number">1.1</span> <span class="keyword">AND</span> 条件<span class="number">2.1</span> <span class="keyword">AND</span> 条件<span class="number">3.3</span>)</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">OR</span> (条件<span class="number">1.1</span> <span class="keyword">AND</span> 条件<span class="number">2.1</span> <span class="keyword">AND</span> 条件<span class="number">3.</span>Z)</span><br><span class="line">    <span class="keyword">OR</span> (条件<span class="number">1.2</span> <span class="keyword">AND</span> 条件<span class="number">2.2</span> <span class="keyword">AND</span> 条件<span class="number">3.1</span>)</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">OR</span> (条件<span class="number">1.</span>X <span class="keyword">AND</span> 条件<span class="number">2.</span>Y <span class="keyword">AND</span> 条件<span class="number">3.</span>Z)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 
@@ -456,11 +456,43 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">data science</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Jupyter</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Cygwin</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">flake8</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">vscode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">proxy</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -472,11 +504,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">data science</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jupyter</a>
+                <a href="javascript:void(0)" class="js-tag color4">wsl</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -492,15 +520,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">telegram</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sql</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">math</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">

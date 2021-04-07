@@ -16,7 +16,7 @@
 <meta property="og:description" content="执行1234567891011121314151617# 创建脚本路径并编辑mkdir ~&#x2F;my_cmdmkdir ~&#x2F;scripts&#x2F;logsvim ~&#x2F;my_cmd&#x2F;SRand.shvim ~&#x2F;my_cmd&#x2F;nodelog.shvim ~&#x2F;my_cmd&#x2F;RunRand.sh# 赋予权限chmod 777 ~&#x2F;my_cmd&#x2F;SRand.shchmod 777 ~&#x2F;my_cmd&#x2F;nodelog.s">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-04-07T11:47:58.556Z">
-<meta property="article:modified_time" content="2021-04-07T11:49:10.382Z">
+<meta property="article:modified_time" content="2021-04-07T11:57:49.125Z">
 <meta property="article:author" content="Billy Zhou">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="shell">
@@ -168,6 +168,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建脚本路径并编辑</span></span><br><span class="line">mkdir ~/my_cmd</span><br><span class="line">mkdir ~/scripts/logs</span><br><span class="line">vim ~/my_cmd/SRand.sh</span><br><span class="line">vim ~/my_cmd/nodelog.sh</span><br><span class="line">vim ~/my_cmd/RunRand.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 赋予权限</span></span><br><span class="line">chmod 777 ~/my_cmd/SRand.sh</span><br><span class="line">chmod 777 ~/my_cmd/nodelog.sh</span><br><span class="line">chmod 777 ~/my_cmd/RunRand.sh</span><br><span class="line"><span class="comment"># 调用</span></span><br><span class="line"><span class="built_in">cd</span> ~/my_cmd</span><br><span class="line">RunRand.sh <span class="string">&#x27;BOTH&#x27;</span> <span class="string">&#x27;/script_path/&#x27;</span> \</span><br><span class="line"><span class="string">&#x27;script_fname1&#x27;</span> \</span><br><span class="line"><span class="string">&#x27;script_fname2&#x27;</span> \</span><br><span class="line"><span class="string">&#x27;script_fname3&#x27;</span></span><br></pre></td></tr></table></figure>
+<span id="more"></span>
 
 <h2 id="RunRand-sh"><a href="#RunRand-sh" class="headerlink" title="RunRand.sh"></a>RunRand.sh</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment"># 注意运行权限</span></span><br><span class="line">index=0</span><br><span class="line">index_rand=0</span><br><span class="line">output_type=<span class="variable">$1</span></span><br><span class="line">script_path=<span class="variable">$2</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$#</span> -gt 2 ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">let</span> script_num=<span class="variable">$#</span>-2</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;输出方式为&quot;</span><span class="variable">$1</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;脚本路径为&quot;</span><span class="variable">$2</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;待运行脚本个数为&quot;</span><span class="variable">$script_num</span><span class="string">&quot;个&quot;</span></span><br><span class="line">    <span class="keyword">for</span> arg <span class="keyword">in</span> $*;<span class="keyword">do</span></span><br><span class="line">        <span class="built_in">let</span> index+=1</span><br><span class="line">        <span class="comment"># 创建随机数组并与脚本名$3到$&#123;!#&#125;一同赋值于fake_array_randnum</span></span><br><span class="line">        <span class="keyword">if</span> [ <span class="variable">$index</span> -gt 2 ]; <span class="keyword">then</span></span><br><span class="line">            randnum=$(head -200 /dev/urandom | cksum | cut -c 1-8)</span><br><span class="line">            fake_array=<span class="variable">$randnum</span><span class="string">&quot;,&quot;</span><span class="variable">$arg</span><span class="string">&quot; &quot;</span><span class="variable">$fake_array</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line">    <span class="built_in">set</span> <span class="variable">$fake_array</span></span><br><span class="line">    fake_array_sorted=$(<span class="built_in">printf</span> <span class="string">&quot;%s\n&quot;</span> <span class="string">&quot;<span class="variable">$@</span>&quot;</span>|sort|tr <span class="string">&quot;\n&quot;</span> <span class="string">&quot; &quot;</span>)</span><br><span class="line">    <span class="built_in">set</span> <span class="variable">$fake_array_sorted</span></span><br><span class="line">    <span class="comment"># echo &quot;fake_array_sorted: $fake_array_sorted&quot;</span></span><br><span class="line">    <span class="keyword">for</span> arg_rand <span class="keyword">do</span> <span class="comment"># looping over the  elements of the $@ array ($1, $2...)</span></span><br><span class="line">        <span class="built_in">let</span> index_rand+=1</span><br><span class="line">        script_fname_sorted=$script_path<span class="variable">$&#123;arg_rand##*,&#125;</span></span><br><span class="line">        <span class="comment"># echo $script_fname_sorted</span></span><br><span class="line">        <span class="comment"># output the log</span></span><br><span class="line">        . ./my_cmd/nodelog.sh <span class="variable">$script_fname_sorted</span> <span class="variable">$output_type</span></span><br><span class="line">        <span class="keyword">if</span> [ <span class="variable">$index_rand</span> -lt <span class="variable">$script_num</span> ]; <span class="keyword">then</span></span><br><span class="line">            <span class="comment"># sleep rand seconds</span></span><br><span class="line">            . ./my_cmd/SRand.sh</span><br><span class="line">            <span class="comment"># echo &#x27;index_rand: &#x27;$index_rand</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;输入参数不足&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
 
@@ -310,6 +311,15 @@
   
 <nav id="article-nav">
   
+    <a href="/coding/vscode%E6%B7%BB%E5%8A%A0sock5%E4%BB%A3%E7%90%86%20d0678dad2e9d4d6fb03a6ef481777f6e/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          vscode添加sock5代理
+        
+      </div>
+    </a>
+  
   
     <a href="/data-science/sql/%E6%A8%AA%E8%BD%AC%E7%AB%96%EF%BC%9A%E5%B0%86%E5%88%97%E5%80%BC%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%B8%8D%E5%90%8C%E5%88%97%E5%90%8D%2096afa36de1bf4b92bd13202640c1f4dd/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">横转竖：将列值转换为不同列名</div>
@@ -447,11 +457,43 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">data science</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Jupyter</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Cygwin</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">flake8</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">vscode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">proxy</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -463,11 +505,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">data science</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jupyter</a>
+                <a href="javascript:void(0)" class="js-tag color4">wsl</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -483,15 +521,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">telegram</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sql</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">math</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
