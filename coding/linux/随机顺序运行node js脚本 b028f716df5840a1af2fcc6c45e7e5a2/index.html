@@ -6,17 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://shiratori3.github.io">
-  <title>Tag: Jupyter | mlstars</title>
+  <title>随机顺序运行node.js脚本 | mlstars</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Record and share the growth of my programming skills">
-<meta property="og:type" content="website">
-<meta property="og:title" content="mlstars">
-<meta property="og:url" content="https://shiratori3.github.io/tags/Jupyter/index.html">
+  <meta name="description" content="执行1234567891011121314151617# 创建脚本路径并编辑mkdir ~&#x2F;my_cmdmkdir ~&#x2F;scripts&#x2F;logsvim ~&#x2F;my_cmd&#x2F;SRand.shvim ~&#x2F;my_cmd&#x2F;nodelog.shvim ~&#x2F;my_cmd&#x2F;RunRand.sh# 赋予权限chmod 777 ~&#x2F;my_cmd&#x2F;SRand.shchmod 777 ~&#x2F;my_cmd&#x2F;nodelog.s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="随机顺序运行node.js脚本">
+<meta property="og:url" content="https://shiratori3.github.io/coding/linux/%E9%9A%8F%E6%9C%BA%E9%A1%BA%E5%BA%8F%E8%BF%90%E8%A1%8Cnode%20js%E8%84%9A%E6%9C%AC%20b028f716df5840a1af2fcc6c45e7e5a2/index.html">
 <meta property="og:site_name" content="mlstars">
-<meta property="og:description" content="Record and share the growth of my programming skills">
+<meta property="og:description" content="执行1234567891011121314151617# 创建脚本路径并编辑mkdir ~&#x2F;my_cmdmkdir ~&#x2F;scripts&#x2F;logsvim ~&#x2F;my_cmd&#x2F;SRand.shvim ~&#x2F;my_cmd&#x2F;nodelog.shvim ~&#x2F;my_cmd&#x2F;RunRand.sh# 赋予权限chmod 777 ~&#x2F;my_cmd&#x2F;SRand.shchmod 777 ~&#x2F;my_cmd&#x2F;nodelog.s">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-07T11:47:58.556Z">
+<meta property="article:modified_time" content="2021-04-07T11:49:10.382Z">
 <meta property="article:author" content="Billy Zhou">
-<meta property="article:tag" content="blog sql python coding">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="shell">
+<meta property="article:tag" content="script">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="mlstars" type="application/atom+xml">
@@ -143,56 +147,91 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-随机顺序运行node js脚本 b028f716df5840a1af2fcc6c45e7e5a2" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/coding/python/Jupyter%20Notebook%20%E9%A2%84%E5%8A%A0%E8%BD%BD%20cece6a5b9e994b949c839a870b651d5e/" class="archive-article-date">
-  	<time datetime="2021-03-29T14:53:09.402Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-29</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/coding/python/Jupyter%20Notebook%20%E9%A2%84%E5%8A%A0%E8%BD%BD%20cece6a5b9e994b949c839a870b651d5e/">Jupyter Notebook 预加载</a>
+    <h1 class="article-title" itemprop="name">
+      随机顺序运行node.js脚本
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/coding/linux/%E9%9A%8F%E6%9C%BA%E9%A1%BA%E5%BA%8F%E8%BF%90%E8%A1%8Cnode%20js%E8%84%9A%E6%9C%AC%20b028f716df5840a1af2fcc6c45e7e5a2/" class="archive-article-date">
+  	<time datetime="2021-04-07T11:47:58.556Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建脚本路径并编辑</span></span><br><span class="line">mkdir ~/my_cmd</span><br><span class="line">mkdir ~/scripts/logs</span><br><span class="line">vim ~/my_cmd/SRand.sh</span><br><span class="line">vim ~/my_cmd/nodelog.sh</span><br><span class="line">vim ~/my_cmd/RunRand.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 赋予权限</span></span><br><span class="line">chmod 777 ~/my_cmd/SRand.sh</span><br><span class="line">chmod 777 ~/my_cmd/nodelog.sh</span><br><span class="line">chmod 777 ~/my_cmd/RunRand.sh</span><br><span class="line"><span class="comment"># 调用</span></span><br><span class="line"><span class="built_in">cd</span> ~/my_cmd</span><br><span class="line">RunRand.sh <span class="string">&#x27;BOTH&#x27;</span> <span class="string">&#x27;/script_path/&#x27;</span> \</span><br><span class="line"><span class="string">&#x27;script_fname1&#x27;</span> \</span><br><span class="line"><span class="string">&#x27;script_fname2&#x27;</span> \</span><br><span class="line"><span class="string">&#x27;script_fname3&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="RunRand-sh"><a href="#RunRand-sh" class="headerlink" title="RunRand.sh"></a>RunRand.sh</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment"># 注意运行权限</span></span><br><span class="line">index=0</span><br><span class="line">index_rand=0</span><br><span class="line">output_type=<span class="variable">$1</span></span><br><span class="line">script_path=<span class="variable">$2</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$#</span> -gt 2 ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">let</span> script_num=<span class="variable">$#</span>-2</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;输出方式为&quot;</span><span class="variable">$1</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;脚本路径为&quot;</span><span class="variable">$2</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;待运行脚本个数为&quot;</span><span class="variable">$script_num</span><span class="string">&quot;个&quot;</span></span><br><span class="line">    <span class="keyword">for</span> arg <span class="keyword">in</span> $*;<span class="keyword">do</span></span><br><span class="line">        <span class="built_in">let</span> index+=1</span><br><span class="line">        <span class="comment"># 创建随机数组并与脚本名$3到$&#123;!#&#125;一同赋值于fake_array_randnum</span></span><br><span class="line">        <span class="keyword">if</span> [ <span class="variable">$index</span> -gt 2 ]; <span class="keyword">then</span></span><br><span class="line">            randnum=$(head -200 /dev/urandom | cksum | cut -c 1-8)</span><br><span class="line">            fake_array=<span class="variable">$randnum</span><span class="string">&quot;,&quot;</span><span class="variable">$arg</span><span class="string">&quot; &quot;</span><span class="variable">$fake_array</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line">    <span class="built_in">set</span> <span class="variable">$fake_array</span></span><br><span class="line">    fake_array_sorted=$(<span class="built_in">printf</span> <span class="string">&quot;%s\n&quot;</span> <span class="string">&quot;<span class="variable">$@</span>&quot;</span>|sort|tr <span class="string">&quot;\n&quot;</span> <span class="string">&quot; &quot;</span>)</span><br><span class="line">    <span class="built_in">set</span> <span class="variable">$fake_array_sorted</span></span><br><span class="line">    <span class="comment"># echo &quot;fake_array_sorted: $fake_array_sorted&quot;</span></span><br><span class="line">    <span class="keyword">for</span> arg_rand <span class="keyword">do</span> <span class="comment"># looping over the  elements of the $@ array ($1, $2...)</span></span><br><span class="line">        <span class="built_in">let</span> index_rand+=1</span><br><span class="line">        script_fname_sorted=$script_path<span class="variable">$&#123;arg_rand##*,&#125;</span></span><br><span class="line">        <span class="comment"># echo $script_fname_sorted</span></span><br><span class="line">        <span class="comment"># output the log</span></span><br><span class="line">        . ./my_cmd/nodelog.sh <span class="variable">$script_fname_sorted</span> <span class="variable">$output_type</span></span><br><span class="line">        <span class="keyword">if</span> [ <span class="variable">$index_rand</span> -lt <span class="variable">$script_num</span> ]; <span class="keyword">then</span></span><br><span class="line">            <span class="comment"># sleep rand seconds</span></span><br><span class="line">            . ./my_cmd/SRand.sh</span><br><span class="line">            <span class="comment"># echo &#x27;index_rand: &#x27;$index_rand</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;输入参数不足&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="SRand-sh"><a href="#SRand-sh" class="headerlink" title="SRand.sh"></a>SRand.sh</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">stl=$(head -200 /dev/urandom | cksum | cut -c 1-2)</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;======================================&#x27;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;Sleep &#x27;</span><span class="variable">$stl</span><span class="string">&#x27;s. Sleeping.&#x27;</span> &amp;&amp; sleep <span class="variable">$stl</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;======================================&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="nodelog-sh"><a href="#nodelog-sh" class="headerlink" title="nodelog.sh"></a>nodelog.sh</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment"># 截取脚本名</span></span><br><span class="line">script_name=<span class="variable">$&#123;1##*/&#125;</span></span><br><span class="line">script_name_noext=<span class="variable">$&#123;script_name%.*&#125;</span></span><br><span class="line"><span class="comment"># echo \$script_name_noext is $script_name_noext</span></span><br><span class="line"><span class="comment"># echo \$2 is $2</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$2</span> != <span class="string">&quot;BOTH&quot;</span> ] ; <span class="keyword">then</span></span><br><span class="line">    node_cmd=<span class="string">&#x27;node &#x27;</span><span class="variable">$1</span><span class="string">&#x27; &gt;&gt; /scripts/logs/&#x27;</span><span class="variable">$script_name_noext</span><span class="string">&#x27;.log 2&gt;&amp;1&#x27;</span></span><br><span class="line">    <span class="comment"># echo \$node_cmd is $node_cmd</span></span><br><span class="line">    <span class="comment"># 输出至logs，不显示在屏幕上</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="variable">$node_cmd</span> | sh</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    node_cmd_tee=<span class="string">&#x27;node &#x27;</span><span class="variable">$1</span><span class="string">&#x27; 2&gt;&amp;1 | tee /scripts/logs/&#x27;</span><span class="variable">$script_name_noext</span><span class="string">&#x27;.log&#x27;</span></span><br><span class="line">    <span class="comment"># echo \$node_cmd_tee is $node_cmd_tee</span></span><br><span class="line">    <span class="comment"># 输出至logs，同时显示在屏幕上</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="variable">$node_cmd_tee</span> | sh</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/zfb.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wx.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">data science</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">shell</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Jupyter</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">script</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -202,24 +241,124 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="/categories/coding/python//" class="article-tag-list-link color2">python</a>
+        			<a href="/categories/coding/linux//" class="article-tag-list-link color1">linux</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://shiratori3.github.io/coding/linux/%E9%9A%8F%E6%9C%BA%E9%A1%BA%E5%BA%8F%E8%BF%90%E8%A1%8Cnode%20js%E8%84%9A%E6%9C%AC%20b028f716df5840a1af2fcc6c45e7e5a2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/data-science/sql/%E6%A8%AA%E8%BD%AC%E7%AB%96%EF%BC%9A%E5%B0%86%E5%88%97%E5%80%BC%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%B8%8D%E5%90%8C%E5%88%97%E5%90%8D%2096afa36de1bf4b92bd13202640c1f4dd/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">横转竖：将列值转换为不同列名</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C"><span class="toc-number">1.</span> <span class="toc-text">执行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RunRand-sh"><span class="toc-number">2.</span> <span class="toc-text">RunRand.sh</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SRand-sh"><span class="toc-number">3.</span> <span class="toc-text">SRand.sh</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nodelog-sh"><span class="toc-number">4.</span> <span class="toc-text">nodelog.sh</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -242,9 +381,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

@@ -6,24 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://shiratori3.github.io">
-  <title>xlwings | mlstars</title>
+  <title>mlstars</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1、安装1conda install xlwings  2、excel插件安装1xlwings addin install  启用UDFs（用户定义函数）及RunPython使用UDFs（用户定义函数）需要进一步设置加载项及VB引用。xlwings.xlam文件的默认安装位置为C:\Users\yourusrname\AppData\Roaming\Microsoft\Excel\XLSTART。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="xlwings">
-<meta property="og:url" content="https://shiratori3.github.io/coding/python/xlwings%20f6a07dce195c4c07a72076b158f95afc/index.html">
+  <meta name="description" content="Record and share the growth of my programming skills">
+<meta property="og:type" content="website">
+<meta property="og:title" content="mlstars">
+<meta property="og:url" content="https://shiratori3.github.io/page/2/index.html">
 <meta property="og:site_name" content="mlstars">
-<meta property="og:description" content="1、安装1conda install xlwings  2、excel插件安装1xlwings addin install  启用UDFs（用户定义函数）及RunPython使用UDFs（用户定义函数）需要进一步设置加载项及VB引用。xlwings.xlam文件的默认安装位置为C:\Users\yourusrname\AppData\Roaming\Microsoft\Excel\XLSTART。">
+<meta property="og:description" content="Record and share the growth of my programming skills">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://shiratori3.github.io/coding/python/xlwings%20f6a07dce195c4c07a72076b158f95afc/Untitled.png">
-<meta property="article:published_time" content="2021-03-29T14:40:23.911Z">
-<meta property="article:modified_time" content="2021-03-29T14:50:20.369Z">
 <meta property="article:author" content="Billy Zhou">
-<meta property="article:tag" content="python">
-<meta property="article:tag" content="excel">
-<meta property="article:tag" content="xlwings">
+<meta property="article:tag" content="blog sql python coding">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://shiratori3.github.io/coding/python/xlwings%20f6a07dce195c4c07a72076b158f95afc/Untitled.png">
   
     <link rel="alternative" href="/atom.xml" title="mlstars" type="application/atom+xml">
   
@@ -149,84 +143,37 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-xlwings f6a07dce195c4c07a72076b158f95afc" class="article article-type-post " itemscope itemprop="blogPost">
+            
+  
+    <article id="post-Jupyter Notebook 预加载 cece6a5b9e994b949c839a870b651d5e" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      xlwings
+    <h1 itemprop="name">
+      <a class="article-title" href="/coding/python/Jupyter%20Notebook%20%E9%A2%84%E5%8A%A0%E8%BD%BD%20cece6a5b9e994b949c839a870b651d5e/">Jupyter Notebook 预加载</a>
     </h1>
   
 
         
-        <a href="/coding/python/xlwings%20f6a07dce195c4c07a72076b158f95afc/" class="archive-article-date">
-  	<time datetime="2021-03-29T14:40:23.911Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-29</time>
+        <a href="/coding/python/Jupyter%20Notebook%20%E9%A2%84%E5%8A%A0%E8%BD%BD%20cece6a5b9e994b949c839a870b651d5e/" class="archive-article-date">
+  	<time datetime="2021-03-29T14:53:09.402Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-29</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1、安装"><a href="#1、安装" class="headerlink" title="1、安装"></a>1、安装</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install xlwings</span><br></pre></td></tr></table></figure>
+        <p><a target="_blank" rel="noopener" href="https://towardsdatascience.com/how-to-automatically-import-your-favorite-libraries-into-ipython-or-a-jupyter-notebook-9c69d89aa343">How to Automatically Import Your Favorite Libraries into IPython or a Jupyter Notebook</a></p>
+<p>Jupyter的python内核实际为Ipython，因此需要在C:\Users\yourusrname.ipython\profile_default\startup\中添加py启动文件实现自动加载。</p>
+<p>文件名格式为XX-filename.py，XX前缀为纯数字，代表加载顺序。下文为该目录的README文件内容，解释了如何读取。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">This is the IPython startup directory</span><br><span class="line"></span><br><span class="line">.py and .ipy files in this directory will be run *prior* to any code or files specified via the exec_lines or exec_files configurables whenever you load this profile.</span><br><span class="line"></span><br><span class="line">Files will be run in lexicographical order, so you can control the execution order of files with a prefix, e.g.::</span><br><span class="line"></span><br><span class="line">    00-first.py</span><br><span class="line">    50-middle.py</span><br><span class="line">    99-last.ipy</span><br></pre></td></tr></table></figure>
 
-<h2 id="2、excel插件安装"><a href="#2、excel插件安装" class="headerlink" title="2、excel插件安装"></a>2、excel插件安装</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xlwings addin install</span><br></pre></td></tr></table></figure>
-
-<h3 id="启用UDFs（用户定义函数）及RunPython"><a href="#启用UDFs（用户定义函数）及RunPython" class="headerlink" title="启用UDFs（用户定义函数）及RunPython"></a>启用UDFs（用户定义函数）及RunPython</h3><p>使用UDFs（用户定义函数）需要进一步设置加载项及VB引用。xlwings.xlam文件的默认安装位置为<code>C:\Users\yourusrname\AppData\Roaming\Microsoft\Excel\XLSTART</code>。</p>
-<p>设置加载项：菜单栏”开发工具”-“加载项”-“加载项”，可用加载宏一栏中，点击Xlwings，点击浏览，点击以上路径中的xlwings.xlam文件。</p>
-<p>设置VB引用项：菜单栏”开发工具”-“代码”-“Visual Basic”，打开VB设置页面，随后菜单栏”工具”-“引用”，可使用的引用一栏中，点击xlwings，点击浏览，点击以上路径中的xlwings.xlam文件。</p>
-<h3 id="避免“文件已打开”警告"><a href="#避免“文件已打开”警告" class="headerlink" title="避免“文件已打开”警告"></a>避免“文件已打开”警告</h3><p>一般而言，PERSONAL.xlsb文件也会在xlwings.xlam文件的默认安装路径中。excel在启动时会自动加载XLSTART文件夹下的文件。因此，xlwings.xlam会先被excel启动，然后再被已添加Xlwings脚本的PERSONAL文件启动一次，导致报错“文件已打开”。</p>
-<p>为避免这个问题，需要把xlwings.xlam文件挪至插件加载项位置。加载项文件夹的路径为：<code>C:\Users\yourusrname\AppData\Roaming\Microsoft\AddIns</code>。修改方式同上。需要修改加载项文件位置及Visual Basic引用文件位置。</p>
-<p>设置完两个引用后，删除原文件夹内的xlwings.xlam文件即可。</p>
-<p>如果更新了xlwings版本，需要重新设置以上步骤。</p>
-<h2 id="3、插件设置"><a href="#3、插件设置" class="headerlink" title="3、插件设置"></a>3、插件设置</h2><p><img src="/coding/python/xlwings%20f6a07dce195c4c07a72076b158f95afc/Untitled.png" alt="xlwings%20f6a07dce195c4c07a72076b158f95afc/Untitled.png"></p>
-<p><a target="_blank" rel="noopener" href="https://docs.xlwings.org/en/stable/addin.html">Add-in &amp; Settings - xlwings dev documentation</a></p>
-<h3 id="主要配置项："><a href="#主要配置项：" class="headerlink" title="主要配置项："></a>主要配置项：</h3><ul>
-<li>interpreter：python解释器位置。推荐用conda独立设置xlwings用的环境，以便维护，如<code>D:\Miniconda3\envs\pyexcel\pythonw.exe</code>。如果用conda，可以只配置Conda Path及Conda Env项，interpreter留空。</li>
-<li>Conda Path：conda安装路径，如配置interpreter则可留空，如<code>D:\Miniconda3</code></li>
-<li>Conda Env：conda环境名，如配置interpreter则可留空，如<code>pyexcel</code></li>
-<li>PYTHONPATH：脚本文件路径。与后面的UDFs相关。如<code>D:\pycharm\py_for_excel</code></li>
-<li>UDF Modules：用户定义模块的文件名称。不需要录入.py后缀，多个文件名用；隔开。如<code>D:\pycharm\py_for_excel\common_udfs.py</code>自定义文件，在PYTHONPATH里配置<code>D:\pycharm\py_for_excel</code> ，在UDF Modules里配置 <code>common_udfs</code></li>
-</ul>
-<h3 id="按钮："><a href="#按钮：" class="headerlink" title="按钮："></a>按钮：</h3><ul>
-<li>Run main：运行与当前工作簿同名的python函数。这允许你在不启用宏的情况下保存你的工作簿为xlsx文件。<code>xlwings quickstart</code> 指令会创建一个工作簿可自动执行该Run按钮。</li>
-<li>Import Functions：导入用户定义模块文件中的函数至当前工作簿为宏。</li>
-</ul>
-
+<p>以下为个人的通用启动文件 00-start.py 设置，具体项目的加载项可以另外设置对应 XX-XXX.py 启动文件，在通用文件后再进行加载：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- encoding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># flake8: noqa</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">@File    :   start.py</span></span><br><span class="line"><span class="string">@Author  :   Billy Zhou</span></span><br><span class="line"><span class="string">@Time    :   2021/03/12</span></span><br><span class="line"><span class="string">@Version :   1.1.0</span></span><br><span class="line"><span class="string">@Desc    :   None</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">pd.options.display.max_columns = <span class="number">500</span></span><br><span class="line">pd.options.display.max_rows = <span class="number">500</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 让notebook展示的区域更加宽</span></span><br><span class="line"><span class="keyword">from</span> IPython.core.display <span class="keyword">import</span> display, HTML</span><br><span class="line">WIDTH_85 = HTML(<span class="string">&quot;&lt;style&gt;.container &#123; width:85% !important; &#125;&lt;/style&gt;&quot;</span>)</span><br><span class="line">WIDTH_100 = HTML(<span class="string">&quot;&lt;style&gt;.container &#123; width:100% !important; &#125;&lt;/style&gt;&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> IPython <span class="keyword">import</span> get_ipython</span><br><span class="line">ipython = get_ipython()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 每次底层包有变动，会自动加载</span></span><br><span class="line"><span class="keyword">if</span> <span class="string">&#x27;ipython&#x27;</span> <span class="keyword">in</span> <span class="built_in">globals</span>() <span class="keyword">and</span> ipython:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;\nWelcome to IPython!&#x27;</span>)</span><br><span class="line">    ipython.magic(<span class="string">&#x27;load_ext autoreload&#x27;</span>)</span><br><span class="line">    ipython.magic(<span class="string">&#x27;autoreload 2&#x27;</span>)</span><br><span class="line">    ipython.magic(<span class="string">&#x27;matplotlib inline&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> IPython.core.interactiveshell <span class="keyword">import</span> InteractiveShell</span><br><span class="line">InteractiveShell.ast_node_interactivity = <span class="string">&#x27;all&#x27;</span></span><br><span class="line"><span class="comment"># ‘all’, ‘last’, ‘last_expr’ or ‘none’, ‘last_expr_or_assign’ specifying which nodes should be run interactively (displaying output from expressions).</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="keyword">import</span> logging</span><br><span class="line">    logging.basicConfig(</span><br><span class="line">        level=logging.INFO,</span><br><span class="line">        <span class="built_in">format</span>=<span class="string">&#x27;%(asctime)s %(name)s %(levelname)s %(message)s&#x27;</span>,</span><br><span class="line">        datefmt=<span class="string">&#x27;%Y-%m-%d %H:%M:%S&#x27;</span>)</span><br><span class="line">    logging.debug(<span class="string">&#x27;start DEBUG&#x27;</span>)</span><br><span class="line">    logging.debug(<span class="string">&#x27;==========================================================&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">import</span> os</span><br><span class="line">    <span class="keyword">from</span> pathlib <span class="keyword">import</span> Path</span><br><span class="line"></span><br><span class="line">    usr_path = os.path.expanduser(<span class="string">&#x27;~&#x27;</span>)</span><br><span class="line">    filepath = Path(os.path.expanduser(<span class="string">&#x27;~&#x27;</span>)).joinpath(<span class="string">&#x27;.ipython\profile_default\startup&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;path_to_put: &#123;0&#125;&#x27;</span>.<span class="built_in">format</span>(filepath))</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;dir: &#123;0&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="built_in">dir</span>()))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;globals: &#123;0&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="built_in">globals</span>()))</span><br><span class="line"></span><br><span class="line">    logging.debug(<span class="string">&#x27;==========================================================&#x27;</span>)</span><br><span class="line">    logging.debug(<span class="string">&#x27;end DEBUG&#x27;</span>)</span><br></pre></td></tr></table></figure>
       
 
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/img/zfb.jpg">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/img/wx.png">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -241,11 +188,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">excel</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">data science</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">xlwings</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Jupyter</a>
         		</li>
       		
 		</ul>
@@ -269,84 +216,16 @@
 
 
       
-
+        <p class="article-more-link">
+          <a class="article-more-a" href="/coding/python/Jupyter%20Notebook%20%E9%A2%84%E5%8A%A0%E8%BD%BD%20cece6a5b9e994b949c839a870b651d5e/">展开全文 >></a>
+        </p>
       
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
 
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://shiratori3.github.io/coding/python/xlwings%20f6a07dce195c4c07a72076b158f95afc/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/coding/python/Jupyter%20Notebook%20%E9%A2%84%E5%8A%A0%E8%BD%BD%20cece6a5b9e994b949c839a870b651d5e/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Jupyter Notebook 预加载
-        
-      </div>
-    </a>
-  
-  
-    <a href="/coding/python/%E6%96%87%E4%BB%B6%E5%8A%A0%E5%AF%86%207064c54fa38b45318a6881d09baeb106/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">文件加密</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -361,32 +240,454 @@
         </div>
         
         
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">1、安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81excel%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">2、excel插件安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E7%94%A8UDFs%EF%BC%88%E7%94%A8%E6%88%B7%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0%EF%BC%89%E5%8F%8ARunPython"><span class="toc-number">2.1.</span> <span class="toc-text">启用UDFs（用户定义函数）及RunPython</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%BF%E5%85%8D%E2%80%9C%E6%96%87%E4%BB%B6%E5%B7%B2%E6%89%93%E5%BC%80%E2%80%9D%E8%AD%A6%E5%91%8A"><span class="toc-number">2.2.</span> <span class="toc-text">避免“文件已打开”警告</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E6%8F%92%E4%BB%B6%E8%AE%BE%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">3、插件设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E9%85%8D%E7%BD%AE%E9%A1%B9%EF%BC%9A"><span class="toc-number">3.1.</span> <span class="toc-text">主要配置项：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%89%E9%92%AE%EF%BC%9A"><span class="toc-number">3.2.</span> <span class="toc-text">按钮：</span></a></li></ol></li></ol>
-                    </div>
-                </span>
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-theme：yilia定制 d9b0f87daa304b289ea00c6867070da2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/coding/blog/theme%EF%BC%9Ayilia%E5%AE%9A%E5%88%B6%20d9b0f87daa304b289ea00c6867070da2/">theme：yilia定制</a>
+    </h1>
+  
+
+        
+        <a href="/coding/blog/theme%EF%BC%9Ayilia%E5%AE%9A%E5%88%B6%20d9b0f87daa304b289ea00c6867070da2/" class="archive-article-date">
+  	<time datetime="2021-03-28T13:51:26.761Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="添加分类目录"><a href="#添加分类目录" class="headerlink" title="添加分类目录"></a>添加分类目录</h2><p><a target="_blank" rel="noopener" href="https://www.dazhuanlan.com/2020/03/25/5e7a473ec10fe/">Hexo yilia 添加目录页面</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建页面</span></span><br><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改 /source/categories/index.md</span></span><br><span class="line">---</span><br><span class="line">title: 分类目录</span><br><span class="line"><span class="built_in">type</span>: <span class="string">&quot;categories&quot;</span></span><br><span class="line">layout: <span class="string">&quot;categories&quot;</span></span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 多层分类</span></span><br><span class="line"><span class="comment"># 新建 themes/yilia/layout/categories.ejs</span></span><br><span class="line">&lt;article class=<span class="string">&quot;article article-type-post show&quot;</span>&gt;</span><br><span class="line">  &lt;header class=<span class="string">&quot;article-header&quot;</span> style=<span class="string">&quot;border-bottom: 1px solid #ccc&quot;</span>&gt;</span><br><span class="line">  &lt;h1 class=<span class="string">&quot;article-title&quot;</span> itemprop=<span class="string">&quot;name&quot;</span>&gt;</span><br><span class="line">    &lt;%= page.title %&gt;</span><br><span class="line">  &lt;/h1&gt;</span><br><span class="line">  &lt;/header&gt;</span><br><span class="line"></span><br><span class="line">  &lt;% <span class="keyword">if</span> (site.categories.length)&#123; %&gt;</span><br><span class="line">  &lt;div class=<span class="string">&quot;category-all-page&quot;</span>&gt;</span><br><span class="line">    &lt;h2&gt;共计&amp;nbsp;&lt;%= site.categories.length %&gt;&amp;nbsp;个分类&lt;/h2&gt;</span><br><span class="line">    &lt;%- list_categories(site.categories, &#123;</span><br><span class="line">      show_count: <span class="literal">true</span>,</span><br><span class="line">      class: <span class="string">&#x27;category-list-item&#x27;</span>,</span><br><span class="line">      style: <span class="string">&#x27;list&#x27;</span>,</span><br><span class="line">      depth: 2,</span><br><span class="line">      separator: <span class="string">&#x27;&#x27;</span></span><br><span class="line">    &#125;) %&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;% &#125; %&gt;</span><br><span class="line">&lt;/article&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改css文件 themes/yilia/source/main.0cf68a.css</span></span><br><span class="line"><span class="comment"># 添加以下样式：</span></span><br><span class="line">category-all-page &#123;</span><br><span class="line">    margin: 30px 40px 30px 40px;</span><br><span class="line">    position: relative;</span><br><span class="line">    min-height: 70vh;</span><br><span class="line">  &#125;</span><br><span class="line">  .category-all-page h2 &#123;</span><br><span class="line">    margin: 20px 0;</span><br><span class="line">  &#125;</span><br><span class="line">  .category-all-page .category-all-title &#123;</span><br><span class="line">    text-align: center;</span><br><span class="line">  &#125;</span><br><span class="line">  .category-all-page .category-all &#123;</span><br><span class="line">    margin-top: 20px;</span><br><span class="line">  &#125;</span><br><span class="line">  .category-all-page .category-list &#123;</span><br><span class="line">    margin: 0;</span><br><span class="line">    padding: 0;</span><br><span class="line">    list-style: none;</span><br><span class="line">  &#125;</span><br><span class="line">  .category-all-page .category-list-item-list-item &#123;</span><br><span class="line">    margin: 10px 15px;</span><br><span class="line">  &#125;</span><br><span class="line">  .category-all-page .category-list-item-list-count &#123;</span><br><span class="line">    color: grey;</span><br><span class="line">  &#125;</span><br><span class="line">  .category-all-page .category-list-item-list-count:before &#123;</span><br><span class="line">    display: inline;</span><br><span class="line">    content: <span class="string">&quot; (&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  .category-all-page .category-list-item-list-count:after &#123;</span><br><span class="line">    display: inline;</span><br><span class="line">    content: <span class="string">&quot;) &quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  .category-all-page .category-list-item &#123;</span><br><span class="line">    margin: 10px 10px;</span><br><span class="line">  &#125;</span><br><span class="line">  .category-all-page .category-list-count &#123;</span><br><span class="line">    color: grey;</span><br><span class="line">  &#125;</span><br><span class="line">  .category-all-page .category-list-count:before &#123;</span><br><span class="line">    display: inline;</span><br><span class="line">    content: <span class="string">&quot; (&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  .category-all-page .category-list-count:after &#123;</span><br><span class="line">    display: inline;</span><br><span class="line">    content: <span class="string">&quot;) &quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  .category-all-page .category-list-child &#123;</span><br><span class="line">    padding-left: 10px;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="部分组件css颜色修改"><a href="#部分组件css颜色修改" class="headerlink" title="部分组件css颜色修改"></a>部分组件css颜色修改</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 左侧右滑侧边栏的渐变色修改</span></span><br><span class="line"><span class="comment"># 修改 themes/yilia/_config.yml</span></span><br><span class="line">style:</span><br><span class="line">  <span class="comment"># 头像上面的背景颜色</span></span><br><span class="line">  header: <span class="string">&#x27;#4d4d4d&#x27;</span></span><br><span class="line">  <span class="comment"># 右滑板块背景</span></span><br><span class="line">  slider: <span class="string">&#x27;linear-gradient(200deg,#a9a9a9,#e8c37e)&#x27;</span></span><br><span class="line"><span class="comment"># 浅暗蓝色 a0cfe4 改为浅灰色 a9a9a9，更有一种晚霞的感觉</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 右侧目录导航框的背景色修改</span></span><br><span class="line"><span class="comment"># 24c1f6 → a9a9a9 or rgba(36,193,246,.9) → rgba(169,169,169,.9)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过F12可以得知导航框的css属性的class为tooltip-content，由main.0cf68a.css文件定义</span></span><br><span class="line"><span class="comment"># 修改 themes/yilia/source/main.0cf68a.css</span></span><br><span class="line">tooltip-left .tooltip-content&#123;position:absolute;background:rgba(169,169,169,.9);&#125;</span><br><span class="line"><span class="comment"># 右侧小方块可改可不改</span></span><br><span class="line">tooltip-top .tooltip-inner&#123;background:rgba(169,169,169,.9);&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过F12可以得知中间的小箭头是svg文件，通过文本编辑器编辑即可</span></span><br><span class="line"><span class="comment"># 修改 themes/yilia/source/fonts/tooltip.4004ff.svg</span></span><br><span class="line">&lt;path fill=<span class="string">&quot;#a9a9a9&quot;</span> d=.../&gt;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">blog</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/coding/blog//" class="article-tag-list-link color5">blog</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/coding/blog/theme%EF%BC%9Ayilia%E5%AE%9A%E5%88%B6%20d9b0f87daa304b289ea00c6867070da2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
             </div>
         </div>
+        
         
     </div>
 </aside>
 
 
 
-  
-  
-  
 
   
-
+    <article id="post-hexo网站管理 f38d067f05564d58acc889806707a701" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/coding/blog/hexo%E7%BD%91%E7%AB%99%E7%AE%A1%E7%90%86%20f38d067f05564d58acc889806707a701/">hexo网站管理</a>
+    </h1>
   
 
+        
+        <a href="/coding/blog/hexo%E7%BD%91%E7%AB%99%E7%AE%A1%E7%90%86%20f38d067f05564d58acc889806707a701/" class="archive-article-date">
+  	<time datetime="2021-03-28T10:14:28.301Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动服务器</span></span><br><span class="line">hexo server</span><br><span class="line"><span class="comment"># 默认地址：http://localhost:4000</span></span><br><span class="line"><span class="comment"># 更改端口</span></span><br><span class="line">hexo server -p 5000</span><br><span class="line"><span class="comment"># 静态模式</span></span><br><span class="line">hexo server -s  </span><br><span class="line"><span class="comment"># 在静态模式下，服务器只处理 public 文件夹内的文件，而不会处理文件变动，在执行时，您应该先自行执行 hexo generate，此模式通常用于生产环境（production mode）下。</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="生成器及部署"><a href="#生成器及部署" class="headerlink" title="生成器及部署"></a>生成器及部署</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成静态文件</span></span><br><span class="line">hexo generate</span><br><span class="line"></span><br><span class="line"><span class="comment"># 清除缓存文件 (db.json) 和已生成的静态文件 (public)</span></span><br><span class="line">hexo clean</span><br><span class="line"></span><br><span class="line"><span class="comment"># 部署网站</span></span><br><span class="line">hexo deploy</span><br><span class="line">hexo generate --deploy  <span class="comment"># 文件生成后立即部署网站</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出网站资料</span></span><br><span class="line">hexo list</span><br><span class="line">hexo list &lt;<span class="built_in">type</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示 Hexo 版本</span></span><br><span class="line">hexo version</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">blog</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/coding/blog//" class="article-tag-list-link color5">blog</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/coding/blog/hexo%E7%BD%91%E7%AB%99%E7%AE%A1%E7%90%86%20f38d067f05564d58acc889806707a701/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-hexo文章管理 8a1aa06fe4a245ea863740a8d4215985" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/coding/blog/hexo%E6%96%87%E7%AB%A0%E7%AE%A1%E7%90%86%208a1aa06fe4a245ea863740a8d4215985/">hexo文章管理</a>
+    </h1>
+  
+
+        
+        <a href="/coding/blog/hexo%E6%96%87%E7%AB%A0%E7%AE%A1%E7%90%86%208a1aa06fe4a245ea863740a8d4215985/" class="archive-article-date">
+  	<time datetime="2021-03-28T08:55:47.854Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/writing">官方文档：写作</a></p>
+<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/front-matter">官方文档：Front-matter</a></p>
+<h2 id="1、新建文章"><a href="#1、新建文章" class="headerlink" title="1、新建文章"></a>1、新建文章</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new [layout] &lt;title&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="布局（layout）"><a href="#布局（layout）" class="headerlink" title="布局（layout）"></a>布局（layout）</h3><p>Hexo 有三种默认布局：post、page 和 draft。在创建这三种不同类型的文件时，它们将会被保存到不同的路径；而您自定义的其他布局和 post 相同，都将储存到 source/_posts 文件夹。</p>
+<ul>
+<li>post：source/_posts</li>
+<li>page：source</li>
+<li>draft：source/_draft</li>
+</ul>
+<h3 id="草稿"><a href="#草稿" class="headerlink" title="草稿"></a>草稿</h3><p>刚刚提到了 Hexo 的一种特殊布局：draft，这种布局在建立时会被保存到 source/_drafts 文件夹，您可通过 publish 命令将草稿移动到 source/_posts 文件夹，该命令的使用方式与 new 十分类似，您也可在命令中指定 layout 来指定布局。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo publish [layout] &lt;title&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、Front-matter"><a href="#2、Front-matter" class="headerlink" title="2、Front-matter"></a>2、Front-matter</h2><p>Front-matter 是文件最上方以 — 分隔的区域，用于指定个别文件的变量，举例来说：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Hello World</span><br><span class="line">date: 2013/7/13 20:46:25</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>以下是预先定义的参数，您可在模板中使用这些参数值并加以利用。</p>
+<ul>
+<li>layout</li>
+<li>title</li>
+<li>date</li>
+<li>updated</li>
+<li>comments</li>
+<li>tags</li>
+<li>categories</li>
+<li>premalink</li>
+<li>excerpt</li>
+<li>disableNunjucks</li>
+<li>lang</li>
+</ul>
+<h3 id="分类和标签"><a href="#分类和标签" class="headerlink" title="分类和标签"></a>分类和标签</h3><p>只有文章支持分类和标签，您可以在 Front-matter 中设置。在其他系统中，分类和标签听起来很接近，但是在 Hexo 中两者有着明显的差别：分类具有顺序性和层次性，也就是说 Foo, Bar 不等于 Bar, Foo；而标签没有顺序和层次。</p>
+<p>如果您有过使用 WordPress 的经验，就很容易误解 Hexo 的分类方式。WordPress 支持对一篇文章设置多个分类，而且这些分类可以是同级的，也可以是父子分类。但是 Hexo 不支持指定多个同级分类。下面的指定方法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">categories:</span><br><span class="line">  - Diary</span><br><span class="line">  - Life</span><br></pre></td></tr></table></figure>
+
+<p>会使分类Life成为Diary的子分类，而不是并列分类。因此，有必要为您的文章选择尽可能准确的分类。</p>
+<p>如果你需要为文章添加多个分类，可以尝试以下 list 中的方法。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">categories:</span><br><span class="line">- [Diary, PlayStation]</span><br><span class="line">- [Diary, Games]</span><br><span class="line">- [Life]</span><br></pre></td></tr></table></figure>
+
+<p>此时这篇文章同时包括三个分类： PlayStation 和 Games 分别都是父分类 Diary 的子分类，同时 Life 是一个没有子分类的分类。</p>
+<h2 id="3、资源管理"><a href="#3、资源管理" class="headerlink" title="3、资源管理"></a>3、资源管理</h2><p>资源（Asset）代表 <code>source</code> 文件夹中除了文章以外的所有文件，例如图片、CSS、JS 文件等。比方说，如果你的Hexo项目中只有少量图片，那最简单的方法就是将它们放在 <code>source/images</code> 文件夹中。然后通过类似于 <code>![](/images/image.jpg)</code> 的方法访问它们。</p>
+<h3 id="文章资源文件夹"><a href="#文章资源文件夹" class="headerlink" title="文章资源文件夹"></a>文章资源文件夹</h3><p>对于那些想要更有规律地提供图片和其他资源以及想要将他们的资源分布在各个文章上的人来说，Hexo也提供了更组织化的方式来管理资源。这个稍微有些复杂但是管理资源非常方便的功能可以通过将 config.yml 文件中的 post_asset_folder 选项设为 true 来打开。</p>
+<p>当资源文件管理功能打开后，Hexo将会在你每一次通过 <code>hexo new [layout] &lt;title&gt;</code> 命令创建新文章时自动创建一个文件夹。这个资源文件夹将会有与这个文章文件一样的名字。将所有与你的文章有关的资源放在这个关联文件夹中之后，你可以通过相对路径来引用它们，这样你就得到了一个更简单而且方便得多的工作流。</p>
+<h3 id="相对路径引用的标签插件"><a href="#相对路径引用的标签插件" class="headerlink" title="相对路径引用的标签插件"></a>相对路径引用的标签插件</h3><p>通过常规的 markdown 语法和相对路径来引用图片和其它资源可能会导致它们在存档页或者主页上显示不正确。在Hexo 2时代，社区创建了很多插件来解决这个问题。但是，随着Hexo 3 的发布，许多新的标签插件被加入到了核心代码中。这使得你可以更简单地在文章中引用你的资源。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% asset_path slug %&#125;</span><br><span class="line">&#123;% asset_img slug [title] %&#125;</span><br><span class="line">&#123;% asset_link slug [title] %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>比如说：当你打开文章资源文件夹功能后，你把一个 example.jpg 图片放在了你的资源文件夹中，如果通过使用相对路径的常规 markdown 语法 <code>![](example.jpg)</code> ，它将 <em>不会</em> 出现在首页上。（但是它会在文章中按你期待的方式工作）</p>
+<p>正确的引用图片方式是使用下列的标签插件而不是 markdown ：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% asset_img example.jpg This is an example image %&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用Markdown嵌入图像"><a href="#使用Markdown嵌入图像" class="headerlink" title="使用Markdown嵌入图像"></a>使用Markdown嵌入图像</h3><p>hexo-renderer-marked 3.1.0引入了一个新选项，该选项允许您在不使用 <code>asset_img</code> 标签插件的情况下将图像嵌入markdown 。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _config.yml</span></span><br><span class="line">post_asset_folder: <span class="literal">true</span></span><br><span class="line">marked:</span><br><span class="line">  prependRoot: <span class="literal">true</span></span><br><span class="line">  postAsset: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>启动后，图片资源会自动解析为对应post的路径。</p>
+<p>比如说，“image.jpg”的路径为“/2020/01/02/foo/image.jpg”，这意味着它是文章“/2020/01/02/foo/“的图片资源。在该文章中， <code>![](image.jpg)</code> 会被识别为 <code>&lt;img src=&quot;/2020/01/02/foo/image.jpg&quot;&gt;</code>.</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">blog</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/coding/blog//" class="article-tag-list-link color5">blog</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/coding/blog/hexo%E6%96%87%E7%AB%A0%E7%AE%A1%E7%90%86%208a1aa06fe4a245ea863740a8d4215985/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-hexo建站 93494de9c5fd46b195405302fcb1d81a" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/coding/blog/hexo%E5%BB%BA%E7%AB%99%2093494de9c5fd46b195405302fcb1d81a/">hexo建站</a>
+    </h1>
+  
+
+        
+        <a href="/coding/blog/hexo%E5%BB%BA%E7%AB%99%2093494de9c5fd46b195405302fcb1d81a/" class="archive-article-date">
+  	<time datetime="2021-03-28T08:23:55.696Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Xiong_IT/article/details/55193816">Hexo建站：部署到github_MichaelX的专栏-CSDN博客</a></p>
+<p>工具列表</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git v2.28.0.windows.1</span><br><span class="line">node.js v14.16.0</span><br><span class="line">hexo-cli v4.2.0</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">官方文档</a></p>
+<h2 id="1、安装"><a href="#1、安装" class="headerlink" title="1、安装"></a>1、安装</h2><p>node.js安装：直接下载安装包，运行即可</p>
+<p>hexo安装：powershell执行以下指令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装cnmp</span></span><br><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br><span class="line"><span class="comment"># 需设置用户环境变量</span></span><br><span class="line"><span class="variable">$addPath</span>=<span class="string">&#x27;D:\Program Files\nodejs\node_global&#x27;</span>; <span class="variable">$target</span>=<span class="string">&#x27;User&#x27;</span>;</span><br><span class="line"><span class="variable">$path</span>=[Environment]::GetEnvironmentVariable(<span class="string">&#x27;Path&#x27;</span>, <span class="variable">$target</span>);</span><br><span class="line"><span class="variable">$newPath</span> = <span class="variable">$path</span> + <span class="string">&quot;;&quot;</span> + <span class="variable">$addPath</span>;</span><br><span class="line">[Environment]::SetEnvironmentVariable(<span class="string">&quot;Path&quot;</span>, <span class="variable">$newPath</span>, <span class="variable">$target</span>)</span><br><span class="line"><span class="comment"># 查看环境变量</span></span><br><span class="line">[Environment]::GetEnvironmentVariable(<span class="string">&#x27;Path&#x27;</span>, <span class="string">&#x27;User&#x27;</span>) -split<span class="string">&quot;;&quot;</span></span><br><span class="line"></span><br><span class="line">cnpm -v </span><br><span class="line"><span class="comment"># cnpm指令需执行以上步骤</span></span><br><span class="line">cnpm install -g hexo-cli </span><br></pre></td></tr></table></figure>
+
+<h2 id="2、建站"><a href="#2、建站" class="headerlink" title="2、建站"></a>2、建站</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hexo init <span class="string">&#x27;E:\\myblog&#x27;</span></span><br><span class="line"><span class="comment"># npx hexo init &#x27;E:\\myblog&#x27;</span></span><br><span class="line"><span class="built_in">cd</span> <span class="string">&quot;E:\\myblog&quot;</span></span><br><span class="line">cnpm install</span><br><span class="line">cnpm install hexo-generator-index --save</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2019/02/npx.html"></a></p>
+<h2 id="3、配置"><a href="#3、配置" class="headerlink" title="3、配置"></a>3、配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改_config.yml</span></span><br><span class="line"><span class="comment"># 参数参照：https://hexo.io/zh-cn/docs/configuration</span></span><br><span class="line"><span class="comment"># Site</span></span><br><span class="line">title: mlstars</span><br><span class="line">subtitle: <span class="string">&#x27;To the million stars&#x27;</span></span><br><span class="line">description: <span class="string">&#x27;Record and share the growth of my programming skills&#x27;</span></span><br><span class="line">keywords: blog sql python coding</span><br><span class="line">author: Billy Zhou</span><br><span class="line">language: zh-CN</span><br><span class="line">timezone: <span class="string">&#x27;Asia/Shanghai&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># https://hexo.io/themes/</span></span><br><span class="line"><span class="comment"># 安装主题</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/litten/hexo-theme-yilia.git themes/yilia</span><br><span class="line"><span class="comment"># 修改_config.yml: theme: yilia</span></span><br><span class="line"><span class="built_in">cd</span> themes/yilia</span><br><span class="line">cnpm install</span><br><span class="line"><span class="comment"># 更新主题</span></span><br><span class="line"><span class="built_in">cd</span> themes/yilia</span><br><span class="line">git pull</span><br><span class="line"><span class="comment"># 配置主题文件</span></span><br><span class="line"><span class="comment"># 修改 themes/yilia/_config.yml</span></span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.notion.so/theme-yilia-378e59a14b7147a484c83d11e7e4c36a">theme: yilia</a></p>
+<h2 id="4、部署"><a href="#4、部署" class="headerlink" title="4、部署"></a>4、部署</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">cnpm install hexo-deployer-git --save</span><br><span class="line"><span class="comment"># 根目录_config.yml 配置deploy</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment"># repo must be public in a free-plan github account</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://github.com/shiratori3/shiratori3.github.io</span><br><span class="line">  <span class="comment"># example, https://github.com/hexojs/hexojs.github.io</span></span><br><span class="line">  <span class="comment"># branch: gh-pages</span></span><br><span class="line">  branch: master</span><br><span class="line"></span><br><span class="line"><span class="comment"># github上新建对应repo</span></span><br><span class="line"><span class="comment"># 记得勾上添加readme.md</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送</span></span><br><span class="line"><span class="built_in">cd</span> <span class="string">&quot;E:\\myblog&quot;</span></span><br><span class="line">hexo generate</span><br><span class="line">hexo clean; hexo deploy</span><br><span class="line"><span class="comment"># 等待30分钟以便github完成域名DNS的配置</span></span><br><span class="line"><span class="comment"># # 本文暂不考虑个人域名的问题</span></span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">blog</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/coding/blog//" class="article-tag-list-link color5">blog</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/coding/blog/hexo%E5%BB%BA%E7%AB%99%2093494de9c5fd46b195405302fcb1d81a/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </nav>
   
 
 
@@ -409,8 +710,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: false,
-		isPost: true,
+		isHome: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
@@ -476,10 +777,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">blog</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
@@ -489,6 +786,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Jupyter</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -513,6 +814,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">math</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">script</a>
               </li>
             
             <div class="clearfix"></div>
