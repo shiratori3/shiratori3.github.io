@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://shiratori3.github.io">
   <title>UNIX模拟环境-Cygwin安装 | mlstars</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -74,16 +74,16 @@
     			
             
     			
-    			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
+    			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">喵</a>
     			
             
 		</nav>
 		<nav class="header-nav">
 			<div class="social">
 				
-					<a class="github" target="_blank" href="https://github.com/shiratori3" title="github"><i class="icon-github"></i></a>
+					<a class="github" target="_blank" href="https://github.com/shiratori3" title="github" rel="external nofollow noopener noreferrer"><i class="icon-github"></i></a>
 		        
-					<a class="mail" target="_blank" href="mailto:work.zzp1993@gmail.com" title="mail"><i class="icon-mail"></i></a>
+					<a class="mail" target="_blank" href="mailto:work.zzp1993@gmail.com" title="mail" rel="external nofollow noopener noreferrer"><i class="icon-mail"></i></a>
 		        
 			</div>
 		</nav>
@@ -118,9 +118,9 @@
 			<nav class="header-nav">
 				<div class="social">
 					
-						<a class="github" target="_blank" href="https://github.com/shiratori3" title="github"><i class="icon-github"></i></a>
+						<a class="github" target="_blank" href="https://github.com/shiratori3" title="github" rel="external nofollow noopener noreferrer"><i class="icon-github"></i></a>
 			        
-						<a class="mail" target="_blank" href="mailto:work.zzp1993@gmail.com" title="mail"><i class="icon-mail"></i></a>
+						<a class="mail" target="_blank" href="mailto:work.zzp1993@gmail.com" title="mail" rel="external nofollow noopener noreferrer"><i class="icon-mail"></i></a>
 			        
 				</div>
 			</nav>
@@ -143,7 +143,7 @@
       <div id="wrapper" class="body-wrap">
         <div class="menu-l">
           <div class="canvas-wrap">
-            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+            <canvas data-colors="#eaeaea" data-sectionheight="100" data-contentid="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
             <article id="post-UNIX模拟环境-Cygwin安装 a2fa1be73ee44999a5bd3b3d73818d48" class="article article-type-post " itemscope itemprop="blogPost">
@@ -167,11 +167,11 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>个人推荐在win10系统下使用 Windows Subsystem for Linux (WSL)，一个由微软开发的Linux兼容的内核接口（不包含Linux内核代码），而非Cygwin来模拟Linux系统。</p>
-<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/windows/wsl/install-win10">在 Windows 10 上安装适用于 Linux 的 Windows 子系统 (WSL)</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.microsoft.com/zh-cn/windows/wsl/install-win10">在 Windows 10 上安装适用于 Linux 的 Windows 子系统 (WSL)</a></p>
 <p>当然，Cygwin仍是一种可选项。</p>
 <h2 id="摘要（来自wiki）"><a href="#摘要（来自wiki）" class="headerlink" title="摘要（来自wiki）"></a>摘要（来自wiki）</h2><p>Cygwin是许多自由软件的集合，最初由Cygnus Solutions开发，用于各种版本的Microsoft Windows上，运行类UNIX系统。Cygwin的主要目的是通过重新编译，将POSIX系统（例如Linux、BSD，以及其他Unix系统）上的软件移植到Windows上。Cygwin移植工作在Windows NT上比较好，在Windows 95和Windows 98上，相对差劲一些。目前Cygwin由Red Hat等负责维护。</p>
 <span id="more"></span>
-<h2 id="官方安装教程"><a href="#官方安装教程" class="headerlink" title="官方安装教程"></a>官方安装教程</h2><p><a target="_blank" rel="noopener" href="https://cygwin.com/cygwin/install.html">Cygwin</a></p>
+<h2 id="官方安装教程"><a href="#官方安装教程" class="headerlink" title="官方安装教程"></a>官方安装教程</h2><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://cygwin.com/cygwin/install.html">Cygwin</a></p>
 <h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 官网下载对应版本的.exe安装包并运行</span></span><br><span class="line"><span class="comment"># 有多种安装模式，决定后续的packages包下载及安装，建议直接选择第一种install from internet</span></span><br><span class="line"><span class="comment"># 后续选择安装目录，建议不要放在系统盘</span></span><br><span class="line"><span class="comment"># 然后是代理设置及packages包的镜像地址，尽量选国内的</span></span><br><span class="line"><span class="comment"># 后续选择需要安装的包</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装过程中推荐的安装包</span></span><br><span class="line">(0) wget, curl</span><br><span class="line">(1) tar, gawk, bzip2, libiconv2</span><br><span class="line">(2) git</span><br><span class="line">(3) libreadline6</span><br><span class="line">(4) vim, ctags</span><br><span class="line">(6) lynx</span><br><span class="line"><span class="comment"># 当前版本已默认安装 tar, gawk, bzip2, libiconv2</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 随后，安装apt-cyg指令以方便安装软件</span></span><br><span class="line"><span class="comment"># 必须：wget, tar, gawk, bzip2</span></span><br><span class="line">lynx -<span class="built_in">source</span> rawgit.com/transcode-open/apt-cyg/master/apt-cyg &gt; apt-cyg</span><br><span class="line">install apt-cyg /bin</span><br><span class="line"></span><br><span class="line"><span class="comment"># 办法2：</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/transcode-open/apt-cyg.git</span><br><span class="line"><span class="built_in">cd</span> apt-cyg</span><br><span class="line">chmod u+x apt-cyg</span><br><span class="line">cp apt-cyg /bin</span><br><span class="line"></span><br><span class="line"><span class="comment"># 办法3：</span></span><br><span class="line"><span class="comment"># 去GitHub下载脚本的压缩文件：https://github.com/transcode-open/apt-cyg</span></span><br><span class="line"><span class="comment"># 把 apt-cyg 解压至Cygwin的安装目录下的bin文件夹，重启即可</span></span><br></pre></td></tr></table></figure>
@@ -381,7 +381,7 @@
     		&copy; 2021 Billy Zhou
     	</div>
       	<div class="footer-right">
-      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      		<a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="external nofollow noopener noreferrer">Yilia</a> by Litten
       	</div>
     </div>
   </div>
@@ -436,7 +436,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
       
         
       
-      <li style="width: 50%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">喵</a></li>
       
         
     </ul>
@@ -457,6 +457,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Cygwin</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
@@ -469,14 +477,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Cygwin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">flake8</a>
               </li>
              
@@ -485,15 +485,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">blog</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">proxy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">seo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -517,11 +529,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">conda</a>
+                <a href="javascript:void(0)" class="js-tag color4">telegram</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">telegram</a>
+                <a href="javascript:void(0)" class="js-tag color1">conda</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -545,7 +557,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
         </div>
         <ul class="search-ul">
           <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
-            缺失模块。<br/>1、请确保node版本大于6.2<br/>2、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
+            缺失模块。<br>1、请确保node版本大于6.2<br>2、在博客根目录（注意不是yilia根目录）执行以下命令：<br> npm i hexo-generator-json-content --save<br><br>
             3、在根目录_config.yml里添加配置：
 <pre style="font-size: 12px;" q-show="jsonFail">
   jsonContent:

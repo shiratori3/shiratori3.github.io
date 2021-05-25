@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://shiratori3.github.io">
   <title>mlstars</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -71,16 +71,16 @@
     			
             
     			
-    			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
+    			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">喵</a>
     			
             
 		</nav>
 		<nav class="header-nav">
 			<div class="social">
 				
-					<a class="github" target="_blank" href="https://github.com/shiratori3" title="github"><i class="icon-github"></i></a>
+					<a class="github" target="_blank" href="https://github.com/shiratori3" title="github" rel="external nofollow noopener noreferrer"><i class="icon-github"></i></a>
 		        
-					<a class="mail" target="_blank" href="mailto:work.zzp1993@gmail.com" title="mail"><i class="icon-mail"></i></a>
+					<a class="mail" target="_blank" href="mailto:work.zzp1993@gmail.com" title="mail" rel="external nofollow noopener noreferrer"><i class="icon-mail"></i></a>
 		        
 			</div>
 		</nav>
@@ -115,9 +115,9 @@
 			<nav class="header-nav">
 				<div class="social">
 					
-						<a class="github" target="_blank" href="https://github.com/shiratori3" title="github"><i class="icon-github"></i></a>
+						<a class="github" target="_blank" href="https://github.com/shiratori3" title="github" rel="external nofollow noopener noreferrer"><i class="icon-github"></i></a>
 			        
-						<a class="mail" target="_blank" href="mailto:work.zzp1993@gmail.com" title="mail"><i class="icon-mail"></i></a>
+						<a class="mail" target="_blank" href="mailto:work.zzp1993@gmail.com" title="mail" rel="external nofollow noopener noreferrer"><i class="icon-mail"></i></a>
 			        
 				</div>
 			</nav>
@@ -140,10 +140,299 @@
       <div id="wrapper" class="body-wrap">
         <div class="menu-l">
           <div class="canvas-wrap">
-            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+            <canvas data-colors="#eaeaea" data-sectionheight="100" data-contentid="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-随机顺序运行node js脚本 b028f716df5840a1af2fcc6c45e7e5a2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/coding/linux/%E9%9A%8F%E6%9C%BA%E9%A1%BA%E5%BA%8F%E8%BF%90%E8%A1%8Cnode%20js%E8%84%9A%E6%9C%AC%20b028f716df5840a1af2fcc6c45e7e5a2/">随机顺序运行node.js脚本</a>
+    </h1>
+  
+
+        
+        <a href="/coding/linux/%E9%9A%8F%E6%9C%BA%E9%A1%BA%E5%BA%8F%E8%BF%90%E8%A1%8Cnode%20js%E8%84%9A%E6%9C%AC%20b028f716df5840a1af2fcc6c45e7e5a2/" class="archive-article-date">
+  	<time datetime="2021-04-07T11:47:58.556Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建脚本路径并编辑</span></span><br><span class="line">mkdir ~/my_cmd</span><br><span class="line">mkdir ~/scripts/logs</span><br><span class="line">vim ~/my_cmd/SRand.sh</span><br><span class="line">vim ~/my_cmd/nodelog.sh</span><br><span class="line">vim ~/my_cmd/RunRand.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 赋予权限</span></span><br><span class="line">chmod 777 ~/my_cmd/SRand.sh</span><br><span class="line">chmod 777 ~/my_cmd/nodelog.sh</span><br><span class="line">chmod 777 ~/my_cmd/RunRand.sh</span><br><span class="line"><span class="comment"># 调用</span></span><br><span class="line"><span class="built_in">cd</span> ~/my_cmd</span><br><span class="line">RunRand.sh <span class="string">&#x27;BOTH&#x27;</span> <span class="string">&#x27;/script_path/&#x27;</span> \</span><br><span class="line"><span class="string">&#x27;script_fname1&#x27;</span> \</span><br><span class="line"><span class="string">&#x27;script_fname2&#x27;</span> \</span><br><span class="line"><span class="string">&#x27;script_fname3&#x27;</span></span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/coding/linux/%E9%9A%8F%E6%9C%BA%E9%A1%BA%E5%BA%8F%E8%BF%90%E8%A1%8Cnode%20js%E8%84%9A%E6%9C%AC%20b028f716df5840a1af2fcc6c45e7e5a2/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">shell</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">script</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/coding/linux//" class="article-tag-list-link color1">linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/coding/linux/%E9%9A%8F%E6%9C%BA%E9%A1%BA%E5%BA%8F%E8%BF%90%E8%A1%8Cnode%20js%E8%84%9A%E6%9C%AC%20b028f716df5840a1af2fcc6c45e7e5a2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-横转竖：将列值转换为不同列名 96afa36de1bf4b92bd13202640c1f4dd" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/data-science/sql/%E6%A8%AA%E8%BD%AC%E7%AB%96%EF%BC%9A%E5%B0%86%E5%88%97%E5%80%BC%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%B8%8D%E5%90%8C%E5%88%97%E5%90%8D%2096afa36de1bf4b92bd13202640c1f4dd/">横转竖：将列值转换为不同列名</a>
+    </h1>
+  
+
+        
+        <a href="/data-science/sql/%E6%A8%AA%E8%BD%AC%E7%AB%96%EF%BC%9A%E5%B0%86%E5%88%97%E5%80%BC%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%B8%8D%E5%90%8C%E5%88%97%E5%90%8D%2096afa36de1bf4b92bd13202640c1f4dd/" class="archive-article-date">
+  	<time datetime="2021-04-07T08:50:22.183Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>有些时候，我们希望将某一列的值按照一定的标准转换成多个列，从一维列变成二维数据表，从而更好地观察数据特征。这时候，我们就需要实现数据的横转竖了。</p>
+<h1 id="CASE-WHEN拆分-GROUP-BY聚合"><a href="#CASE-WHEN拆分-GROUP-BY聚合" class="headerlink" title="CASE WHEN拆分+GROUP BY聚合"></a>CASE WHEN拆分+GROUP BY聚合</h1><p>在下文中，我们将把包含最终展示数据的列称为展示列，用于拆分展示列的列称为转置列。比如说我们希望看到按照各科目（SUBJECT）进行横转竖的学生成绩（SCORE），那么SCORE列就是展示列，而SUBJECT列则是转置列，即展示列的转置标准。</p>
+<p>实际操作如下：</p>
+<p>1、根据[转置列]的值，用CASE WHEN把[展示列]拆分成多个不同范围的[展示列]。这时其实已经达到了转列的效果，但会包含众多NULL值。</p>
+<p>2、然后，我们再用GROUP BY以及聚合函数便可消除这部分NULL值。</p>
+<p>需要注意的是，根据CASE WHEN的条件，由于GROUP BY以及聚合函数的影响，最终展示数据可能存在数据精度的损失。如CASE WHEN [转置列] LIKE ‘%X%’或者CASE WHEN [转置列] IN (‘XXX’, ‘YYY’)这种一对多的条件，会导致最终数据精度的损失。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 展示列按照转置列进行横转竖 */</span></span><br><span class="line"><span class="comment">/* step1: CASE WHEN 根据转置列的值把展示列拆分成多个列*/</span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    [展示列<span class="number">1</span>_A类] <span class="operator">=</span> <span class="keyword">CASE</span> <span class="keyword">WHEN</span> [转置列] <span class="operator">=</span> <span class="string">&#x27;A类值&#x27;</span> <span class="keyword">THEN</span> [展示列<span class="number">1</span>] <span class="keyword">END</span>,</span><br><span class="line">    [展示列<span class="number">1</span>_B类] <span class="operator">=</span> <span class="keyword">CASE</span> <span class="keyword">WHEN</span> [转置列] <span class="operator">=</span> <span class="string">&#x27;B类值&#x27;</span> <span class="keyword">THEN</span> [展示列<span class="number">1</span>] <span class="keyword">END</span>,</span><br><span class="line">    [展示列<span class="number">1</span>_OTHER类] <span class="operator">=</span> <span class="keyword">CASE</span> <span class="keyword">WHEN</span> [转置列] <span class="operator">=</span> <span class="string">&#x27;剩余其他类值&#x27;</span> <span class="keyword">THEN</span> [展示列<span class="number">1</span>] <span class="keyword">END</span>,</span><br><span class="line">    [展示列<span class="number">1</span>_ERROR] <span class="operator">=</span> <span class="keyword">CASE</span> <span class="keyword">WHEN</span> [转置列] <span class="operator">=</span> <span class="string">&#x27;异常值&#x27;</span> <span class="keyword">THEN</span> [展示列<span class="number">1</span>] <span class="keyword">END</span> <span class="comment">--调试用，非必要</span></span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    sheetname</span><br><span class="line"></span><br><span class="line"><span class="comment">/* step2: GROUP BY 聚合消除NULL值。示例中，使用SUM函数进行聚合 */</span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    [展示列<span class="number">1</span>_A类_SUM] <span class="operator">=</span> <span class="built_in">SUM</span>([展示列<span class="number">1</span>_A类]),</span><br><span class="line">    [展示列<span class="number">1</span>_B类_SUM] <span class="operator">=</span> <span class="built_in">SUM</span>([展示列<span class="number">1</span>_B类]),</span><br><span class="line">    [展示列<span class="number">1</span>_OTHER类_SUM] <span class="operator">=</span> <span class="built_in">SUM</span>([展示列<span class="number">1</span>_OTHER类]),</span><br><span class="line">    [展示列<span class="number">1</span>_ERROR_SUM] <span class="operator">=</span> <span class="built_in">SUM</span>([展示列<span class="number">1</span>_ERROR]) <span class="comment">--调试用，非必要</span></span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    step1_result A</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 创建测试数据-SQL Server */</span></span><br><span class="line">IF <span class="keyword">EXISTS</span> ( <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> tempdb.dbo.sysobjects <span class="keyword">WHERE</span> id <span class="operator">=</span> object_id( N<span class="string">&#x27;tempdb..#temp_sheet&#x27;</span> ) <span class="keyword">AND</span> type <span class="operator">=</span> <span class="string">&#x27;U&#x27;</span> ) <span class="keyword">DROP</span> <span class="keyword">TABLE</span> #temp_sheet</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> #temp_sheet(</span><br><span class="line">    ID <span class="type">INT</span> <span class="keyword">IDENTITY</span>(<span class="number">1</span>,<span class="number">1</span>) <span class="keyword">PRIMARY</span> KEY,</span><br><span class="line">    STUDENT_NAME <span class="type">VARCHAR</span>(<span class="number">20</span>),</span><br><span class="line">    CLASS <span class="type">VARCHAR</span>(<span class="number">20</span>),</span><br><span class="line">    SUBJECT <span class="type">VARCHAR</span>(<span class="number">20</span>),</span><br><span class="line">    SCORE <span class="type">INT</span>,</span><br><span class="line">)</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> #temp_sheet (STUDENT_NAME, CLASS, SUBJECT, SCORE) <span class="keyword">VALUES</span> (<span class="string">&#x27;小明&#x27;</span>, <span class="string">&#x27;1年级A班&#x27;</span>, <span class="string">&#x27;语文&#x27;</span>, <span class="number">10</span>), (<span class="string">&#x27;小明&#x27;</span>, <span class="string">&#x27;1年级A班&#x27;</span>, <span class="string">&#x27;数学&#x27;</span>, <span class="number">81</span>), (<span class="string">&#x27;小明&#x27;</span>, <span class="string">&#x27;1年级A班&#x27;</span>, <span class="string">&#x27;英语&#x27;</span>, <span class="number">27</span>), (<span class="string">&#x27;小红&#x27;</span>, <span class="string">&#x27;1年级B班&#x27;</span>, <span class="string">&#x27;语文&#x27;</span>, <span class="number">91</span>), (<span class="string">&#x27;小红&#x27;</span>, <span class="string">&#x27;1年级B班&#x27;</span>, <span class="string">&#x27;数学&#x27;</span>, <span class="number">86</span>), (<span class="string">&#x27;小红&#x27;</span>, <span class="string">&#x27;1年级B班&#x27;</span>, <span class="string">&#x27;英语&#x27;</span>, <span class="number">87</span>), (<span class="string">&#x27;小黄&#x27;</span>, <span class="string">&#x27;2年级B班&#x27;</span>, <span class="string">&#x27;语文&#x27;</span>, <span class="number">28</span>), (<span class="string">&#x27;小黄&#x27;</span>, <span class="string">&#x27;2年级B班&#x27;</span>, <span class="string">&#x27;数学&#x27;</span>, <span class="number">90</span>), (<span class="string">&#x27;小黄&#x27;</span>, <span class="string">&#x27;2年级B班&#x27;</span>, <span class="string">&#x27;英语&#x27;</span>, <span class="number">72</span>), (<span class="string">&#x27;小蓝&#x27;</span>, <span class="string">&#x27;2年级C班&#x27;</span>, <span class="string">&#x27;语文&#x27;</span>, <span class="number">17</span>), (<span class="string">&#x27;小蓝&#x27;</span>, <span class="string">&#x27;2年级C班&#x27;</span>, <span class="string">&#x27;数学&#x27;</span>, <span class="number">67</span>), (<span class="string">&#x27;小蓝&#x27;</span>, <span class="string">&#x27;2年级C班&#x27;</span>, <span class="string">&#x27;英语&#x27;</span>, <span class="number">24</span>), (<span class="string">&#x27;小白&#x27;</span>, <span class="string">&#x27;3年级A班&#x27;</span>, <span class="string">&#x27;语文&#x27;</span>, <span class="number">40</span>), (<span class="string">&#x27;小白&#x27;</span>, <span class="string">&#x27;3年级A班&#x27;</span>, <span class="string">&#x27;数学&#x27;</span>, <span class="number">79</span>), (<span class="string">&#x27;小白&#x27;</span>, <span class="string">&#x27;3年级A班&#x27;</span>, <span class="string">&#x27;英语&#x27;</span>, <span class="number">18</span>), (<span class="string">&#x27;小黑&#x27;</span>, <span class="string">&#x27;3年级C班&#x27;</span>, <span class="string">&#x27;语文&#x27;</span>, <span class="number">83</span>), (<span class="string">&#x27;小黑&#x27;</span>, <span class="string">&#x27;3年级C班&#x27;</span>, <span class="string">&#x27;数学&#x27;</span>, <span class="number">82</span>), (<span class="string">&#x27;小黑&#x27;</span>, <span class="string">&#x27;3年级C班&#x27;</span>, <span class="string">&#x27;英语&#x27;</span>, <span class="number">90</span>), (<span class="string">&#x27;大明&#x27;</span>, <span class="string">&#x27;4年级D班&#x27;</span>, <span class="string">&#x27;语文&#x27;</span>, <span class="number">67</span>), (<span class="string">&#x27;大明&#x27;</span>, <span class="string">&#x27;4年级D班&#x27;</span>, <span class="string">&#x27;数学&#x27;</span>, <span class="number">25</span>), (<span class="string">&#x27;大明&#x27;</span>, <span class="string">&#x27;4年级D班&#x27;</span>, <span class="string">&#x27;英语&#x27;</span>, <span class="number">63</span>), (<span class="string">&#x27;大白&#x27;</span>, <span class="string">&#x27;4年级E班&#x27;</span>, <span class="string">&#x27;语文&#x27;</span>, <span class="number">87</span>), (<span class="string">&#x27;大白&#x27;</span>, <span class="string">&#x27;4年级E班&#x27;</span>, <span class="string">&#x27;数学&#x27;</span>, <span class="number">71</span>), (<span class="string">&#x27;大白&#x27;</span>, <span class="string">&#x27;4年级E班&#x27;</span>, <span class="string">&#x27;英语&#x27;</span>, <span class="number">80</span>)</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> #temp_sheet</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/data-science/sql/%E6%A8%AA%E8%BD%AC%E7%AB%96%EF%BC%9A%E5%B0%86%E5%88%97%E5%80%BC%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%B8%8D%E5%90%8C%E5%88%97%E5%90%8D%2096afa36de1bf4b92bd13202640c1f4dd/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">sql</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/data-science//" class="article-tag-list-link color3">data science</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/data-science/sql//" class="article-tag-list-link color4">sql</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/data-science/sql/%E6%A8%AA%E8%BD%AC%E7%AB%96%EF%BC%9A%E5%B0%86%E5%88%97%E5%80%BC%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%B8%8D%E5%90%8C%E5%88%97%E5%90%8D%2096afa36de1bf4b92bd13202640c1f4dd/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-查询结果拼接 ddfd423c0fc14c8d9f6778247e8844c5" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/data-science/sql/%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E6%8B%BC%E6%8E%A5%20ddfd423c0fc14c8d9f6778247e8844c5/">查询结果拼接</a>
+    </h1>
+  
+
+        
+        <a href="/data-science/sql/%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E6%8B%BC%E6%8E%A5%20ddfd423c0fc14c8d9f6778247e8844c5/" class="archive-article-date">
+  	<time datetime="2021-04-07T08:47:44.937Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>通过把查询结果转换成XML，实现查询结果的字符串拼接</p>
+<h1 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># sqlserver</span><br><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">	COLUMN_NAME_1, </span><br><span class="line">	COLUMN_NAME_2_JOINED <span class="operator">=</span> (<span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> <span class="keyword">CONVERT</span>(<span class="type">VARCHAR</span>, COLUMN_NAME_2)<span class="operator">+</span><span class="string">&#x27;,&#x27;</span> <span class="keyword">FROM</span> sheet1 <span class="keyword">WHERE</span> COLUMN_NAME_1 <span class="operator">=</span> A.COLUMN_NAME_1 <span class="keyword">FOR</span> XML PATH(<span class="string">&#x27;&#x27;</span>))</span><br><span class="line"><span class="keyword">FROM</span> (</span><br><span class="line">	<span class="keyword">SELECT</span> COLUMN_NAME_1, COLUMN_NAME_2 <span class="keyword">FROM</span> sheet1 </span><br><span class="line">) A</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># mysql</span><br><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">	COLUMN_NAME_1, </span><br><span class="line">	COLUMN_NAME_2_JOINED <span class="operator">=</span> GROUP_CONCAT(COLUMN_NAME_2)</span><br><span class="line"><span class="keyword">FROM</span> sheet1</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> COLUMN_NAME_1</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">sql</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/data-science//" class="article-tag-list-link color3">data science</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/data-science/sql//" class="article-tag-list-link color4">sql</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/data-science/sql/%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E6%8B%BC%E6%8E%A5%20ddfd423c0fc14c8d9f6778247e8844c5/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-理解多条件的复合查询 b8075f9f12324e69bd28c0b7460fc484" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -570,7 +859,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a target="_blank" rel="noopener" href="https://conda.github.io/conda-pack/">conda-pack</a></p>
+        <p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://conda.github.io/conda-pack/">conda-pack</a></p>
 <p>Conda-pack 是一个命令行工具，用于打包 conda 环境，其中包括该环境中安装的软件包的所有二进制文件。 当您想在有限或没有网络访问的系统中重现环境时，此功能很有用。</p>
 <p>要安装 conda-pack，请确保您位于 root 或 base 环境中，以便 conda-pack 在子环境中可用。Conda-pack 可通过 conda-forge 或者 PyPI 安装。</p>
 <p>需要注意的是：</p>
@@ -671,7 +960,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2013/07/rsa_algorithm_part_two.html">RSA算法原理（二）</a></p>
+        <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.ruanyifeng.com/blog/2013/07/rsa_algorithm_part_two.html">RSA算法原理（二）</a></p>
         
           <a class="article-more-a" href="/coding/python/rsa%E6%96%87%E4%BB%B6%E5%8A%A0%E5%AF%86python%E5%AE%9E%E7%8E%B0%207064c54fa38b45318a6881d09baeb106/#more">more >></a>
         
@@ -847,293 +1136,6 @@
 
 
   
-    <article id="post-Jupyter Notebook 预加载 cece6a5b9e994b949c839a870b651d5e" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/coding/python/Jupyter%20Notebook%20%E9%A2%84%E5%8A%A0%E8%BD%BD%20cece6a5b9e994b949c839a870b651d5e/">Jupyter Notebook 预加载</a>
-    </h1>
-  
-
-        
-        <a href="/coding/python/Jupyter%20Notebook%20%E9%A2%84%E5%8A%A0%E8%BD%BD%20cece6a5b9e994b949c839a870b651d5e/" class="archive-article-date">
-  	<time datetime="2021-03-29T14:53:09.402Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://towardsdatascience.com/how-to-automatically-import-your-favorite-libraries-into-ipython-or-a-jupyter-notebook-9c69d89aa343">How to Automatically Import Your Favorite Libraries into IPython or a Jupyter Notebook</a></p>
-<p>Jupyter的python内核实际为Ipython，因此需要在C:\Users\yourusrname.ipython\profile_default\startup\中添加py启动文件实现自动加载。</p>
-<p>文件名格式为XX-filename.py，XX前缀为纯数字，代表加载顺序。下文为该目录的README文件内容，解释了如何读取。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">This is the IPython startup directory</span><br><span class="line"></span><br><span class="line">.py and .ipy files in this directory will be run *prior* to any code or files specified via the exec_lines or exec_files configurables whenever you load this profile.</span><br><span class="line"></span><br><span class="line">Files will be run in lexicographical order, so you can control the execution order of files with a prefix, e.g.::</span><br><span class="line"></span><br><span class="line">    00-first.py</span><br><span class="line">    50-middle.py</span><br><span class="line">    99-last.ipy</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/coding/python/Jupyter%20Notebook%20%E9%A2%84%E5%8A%A0%E8%BD%BD%20cece6a5b9e994b949c839a870b651d5e/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">data science</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Jupyter</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding/python//" class="article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/coding/python/Jupyter%20Notebook%20%E9%A2%84%E5%8A%A0%E8%BD%BD%20cece6a5b9e994b949c839a870b651d5e/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-theme：yilia定制 d9b0f87daa304b289ea00c6867070da2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/coding/blog/theme%EF%BC%9Ayilia%E5%AE%9A%E5%88%B6%20d9b0f87daa304b289ea00c6867070da2/">theme：yilia定制</a>
-    </h1>
-  
-
-        
-        <a href="/coding/blog/theme%EF%BC%9Ayilia%E5%AE%9A%E5%88%B6%20d9b0f87daa304b289ea00c6867070da2/" class="archive-article-date">
-  	<time datetime="2021-03-28T13:51:26.761Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="添加分类目录"><a href="#添加分类目录" class="headerlink" title="添加分类目录"></a>添加分类目录</h2><p><a target="_blank" rel="noopener" href="https://www.dazhuanlan.com/2020/03/25/5e7a473ec10fe/">Hexo yilia 添加目录页面</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建页面</span></span><br><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改 /source/categories/index.md</span></span><br><span class="line">---</span><br><span class="line">title: 分类目录</span><br><span class="line"><span class="built_in">type</span>: <span class="string">&quot;categories&quot;</span></span><br><span class="line">layout: <span class="string">&quot;categories&quot;</span></span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/coding/blog/theme%EF%BC%9Ayilia%E5%AE%9A%E5%88%B6%20d9b0f87daa304b289ea00c6867070da2/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">blog</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding/blog//" class="article-tag-list-link color5">blog</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/coding/blog/theme%EF%BC%9Ayilia%E5%AE%9A%E5%88%B6%20d9b0f87daa304b289ea00c6867070da2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hexo网站管理 f38d067f05564d58acc889806707a701" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/coding/blog/hexo%E7%BD%91%E7%AB%99%E7%AE%A1%E7%90%86%20f38d067f05564d58acc889806707a701/">hexo网站管理</a>
-    </h1>
-  
-
-        
-        <a href="/coding/blog/hexo%E7%BD%91%E7%AB%99%E7%AE%A1%E7%90%86%20f38d067f05564d58acc889806707a701/" class="archive-article-date">
-  	<time datetime="2021-03-28T10:14:28.301Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动服务器</span></span><br><span class="line">hexo server</span><br><span class="line"><span class="comment"># 默认地址：http://localhost:4000</span></span><br><span class="line"><span class="comment"># 更改端口</span></span><br><span class="line">hexo server -p 5000</span><br><span class="line"><span class="comment"># 静态模式</span></span><br><span class="line">hexo server -s  </span><br><span class="line"><span class="comment"># 在静态模式下，服务器只处理 public 文件夹内的文件，而不会处理文件变动，在执行时，您应该先自行执行 hexo generate，此模式通常用于生产环境（production mode）下。</span></span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/coding/blog/hexo%E7%BD%91%E7%AB%99%E7%AE%A1%E7%90%86%20f38d067f05564d58acc889806707a701/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">blog</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding/blog//" class="article-tag-list-link color5">blog</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/coding/blog/hexo%E7%BD%91%E7%AB%99%E7%AE%A1%E7%90%86%20f38d067f05564d58acc889806707a701/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1151,7 +1153,7 @@
     		&copy; 2021 Billy Zhou
     	</div>
       	<div class="footer-right">
-      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      		<a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="external nofollow noopener noreferrer">Yilia</a> by Litten
       	</div>
     </div>
   </div>
@@ -1206,7 +1208,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
       
         
       
-      <li style="width: 50%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">喵</a></li>
       
         
     </ul>
@@ -1227,6 +1229,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Cygwin</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
@@ -1239,14 +1249,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Cygwin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">flake8</a>
               </li>
              
@@ -1255,15 +1257,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">blog</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">proxy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">seo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1287,11 +1301,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">conda</a>
+                <a href="javascript:void(0)" class="js-tag color4">telegram</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">telegram</a>
+                <a href="javascript:void(0)" class="js-tag color1">conda</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1315,7 +1329,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
         </div>
         <ul class="search-ul">
           <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
-            缺失模块。<br/>1、请确保node版本大于6.2<br/>2、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
+            缺失模块。<br>1、请确保node版本大于6.2<br>2、在博客根目录（注意不是yilia根目录）执行以下命令：<br> npm i hexo-generator-json-content --save<br><br>
             3、在根目录_config.yml里添加配置：
 <pre style="font-size: 12px;" q-show="jsonFail">
   jsonContent:

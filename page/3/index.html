@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://shiratori3.github.io">
   <title>mlstars</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -71,16 +71,16 @@
     			
             
     			
-    			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
+    			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">喵</a>
     			
             
 		</nav>
 		<nav class="header-nav">
 			<div class="social">
 				
-					<a class="github" target="_blank" href="https://github.com/shiratori3" title="github"><i class="icon-github"></i></a>
+					<a class="github" target="_blank" href="https://github.com/shiratori3" title="github" rel="external nofollow noopener noreferrer"><i class="icon-github"></i></a>
 		        
-					<a class="mail" target="_blank" href="mailto:work.zzp1993@gmail.com" title="mail"><i class="icon-mail"></i></a>
+					<a class="mail" target="_blank" href="mailto:work.zzp1993@gmail.com" title="mail" rel="external nofollow noopener noreferrer"><i class="icon-mail"></i></a>
 		        
 			</div>
 		</nav>
@@ -115,9 +115,9 @@
 			<nav class="header-nav">
 				<div class="social">
 					
-						<a class="github" target="_blank" href="https://github.com/shiratori3" title="github"><i class="icon-github"></i></a>
+						<a class="github" target="_blank" href="https://github.com/shiratori3" title="github" rel="external nofollow noopener noreferrer"><i class="icon-github"></i></a>
 			        
-						<a class="mail" target="_blank" href="mailto:work.zzp1993@gmail.com" title="mail"><i class="icon-mail"></i></a>
+						<a class="mail" target="_blank" href="mailto:work.zzp1993@gmail.com" title="mail" rel="external nofollow noopener noreferrer"><i class="icon-mail"></i></a>
 			        
 				</div>
 			</nav>
@@ -140,10 +140,297 @@
       <div id="wrapper" class="body-wrap">
         <div class="menu-l">
           <div class="canvas-wrap">
-            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+            <canvas data-colors="#eaeaea" data-sectionheight="100" data-contentid="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-Jupyter Notebook 预加载 cece6a5b9e994b949c839a870b651d5e" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/coding/python/Jupyter%20Notebook%20%E9%A2%84%E5%8A%A0%E8%BD%BD%20cece6a5b9e994b949c839a870b651d5e/">Jupyter Notebook 预加载</a>
+    </h1>
+  
+
+        
+        <a href="/coding/python/Jupyter%20Notebook%20%E9%A2%84%E5%8A%A0%E8%BD%BD%20cece6a5b9e994b949c839a870b651d5e/" class="archive-article-date">
+  	<time datetime="2021-03-29T14:53:09.402Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://towardsdatascience.com/how-to-automatically-import-your-favorite-libraries-into-ipython-or-a-jupyter-notebook-9c69d89aa343">How to Automatically Import Your Favorite Libraries into IPython or a Jupyter Notebook</a></p>
+<p>Jupyter的python内核实际为Ipython，因此需要在C:\Users\yourusrname.ipython\profile_default\startup\中添加py启动文件实现自动加载。</p>
+<p>文件名格式为XX-filename.py，XX前缀为纯数字，代表加载顺序。下文为该目录的README文件内容，解释了如何读取。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">This is the IPython startup directory</span><br><span class="line"></span><br><span class="line">.py and .ipy files in this directory will be run *prior* to any code or files specified via the exec_lines or exec_files configurables whenever you load this profile.</span><br><span class="line"></span><br><span class="line">Files will be run in lexicographical order, so you can control the execution order of files with a prefix, e.g.::</span><br><span class="line"></span><br><span class="line">    00-first.py</span><br><span class="line">    50-middle.py</span><br><span class="line">    99-last.ipy</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/coding/python/Jupyter%20Notebook%20%E9%A2%84%E5%8A%A0%E8%BD%BD%20cece6a5b9e994b949c839a870b651d5e/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">data science</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Jupyter</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/coding/python//" class="article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/coding/python/Jupyter%20Notebook%20%E9%A2%84%E5%8A%A0%E8%BD%BD%20cece6a5b9e994b949c839a870b651d5e/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-theme：yilia定制 d9b0f87daa304b289ea00c6867070da2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/coding/blog/theme%EF%BC%9Ayilia%E5%AE%9A%E5%88%B6%20d9b0f87daa304b289ea00c6867070da2/">theme：yilia定制</a>
+    </h1>
+  
+
+        
+        <a href="/coding/blog/theme%EF%BC%9Ayilia%E5%AE%9A%E5%88%B6%20d9b0f87daa304b289ea00c6867070da2/" class="archive-article-date">
+  	<time datetime="2021-03-28T13:51:26.761Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="添加分类目录"><a href="#添加分类目录" class="headerlink" title="添加分类目录"></a>添加分类目录</h2><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.dazhuanlan.com/2020/03/25/5e7a473ec10fe/">Hexo yilia 添加目录页面</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建页面</span></span><br><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改 /source/categories/index.md</span></span><br><span class="line">---</span><br><span class="line">title: 分类目录</span><br><span class="line"><span class="built_in">type</span>: <span class="string">&quot;categories&quot;</span></span><br><span class="line">layout: <span class="string">&quot;categories&quot;</span></span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/coding/blog/theme%EF%BC%9Ayilia%E5%AE%9A%E5%88%B6%20d9b0f87daa304b289ea00c6867070da2/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">blog</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/coding/blog//" class="article-tag-list-link color5">blog</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/coding/blog/theme%EF%BC%9Ayilia%E5%AE%9A%E5%88%B6%20d9b0f87daa304b289ea00c6867070da2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-hexo网站管理 f38d067f05564d58acc889806707a701" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/coding/blog/hexo%E7%BD%91%E7%AB%99%E7%AE%A1%E7%90%86%20f38d067f05564d58acc889806707a701/">hexo网站管理</a>
+    </h1>
+  
+
+        
+        <a href="/coding/blog/hexo%E7%BD%91%E7%AB%99%E7%AE%A1%E7%90%86%20f38d067f05564d58acc889806707a701/" class="archive-article-date">
+  	<time datetime="2021-03-28T10:14:28.301Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动服务器</span></span><br><span class="line">hexo server</span><br><span class="line"><span class="comment"># 默认地址：http://localhost:4000</span></span><br><span class="line"><span class="comment"># 更改端口</span></span><br><span class="line">hexo server -p 5000</span><br><span class="line"><span class="comment"># 静态模式</span></span><br><span class="line">hexo server -s  </span><br><span class="line"><span class="comment"># 在静态模式下，服务器只处理 public 文件夹内的文件，而不会处理文件变动，在执行时，您应该先自行执行 hexo generate，此模式通常用于生产环境（production mode）下。</span></span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/coding/blog/hexo%E7%BD%91%E7%AB%99%E7%AE%A1%E7%90%86%20f38d067f05564d58acc889806707a701/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">blog</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/coding/blog//" class="article-tag-list-link color5">blog</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/coding/blog/hexo%E7%BD%91%E7%AB%99%E7%AE%A1%E7%90%86%20f38d067f05564d58acc889806707a701/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-hexo文章管理 8a1aa06fe4a245ea863740a8d4215985" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -165,8 +452,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/writing">写作</a></p>
-<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/front-matter">Front-matter</a></p>
+        <p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io/zh-cn/docs/writing">写作</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io/zh-cn/docs/front-matter">Front-matter</a></p>
 <h2 id="1、新建文章"><a href="#1、新建文章" class="headerlink" title="1、新建文章"></a>1、新建文章</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new [layout] &lt;title&gt;</span><br></pre></td></tr></table></figure>
 
 <h3 id="布局（layout）"><a href="#布局（layout）" class="headerlink" title="布局（layout）"></a>布局（layout）</h3><p>Hexo 有三种默认布局：post、page 和 draft。在创建这三种不同类型的文件时，它们将会被保存到不同的路径；而您自定义的其他布局和 post 相同，都将储存到 source/_posts 文件夹。</p>
@@ -267,11 +554,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Xiong_IT/article/details/55193816">Hexo建站：部署到github_MichaelX的专栏-CSDN博客</a></p>
+        <p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.csdn.net/Xiong_IT/article/details/55193816">Hexo建站：部署到github_MichaelX的专栏-CSDN博客</a></p>
 <p>工具列表</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git v2.28.0.windows.1</span><br><span class="line">node.js v14.16.0</span><br><span class="line">hexo-cli v4.2.0</span><br></pre></td></tr></table></figure>
 
-<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">官方文档</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io/zh-cn/docs/">官方文档</a></p>
 <h2 id="1、安装"><a href="#1、安装" class="headerlink" title="1、安装"></a>1、安装</h2><p>node.js安装：直接下载安装包，运行即可</p>
 <p>hexo安装：powershell执行以下指令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装cnmp</span></span><br><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br><span class="line"><span class="comment"># 需设置用户环境变量</span></span><br><span class="line"><span class="variable">$addPath</span>=<span class="string">&#x27;D:\Program Files\nodejs\node_global&#x27;</span>; <span class="variable">$target</span>=<span class="string">&#x27;User&#x27;</span>;</span><br><span class="line"><span class="variable">$path</span>=[Environment]::GetEnvironmentVariable(<span class="string">&#x27;Path&#x27;</span>, <span class="variable">$target</span>);</span><br><span class="line"><span class="variable">$newPath</span> = <span class="variable">$path</span> + <span class="string">&quot;;&quot;</span> + <span class="variable">$addPath</span>;</span><br><span class="line">[Environment]::SetEnvironmentVariable(<span class="string">&quot;Path&quot;</span>, <span class="variable">$newPath</span>, <span class="variable">$target</span>)</span><br><span class="line"><span class="comment"># 查看环境变量</span></span><br><span class="line">[Environment]::GetEnvironmentVariable(<span class="string">&#x27;Path&#x27;</span>, <span class="string">&#x27;User&#x27;</span>) -split<span class="string">&quot;;&quot;</span></span><br><span class="line"></span><br><span class="line">cnpm -v </span><br><span class="line"><span class="comment"># cnpm指令需执行以上步骤</span></span><br><span class="line">cnpm install -g hexo-cli </span><br></pre></td></tr></table></figure>
@@ -362,7 +649,7 @@
     		&copy; 2021 Billy Zhou
     	</div>
       	<div class="footer-right">
-      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      		<a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="external nofollow noopener noreferrer">Yilia</a> by Litten
       	</div>
     </div>
   </div>
@@ -417,7 +704,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
       
         
       
-      <li style="width: 50%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">喵</a></li>
       
         
     </ul>
@@ -438,6 +725,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Cygwin</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
@@ -450,14 +745,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Cygwin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">flake8</a>
               </li>
              
@@ -466,15 +753,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">blog</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">proxy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">seo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -498,11 +797,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">conda</a>
+                <a href="javascript:void(0)" class="js-tag color4">telegram</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">telegram</a>
+                <a href="javascript:void(0)" class="js-tag color1">conda</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -526,7 +825,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
         </div>
         <ul class="search-ul">
           <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
-            缺失模块。<br/>1、请确保node版本大于6.2<br/>2、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
+            缺失模块。<br>1、请确保node版本大于6.2<br>2、在博客根目录（注意不是yilia根目录）执行以下命令：<br> npm i hexo-generator-json-content --save<br><br>
             3、在根目录_config.yml里添加配置：
 <pre style="font-size: 12px;" q-show="jsonFail">
   jsonContent:
