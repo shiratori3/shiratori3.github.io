@@ -214,6 +214,20 @@
   </url>
   
   <url>
+    <loc>https://shiratori3.github.io/tags/linux/</loc>
+    <lastmod>2021-05-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://shiratori3.github.io/tags/Cygwin/</loc>
+    <lastmod>2021-05-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://shiratori3.github.io/tags/flake8/</loc>
     <lastmod>2021-05-25</lastmod>
     <changefreq>daily</changefreq>
@@ -236,20 +250,6 @@
   
   <url>
     <loc>https://shiratori3.github.io/tags/proxy/</loc>
-    <lastmod>2021-05-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://shiratori3.github.io/tags/linux/</loc>
-    <lastmod>2021-05-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://shiratori3.github.io/tags/Cygwin/</loc>
     <lastmod>2021-05-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -370,13 +370,6 @@
   </url>
   
   <url>
-    <loc>https://shiratori3.github.io/categories/coding/linux/</loc>
-    <lastmod>2021-05-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://shiratori3.github.io/categories/coding/python/</loc>
     <lastmod>2021-05-25</lastmod>
     <changefreq>daily</changefreq>
@@ -392,6 +385,13 @@
   
   <url>
     <loc>https://shiratori3.github.io/categories/coding/blog/</loc>
+    <lastmod>2021-05-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://shiratori3.github.io/categories/coding/linux/</loc>
     <lastmod>2021-05-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
