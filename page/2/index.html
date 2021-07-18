@@ -147,6 +147,189 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-git f7b50770818d456a9cd9ce63620e286c" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/coding/git%20f7b50770818d456a9cd9ce63620e286c/">git</a>
+    </h1>
+  
+
+        
+        <a href="/coding/git%20f7b50770818d456a9cd9ce63620e286c/" class="archive-article-date">
+  	<time datetime="2021-04-07T12:45:05.464Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="设置代理"><a href="#设置代理" class="headerlink" title="设置代理"></a>设置代理</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 首先设置推送地址。在git上先新建repo然后获取对应地址</span><br><span class="line"># ssh更新</span><br><span class="line">git remote <span class="keyword">add</span> origin git<span class="variable">@github</span>.com:USERNAME<span class="operator">/</span>REPOSITORY.git # sock5代理没法使用</span><br><span class="line"># https</span><br><span class="line">git remote <span class="keyword">add</span> origin https:<span class="operator">/</span><span class="operator">/</span>github.com<span class="operator">/</span>USERNAME<span class="operator">/</span>REPOSITORY.git</span><br><span class="line"></span><br><span class="line"># 重设地址</span><br><span class="line">git remote <span class="keyword">set</span><span class="operator">-</span>url origin git<span class="variable">@github</span>.com:USERNAME<span class="operator">/</span>REPOSITORY.git</span><br><span class="line">git remote <span class="keyword">set</span><span class="operator">-</span>url origin https:<span class="operator">/</span><span class="operator">/</span>github.com<span class="operator">/</span>USERNAME<span class="operator">/</span>REPOSITORY.git</span><br><span class="line"># origin是remote名称</span><br><span class="line"></span><br><span class="line"># if <span class="literal">false</span>, <span class="keyword">set</span> proxy:</span><br><span class="line">git config <span class="comment">--global http.proxy &#x27;http://127.0.0.1:7890&#x27;  # 具体端口按自己的配置来</span></span><br><span class="line">git config <span class="comment">--global https.proxy &#x27;http://127.0.0.1:7890&#x27;</span></span><br><span class="line"># git config <span class="comment">--list</span></span><br><span class="line">git config <span class="comment">--global --unset http.proxy</span></span><br><span class="line">git config <span class="comment">--global --unset https.proxy</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 初始化repo</span><br><span class="line">git init</span><br><span class="line"></span><br><span class="line"># 添加需要推送的文件</span><br><span class="line">echo &quot;# 仓库标题&quot; <span class="operator">&gt;&gt;</span> README.md # 这步可跳过。README.md 可自行创建</span><br><span class="line">git <span class="keyword">add</span> README.md</span><br><span class="line">git <span class="keyword">add</span> xxx.xx</span><br><span class="line"># 记得编辑 .gitignore 文件以避免错误上传重要文件</span><br><span class="line"></span><br><span class="line"># 提交</span><br><span class="line">git <span class="keyword">commit</span> <span class="operator">-</span>m &quot;first commit&quot;</span><br><span class="line"></span><br><span class="line"># 添加分支</span><br><span class="line">git branch <span class="operator">-</span>M main  # 设置分支main为推送分支</span><br><span class="line"></span><br><span class="line">git remote <span class="keyword">add</span> origin https:<span class="operator">/</span><span class="operator">/</span>github.com<span class="operator">/</span>shinadori<span class="operator">/</span>py_for_excel.git</span><br><span class="line"># 推送</span><br><span class="line">git push <span class="operator">-</span>u origin main</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">proxy</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/coding/git%20f7b50770818d456a9cd9ce63620e286c/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-vscode添加sock5代理 d0678dad2e9d4d6fb03a6ef481777f6e" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/coding/vscode%E6%B7%BB%E5%8A%A0sock5%E4%BB%A3%E7%90%86%20d0678dad2e9d4d6fb03a6ef481777f6e/">vscode添加sock5代理</a>
+    </h1>
+  
+
+        
+        <a href="/coding/vscode%E6%B7%BB%E5%8A%A0sock5%E4%BB%A3%E7%90%86%20d0678dad2e9d4d6fb03a6ef481777f6e/" class="archive-article-date">
+  	<time datetime="2021-04-07T12:42:24.277Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>添加启用代理的快捷方式，修改目标参数如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;C:\...\Microsoft VS Code\Code.exe&quot;</span> --proxy-server=socks5://127.0.0.1:7890 --host-resolver-rules=<span class="string">&quot;MAP * ~NOTFOUND, EXCLUDE 127.0.0.1&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>参考资料：</p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://bread-whisper.now.sh/2020/02/28/vscode-socks5-proxy-setting/">VSCode如何配置SOCKS5代理</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">vscode</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">proxy</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/coding/vscode%E6%B7%BB%E5%8A%A0sock5%E4%BB%A3%E7%90%86%20d0678dad2e9d4d6fb03a6ef481777f6e/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-随机顺序运行node js脚本 b028f716df5840a1af2fcc6c45e7e5a2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -942,202 +1125,6 @@
 
 
   
-    <article id="post-rsa文件加密python实现 7064c54fa38b45318a6881d09baeb106" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/coding/python/rsa%E6%96%87%E4%BB%B6%E5%8A%A0%E5%AF%86python%E5%AE%9E%E7%8E%B0%207064c54fa38b45318a6881d09baeb106/">rsa文件加密python实现</a>
-    </h1>
-  
-
-        
-        <a href="/coding/python/rsa%E6%96%87%E4%BB%B6%E5%8A%A0%E5%AF%86python%E5%AE%9E%E7%8E%B0%207064c54fa38b45318a6881d09baeb106/" class="archive-article-date">
-  	<time datetime="2021-04-07T08:30:38.409Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.ruanyifeng.com/blog/2013/07/rsa_algorithm_part_two.html">RSA算法原理（二）</a></p>
-        
-          <a class="article-more-a" href="/coding/python/rsa%E6%96%87%E4%BB%B6%E5%8A%A0%E5%AF%86python%E5%AE%9E%E7%8E%B0%207064c54fa38b45318a6881d09baeb106/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">rsa</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">encrypt</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding/python//" class="article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/coding/python/rsa%E6%96%87%E4%BB%B6%E5%8A%A0%E5%AF%86python%E5%AE%9E%E7%8E%B0%207064c54fa38b45318a6881d09baeb106/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-运用公用表表达式(CTE)优化查询语句 867ec13d97204cd59c0909ba5f5fbb42" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/data-science/sql/%E8%BF%90%E7%94%A8%E5%85%AC%E7%94%A8%E8%A1%A8%E8%A1%A8%E8%BE%BE%E5%BC%8F(CTE)%E4%BC%98%E5%8C%96%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5%20867ec13d97204cd59c0909ba5f5fbb42/">运用公用表表达式(CTE)优化查询语句</a>
-    </h1>
-  
-
-        
-        <a href="/data-science/sql/%E8%BF%90%E7%94%A8%E5%85%AC%E7%94%A8%E8%A1%A8%E8%A1%A8%E8%BE%BE%E5%BC%8F(CTE)%E4%BC%98%E5%8C%96%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5%20867ec13d97204cd59c0909ba5f5fbb42/" class="archive-article-date">
-  	<time datetime="2021-03-29T14:55:35.104Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="自关联查询"><a href="#自关联查询" class="headerlink" title="自关联查询"></a>自关联查询</h3><p>在关系型数据库中，数据以二维数据表的形式进行存储，我们在查询的时候也往往只能以记录（一行）或者字段（一列）的形式对数据进行筛选。当需要比对不在同一条记录上的两个数据时，我们可以通过表关联自身的形式来拼接这两个数据，来实现对比目的。</p>
-<p>比如说，我们想知道某行的下一行的对应数值是什么（不在同一条记录上），这种情况可以写成：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 创建测试数据-SQL Server */</span></span><br><span class="line">IF <span class="keyword">EXISTS</span> ( <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> tempdb.dbo.sysobjects <span class="keyword">WHERE</span> id <span class="operator">=</span> object_id( N<span class="string">&#x27;tempdb..#temp_sheet&#x27;</span> ) <span class="keyword">AND</span> type <span class="operator">=</span> <span class="string">&#x27;U&#x27;</span> ) <span class="keyword">DROP</span> <span class="keyword">TABLE</span> #temp_sheet</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> #temp_sheet(</span><br><span class="line">    ID <span class="type">INT</span> <span class="keyword">IDENTITY</span>(<span class="number">1</span>,<span class="number">1</span>) <span class="keyword">PRIMARY</span> KEY,</span><br><span class="line">    HBM <span class="type">INT</span>,</span><br><span class="line">    ZBSZ <span class="type">VARCHAR</span>(<span class="number">100</span>)</span><br><span class="line">)</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> #temp_sheet (HBM, ZBSZ) <span class="keyword">VALUES</span> (<span class="number">1</span>, <span class="string">&#x27;111&#x27;</span>), (<span class="number">2</span>, <span class="string">&#x27;2222&#x27;</span>), (<span class="number">3</span>, <span class="string">&#x27;33333&#x27;</span>)</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> #temp_sheet</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 自关联测试-SQL Server */</span></span><br><span class="line"><span class="keyword">SELECT</span> A.HBM, B.HBM, A.ZBSZ, B.ZBSZ</span><br><span class="line"><span class="keyword">FROM</span> #temp_sheet A</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> #temp_sheet B <span class="keyword">ON</span> A.HBM <span class="operator">=</span> B.HBM<span class="number">-1</span></span><br></pre></td></tr></table></figure>
-
-<p>以上这种情况就是自关联，通过将一个表关联自身来实现同一张二维数据表下，不同行列的数据比对。</p>
-        
-          <a class="article-more-a" href="/data-science/sql/%E8%BF%90%E7%94%A8%E5%85%AC%E7%94%A8%E8%A1%A8%E8%A1%A8%E8%BE%BE%E5%BC%8F(CTE)%E4%BC%98%E5%8C%96%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5%20867ec13d97204cd59c0909ba5f5fbb42/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">sql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/data-science//" class="article-tag-list-link color3">data science</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/data-science/sql//" class="article-tag-list-link color4">sql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/data-science/sql/%E8%BF%90%E7%94%A8%E5%85%AC%E7%94%A8%E8%A1%A8%E8%A1%A8%E8%BE%BE%E5%BC%8F(CTE)%E4%BC%98%E5%8C%96%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5%20867ec13d97204cd59c0909ba5f5fbb42/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1251,19 +1238,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">proxy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">flake8</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">vscode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">proxy</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1280,6 +1267,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">coding</a>
               </li>
              
               <li class="article-tag-list-item">
