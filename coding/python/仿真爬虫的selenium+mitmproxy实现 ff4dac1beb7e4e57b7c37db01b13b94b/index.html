@@ -8,17 +8,22 @@
   <meta name="google-site-verification" content="WV7rQYhdzTRbcHU1ErVTln0fKKXLHEAOxGZsqLVMxmY">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://shiratori3.github.io">
-  <title>Archives: 2021/4 | mlstars</title>
+  <title>仿真爬虫的selenium+mitmproxy实现 | mlstars</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Record and share the growth of my programming skills">
-<meta property="og:type" content="website">
-<meta property="og:title" content="mlstars">
-<meta property="og:url" content="https://shiratori3.github.io/archives/2021/04/index.html">
+  <meta name="description" content="问题起源在stackoverflow上，遇到一个需要抓取受CloudFlare服务保护的网站数据（用postman确认了下会弹出CloudFlare的验证页面）的问题，自己尝试了下通常的方式即专门应付CloudFlare防御的cloudscraper，发现开源版本无法击穿对方装甲，需要转换思路。 代码如下： 12345import cloudscraperurl &#x3D; &quot;https:&#x2F;&#x2F;w">
+<meta property="og:type" content="article">
+<meta property="og:title" content="仿真爬虫的selenium+mitmproxy实现">
+<meta property="og:url" content="https://shiratori3.github.io/coding/python/%E4%BB%BF%E7%9C%9F%E7%88%AC%E8%99%AB%E7%9A%84selenium+mitmproxy%E5%AE%9E%E7%8E%B0%20ff4dac1beb7e4e57b7c37db01b13b94b/index.html">
 <meta property="og:site_name" content="mlstars">
-<meta property="og:description" content="Record and share the growth of my programming skills">
+<meta property="og:description" content="问题起源在stackoverflow上，遇到一个需要抓取受CloudFlare服务保护的网站数据（用postman确认了下会弹出CloudFlare的验证页面）的问题，自己尝试了下通常的方式即专门应付CloudFlare防御的cloudscraper，发现开源版本无法击穿对方装甲，需要转换思路。 代码如下： 12345import cloudscraperurl &#x3D; &quot;https:&#x2F;&#x2F;w">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-21T15:35:32.740Z">
+<meta property="article:modified_time" content="2021-07-21T15:36:47.636Z">
 <meta property="article:author" content="Billy Zhou">
-<meta property="article:tag" content="blog sql python coding">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="coding">
+<meta property="article:tag" content="selenium">
+<meta property="article:tag" content="scrapy">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="mlstars" type="application/atom+xml">
@@ -145,333 +150,111 @@
             <canvas data-colors="#eaeaea" data-sectionheight="100" data-contentid="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-仿真爬虫的selenium+mitmproxy实现 ff4dac1beb7e4e57b7c37db01b13b94b" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      仿真爬虫的selenium+mitmproxy实现
+    </h1>
+  
+
+        
+        <a href="/coding/python/%E4%BB%BF%E7%9C%9F%E7%88%AC%E8%99%AB%E7%9A%84selenium+mitmproxy%E5%AE%9E%E7%8E%B0%20ff4dac1beb7e4e57b7c37db01b13b94b/" class="archive-article-date">
+  	<time datetime="2021-07-21T15:35:32.740Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-21</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="问题起源"><a href="#问题起源" class="headerlink" title="问题起源"></a>问题起源</h2><p>在stackoverflow上，遇到一个需要抓取受CloudFlare服务保护的网站数据（用postman确认了下会弹出CloudFlare的验证页面）的问题，自己尝试了下通常的方式即专门应付CloudFlare防御的cloudscraper，发现开源版本无法击穿对方装甲，需要转换思路。</p>
+<p>代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cloudscraper</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;https://www.zolo.ca/&quot;</span></span><br><span class="line">scraper = cloudscraper.create_scraper()</span><br><span class="line"><span class="built_in">print</span>(scraper.get(url).text)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># output</span></span><br><span class="line">cloudscraper.exceptions.CloudflareChallengeError: Detected a Cloudflare version <span class="number">2</span> Captcha challenge, This feature <span class="keyword">is</span> <span class="keyword">not</span> available <span class="keyword">in</span> the opensource (free) version.</span><br></pre></td></tr></table></figure>
+
+<h2 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h2><p>于是，我打算用selenium直接连现有的浏览器，在此基础上控制现有的浏览器进行浏览，并捕获期间产生的网络流量以实现爬虫的数据抓取。</p>
+<p>这种仿真式爬虫的效率低，但发包数据和浏览行为会更接近真实自然人，也方便在遇到突发情况时手动干预以避免被列入黑名单。</p>
+<h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><h3 id="1、selenium操纵现有浏览器"><a href="#1、selenium操纵现有浏览器" class="headerlink" title="1、selenium操纵现有浏览器"></a>1、selenium操纵现有浏览器</h3><p>selenium本身要连接现有浏览器很简单，windows平台上只需设置一下chrome.exe的启动参数，加上<code>--remote-debugging-port=9222</code>即可。这里的端口号可以自行更改。</p>
+<p>同时，为了避免干预以往的浏览数据，另外弄了用于存放chrome数据的文件夹并加入启动参数<code>-user-data-dir=&quot;D:\pycharm\mitmscraper\chrome_files&quot;</code>。</p>
+<p>在启动浏览器后，通过设置<code>chrome_opts.add_experimental_option(&#39;debuggerAddress&#39;, &quot;127.0.0.1:9222&quot;)</code>便可实现selenium和现有浏览器的连接，然后启动driver实例即可。</p>
+<p>这样，我们便可以开始考虑如何捕获期间产生的网络流量了。</p>
+<p>下面的代码为具体实现，其中包括了不使用现有浏览器，直接新开chromedriver的方式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.chrome.options <span class="keyword">import</span> Options</span><br><span class="line"><span class="comment"># chromedriver: https://chromedriver.chromium.org/downloads</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># run the selenium driver</span></span><br><span class="line">chrome_opts = Options()</span><br><span class="line"></span><br><span class="line"><span class="comment"># two diff ways to capture network traffic by mitmproxy</span></span><br><span class="line"><span class="comment"># connect to existing chrome on debug mode</span></span><br><span class="line">chrome_opts.add_experimental_option(<span class="string">&#x27;debuggerAddress&#x27;</span>, <span class="string">&quot;127.0.0.1:9222&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># start a new chromedriver</span></span><br><span class="line"><span class="comment"># chrome_opts.add_argument(&quot;--user-data-dir=&quot; + r&quot;D:\pycharm\mitmscraper\chrome_files&quot;)</span></span><br><span class="line"><span class="comment"># chrome_opts.add_argument(&#x27;--ignore-certificate-errors&#x27;)</span></span><br><span class="line"><span class="comment"># chrome_opts.add_argument(&#x27;--ignore-ssl-errors&#x27;)</span></span><br><span class="line"><span class="comment"># chrome_opts.add_experimental_option(&#x27;excludeSwitches&#x27;, [&#x27;enable-automation&#x27;, &#x27;load-extension&#x27;])  # don&#x27;t show the bar of automation</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set proxy in SwitchyOmega extension or add argument for network traffic capturing</span></span><br><span class="line"><span class="comment"># chrome_opts.add_argument(&#x27;--proxy-server=127.0.0.1:8080&#x27;)</span></span><br><span class="line"></span><br><span class="line">driver = webdriver.Chrome(executable_path=<span class="string">&quot;chromedriver&quot;</span>, options=chrome_opts)</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;https://www.google.com/&quot;</span></span><br><span class="line">driver.get(url)</span><br><span class="line"><span class="built_in">print</span>(driver.title)</span><br><span class="line"></span><br><span class="line">a = <span class="built_in">input</span>(<span class="string">&#x27;Wait for inputing.\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">driver.quit()</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、selenium流量监控"><a href="#2、selenium流量监控" class="headerlink" title="2、selenium流量监控"></a>2、selenium流量监控</h3><p>一开始通过查阅资料，确定了捕获selenium爬虫期间网络流量的工具主要如下：</p>
+<ul>
+<li><strong>selenium-wire</strong>：与selenium类似但有api来操作相应request和response</li>
+<li><strong>browsermob-proxy</strong>：一个独立的代理服务器用于捕获流量并操作相应request和response，可以方便地嵌入selenium测试</li>
+<li><strong>mitmproxy</strong>：如名称所言，mitmproxy是一款中间人（man in the middle）代理服务器，以原理类似于中间人攻击的方法捕获网络流量。其实现以python为主，比起fiddler等流量监控软件更容易于嵌入python代码中。</li>
+</ul>
+<p>很显然，selenium-wire对那些selenium本身并不起作用的网站毫无帮助，直接可以不计入考虑。后文主要也是围绕browsermob-proxy与mitmproxy进行讨论。</p>
+<ul>
+<li><strong>browsermob-proxy</strong></li>
+</ul>
+<p>最初我先尝试使用browsermob-proxy来实现浏览器的流量监控。</p>
+<p>在正常的selenium模式（不连接现有服务器，配置并启动chromedriver）下，它的确运行得很好，但当我尝试连接到现有的服务器时，我就发现怎么都不行了。</p>
+<p>而且，这个在Windows平台上会存在Java进程杀不干净，导致端口一直被占用的问题（Github上的issue也有提过，目前好像还未得到解决），使得调试过程也十分痛苦，需要不停修改客户端的代理端口号。</p>
+<p>还有一点，pypi上的版本已经很久未更新，是0.8.0，而目前github上最新版是2.1.4（调试过程也是用最新版2.1.4，pip安装的是0.8.0）</p>
+<p>所以，最终我还是放弃了这套方式，转投了更嵌合python的mitmproxy。</p>
+<p>这部分的实现代码如下。需要把对应的bin文件放入项目文件夹然后在python中启动对应proxy服务器进行监听，监听结果会在proxy.har中得到体现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> browsermobproxy <span class="keyword">import</span> Server</span><br><span class="line"><span class="keyword">import</span> psutil</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> proc <span class="keyword">in</span> psutil.process_iter():</span><br><span class="line">    <span class="comment"># check whether the process name matches</span></span><br><span class="line">    <span class="keyword">if</span> proc.name() == <span class="string">&quot;browsermob-proxy&quot;</span>:</span><br><span class="line">        proc.kill()</span><br><span class="line"></span><br><span class="line">port_dict = &#123;<span class="string">&#x27;port&#x27;</span>: <span class="number">8090</span>&#125;</span><br><span class="line">server = Server(path=<span class="string">&quot;./browsermob-proxy-2.1.4/bin/browsermob-proxy&quot;</span>, options=port_dict)</span><br><span class="line">server.start()</span><br><span class="line">proxy = server.create_proxy()</span><br><span class="line"><span class="built_in">print</span>(proxy.proxy)</span><br><span class="line"></span><br><span class="line"><span class="comment"># create a selenium driver here </span></span><br><span class="line"></span><br><span class="line">proxy.new_har(<span class="string">&quot;google&quot;</span>, options=&#123;<span class="string">&#x27;captureHeaders&#x27;</span>: <span class="literal">True</span>, <span class="string">&#x27;captureContent&#x27;</span>: <span class="literal">True</span>&#125;)</span><br><span class="line">driver.get(<span class="string">&quot;http://www.google.com&quot;</span>)</span><br><span class="line"><span class="comment"># print(proxy.har)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> entry <span class="keyword">in</span> proxy.har[<span class="string">&#x27;log&#x27;</span>][<span class="string">&#x27;entries&#x27;</span>]:</span><br><span class="line">    _url = entry[<span class="string">&#x27;request&#x27;</span>][<span class="string">&#x27;url&#x27;</span>]</span><br><span class="line">    <span class="built_in">print</span>(_url)</span><br><span class="line"></span><br><span class="line">server.stop()</span><br><span class="line">driver.quit()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>mitmproxy</strong></li>
+</ul>
+<p>mitmproxy有多种代理方式：正向代理、反向代理、透明代理、Upstream Proxy（正向代理套一层娃）等，这里我用了上游代理（Upstream Proxy），因为要抓的部分网站需要科学上网。</p>
+<p>具体模式差异可见以下链接：</p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.mitmproxy.org/stable/concepts-modes/">Modes of operation</a></p>
+<p>配置mitmproxy本身其实并不难，最大难点是在于它居然没有一个成体系的python api文档（readthedocs上的含python api版本是0.18，最新版是7.0.0）。我是通过谷歌去查阅相关文章以及直接看源代码来了解部分功能是怎么实现的。</p>
+<p>另外，我这里使用的是6.0.2，因为7.0.0下部分api做了更改，新版本根本不能启动proxy服务器，但又找不到对应文档去实现新版的代码。</p>
+<p>简单而言，通过mitmproxy监控网络流量只需启动对应程序（mitmdump或mitmweb，mitmproxy在Windows平台下无法使用）并添加你需要的模块（addon）即可。</p>
+<p>下面代码不通过cmd.exe启动proxy服务器，而是在python中启动对应服务，并处于后台持续收集数据。需要加载的Addons模块另外放置于MitmAddons.py中以便修改，这里加载的是一个简单的计数模块，实际爬虫过程中可以把这里的数据抓取出来放入数据库以便后续处理。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># MitmProxifier.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">from</span> mitmproxy <span class="keyword">import</span> proxy, options</span><br><span class="line"><span class="keyword">from</span> mitmproxy.tools.dump <span class="keyword">import</span> DumpMaster</span><br><span class="line"><span class="keyword">from</span> mitmproxy.tools.web.master <span class="keyword">import</span> WebMaster</span><br><span class="line"><span class="keyword">from</span> MitmAddons <span class="keyword">import</span> my_addons</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MitmProxifier</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.thread = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">loop_in_thread</span>(<span class="params">self, loop, m</span>):</span></span><br><span class="line">        asyncio.set_event_loop(loop)</span><br><span class="line">        self.m.run()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">start</span>(<span class="params">self, addons, web_client=<span class="literal">False</span></span>):</span></span><br><span class="line">        <span class="comment"># set the mitmproxy config</span></span><br><span class="line">        mitm_opts = options.Options(</span><br><span class="line">            listen_host=<span class="string">&#x27;127.0.0.1&#x27;</span>, listen_port=<span class="number">8080</span>, mode=<span class="string">&#x27;upstream:http://127.0.0.1:7890&#x27;</span>)</span><br><span class="line">        <span class="comment"># mitmdump --mode upstream:http://127.0.0.1:7890</span></span><br><span class="line">        pconf = proxy.config.ProxyConfig(mitm_opts)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> web_client:</span><br><span class="line">            self.m = WebMaster(mitm_opts)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.m = DumpMaster(mitm_opts, with_termlog=<span class="literal">False</span>, with_dumper=<span class="literal">True</span>)</span><br><span class="line">        self.m.server = proxy.server.ProxyServer(pconf)</span><br><span class="line">        <span class="keyword">for</span> addon <span class="keyword">in</span> addons:</span><br><span class="line">            self.m.addons.add(addon)</span><br><span class="line">        <span class="comment"># print(self.m.addons)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># create thread</span></span><br><span class="line">        loop = asyncio.get_event_loop()</span><br><span class="line">        self.thread = threading.Thread(</span><br><span class="line">            target=self.loop_in_thread, args=(loop, self.m))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            self.thread.start()</span><br><span class="line">        <span class="keyword">except</span> KeyboardInterrupt:</span><br><span class="line">            self.m.shutdown()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    my_mitmdump = MitmProxifier()</span><br><span class="line">    my_mitmdump.start(my_addons, web_client=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># MitmAddons.py</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CountNum</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.request_num = <span class="number">0</span></span><br><span class="line">        self.response_num = <span class="number">0</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;inited&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">request</span>(<span class="params">self, flow</span>):</span></span><br><span class="line">        self.request_num += <span class="number">1</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;send request. count: &#123;0&#125;&#x27;</span>.<span class="built_in">format</span>(self.request_num))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">response</span>(<span class="params">self, flow</span>):</span></span><br><span class="line">        self.response_num += <span class="number">1</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;get response. count: &#123;0&#125;&#x27;</span>.<span class="built_in">format</span>(self.response_num))</span><br><span class="line"></span><br><span class="line">my_addons = [</span><br><span class="line">    CountNum()</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/zfb.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wx.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/coding/web/hexo%20seo%E4%BC%98%E5%8C%96%204625de9518864ab9b85ade1e9a2873b9/" class="archive-article-date">
-  	<time datetime="2021-04-11T14:48:33.331Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/coding/web/hexo%20seo%E4%BC%98%E5%8C%96%204625de9518864ab9b85ade1e9a2873b9/">hexo seo优化</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">web</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">seo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding/web//" class="article-tag-list-link color4">web</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/coding/linux/%E5%AE%89%E8%A3%85telegram-cli%E5%AE%A2%E6%88%B7%E7%AB%AF-cygwin%20014b742bd8bc4dd1bb29df7620189784/" class="archive-article-date">
-  	<time datetime="2021-04-07T14:52:24.691Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/coding/linux/%E5%AE%89%E8%A3%85telegram-cli%E5%AE%A2%E6%88%B7%E7%AB%AF-cygwin%20014b742bd8bc4dd1bb29df7620189784/">安装telegram-cli客户端-cygwin</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Cygwin</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">telegram</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding/linux//" class="article-tag-list-link color1">linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/coding/linux/%E5%AE%89%E8%A3%85telegram-cli%E5%AE%A2%E6%88%B7%E7%AB%AF%207b1b948865874cffbb1fe0ff706787c8/" class="archive-article-date">
-  	<time datetime="2021-04-07T14:51:00.573Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/coding/linux/%E5%AE%89%E8%A3%85telegram-cli%E5%AE%A2%E6%88%B7%E7%AB%AF%207b1b948865874cffbb1fe0ff706787c8/">安装telegram-cli客户端</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">telegram</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding/linux//" class="article-tag-list-link color1">linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/coding/linux/UNIX%E6%A8%A1%E6%8B%9F%E7%8E%AF%E5%A2%83-Cygwin%E5%AE%89%E8%A3%85%20a2fa1be73ee44999a5bd3b3d73818d48/" class="archive-article-date">
-  	<time datetime="2021-04-07T13:49:30.817Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/coding/linux/UNIX%E6%A8%A1%E6%8B%9F%E7%8E%AF%E5%A2%83-Cygwin%E5%AE%89%E8%A3%85%20a2fa1be73ee44999a5bd3b3d73818d48/">UNIX模拟环境-Cygwin安装</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Cygwin</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding/linux//" class="article-tag-list-link color1">linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/coding/linux/wsl2%E8%AE%BE%E7%BD%AEproxy%20b8d2ea03c29e42bc8e6ce9c1a5d8c464/" class="archive-article-date">
-  	<time datetime="2021-04-07T13:02:28.146Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/coding/linux/wsl2%E8%AE%BE%E7%BD%AEproxy%20b8d2ea03c29e42bc8e6ce9c1a5d8c464/">wsl2设置proxy</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">proxy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">wsl</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding/linux//" class="article-tag-list-link color1">linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/coding/python/flake8%E5%85%A8%E5%B1%80%E5%BF%BD%E7%95%A5E501%208f67305f41614be185d302ff2233cbb8/" class="archive-article-date">
-  	<time datetime="2021-04-07T12:52:24.422Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/coding/python/flake8%E5%85%A8%E5%B1%80%E5%BF%BD%E7%95%A5E501%208f67305f41614be185d302ff2233cbb8/">flake8全局忽略E501</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -481,17 +264,21 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">flake8</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">coding</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">vscode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">selenium</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">scrapy</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -508,240 +295,116 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://shiratori3.github.io/coding/python/%E4%BB%BF%E7%9C%9F%E7%88%AC%E8%99%AB%E7%9A%84selenium+mitmproxy%E5%AE%9E%E7%8E%B0%20ff4dac1beb7e4e57b7c37db01b13b94b/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/coding/git%20f7b50770818d456a9cd9ce63620e286c/" class="archive-article-date">
-  	<time datetime="2021-04-07T12:45:05.464Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-07</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/coding/python/python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7%E5%88%97%E8%A1%A8%20b5842bb9ea9f4249a790c1ff3784bc66/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">python自动化工具列表</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/coding/git%20f7b50770818d456a9cd9ce63620e286c/">git</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">proxy</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E8%B5%B7%E6%BA%90"><span class="toc-number">1.</span> <span class="toc-text">问题起源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%80%9D%E8%B7%AF"><span class="toc-number">2.</span> <span class="toc-text">解决思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.</span> <span class="toc-text">具体实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81selenium%E6%93%8D%E7%BA%B5%E7%8E%B0%E6%9C%89%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="toc-number">3.1.</span> <span class="toc-text">1、selenium操纵现有浏览器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81selenium%E6%B5%81%E9%87%8F%E7%9B%91%E6%8E%A7"><span class="toc-number">3.2.</span> <span class="toc-text">2、selenium流量监控</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/coding/vscode%E6%B7%BB%E5%8A%A0sock5%E4%BB%A3%E7%90%86%20d0678dad2e9d4d6fb03a6ef481777f6e/" class="archive-article-date">
-  	<time datetime="2021-04-07T12:42:24.277Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/coding/vscode%E6%B7%BB%E5%8A%A0sock5%E4%BB%A3%E7%90%86%20d0678dad2e9d4d6fb03a6ef481777f6e/">vscode添加sock5代理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">proxy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">vscode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/coding/linux/%E9%9A%8F%E6%9C%BA%E9%A1%BA%E5%BA%8F%E8%BF%90%E8%A1%8Cnode%20js%E8%84%9A%E6%9C%AC%20b028f716df5840a1af2fcc6c45e7e5a2/" class="archive-article-date">
-  	<time datetime="2021-04-07T11:47:58.556Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/coding/linux/%E9%9A%8F%E6%9C%BA%E9%A1%BA%E5%BA%8F%E8%BF%90%E8%A1%8Cnode%20js%E8%84%9A%E6%9C%AC%20b028f716df5840a1af2fcc6c45e7e5a2/">随机顺序运行node.js脚本</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">shell</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">script</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding/linux//" class="article-tag-list-link color1">linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/data-science/sql/%E6%A8%AA%E8%BD%AC%E7%AB%96%EF%BC%9A%E5%B0%86%E5%88%97%E5%80%BC%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%B8%8D%E5%90%8C%E5%88%97%E5%90%8D%2096afa36de1bf4b92bd13202640c1f4dd/" class="archive-article-date">
-  	<time datetime="2021-04-07T08:50:22.183Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/data-science/sql/%E6%A8%AA%E8%BD%AC%E7%AB%96%EF%BC%9A%E5%B0%86%E5%88%97%E5%80%BC%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%B8%8D%E5%90%8C%E5%88%97%E5%90%8D%2096afa36de1bf4b92bd13202640c1f4dd/">横转竖：将列值转换为不同列名</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">sql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/data-science//" class="article-tag-list-link color3">data science</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/data-science/sql//" class="article-tag-list-link color4">sql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2021/04/page/2/">2</a><a class="extend next" rel="next" href="/archives/2021/04/page/2/">Next &amp;raquo;</a>
-    </nav>
+  
+
+  
+
   
 
 
@@ -765,8 +428,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
