@@ -8,17 +8,21 @@
   <meta name="google-site-verification" content="WV7rQYhdzTRbcHU1ErVTln0fKKXLHEAOxGZsqLVMxmY">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://shiratori3.github.io">
-  <title>Category: blog | mlstars</title>
+  <title>超长整数的处理 | mlstars</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Record and share the growth of my programming skills">
-<meta property="og:type" content="website">
-<meta property="og:title" content="mlstars">
-<meta property="og:url" content="https://shiratori3.github.io/categories/coding/blog/index.html">
+  <meta name="description" content="numpy的数据类型可处理范围首先，我们来了解下numpy下整型及浮点数的范围。 123456print(np.iinfo(np.longlong))print(np.iinfo(np.int64))print(np.iinfo(int))print(np.finfo(np.clongdouble))print(np.finfo(np.float64))print(np.finfo(float))">
+<meta property="og:type" content="article">
+<meta property="og:title" content="超长整数的处理">
+<meta property="og:url" content="https://shiratori3.github.io/data-science/python/%E8%B6%85%E9%95%BF%E6%95%B4%E6%95%B0%E7%9A%84%E5%A4%84%E7%90%86%2006ed517ead014b9fb7fccfb08c05799b/index.html">
 <meta property="og:site_name" content="mlstars">
-<meta property="og:description" content="Record and share the growth of my programming skills">
+<meta property="og:description" content="numpy的数据类型可处理范围首先，我们来了解下numpy下整型及浮点数的范围。 123456print(np.iinfo(np.longlong))print(np.iinfo(np.int64))print(np.iinfo(int))print(np.finfo(np.clongdouble))print(np.finfo(np.float64))print(np.finfo(float))">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-26T12:03:09.686Z">
+<meta property="article:modified_time" content="2021-07-26T12:06:22.378Z">
 <meta property="article:author" content="Billy Zhou">
-<meta property="article:tag" content="blog sql python coding">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="numpy">
+<meta property="article:tag" content="pandas">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="mlstars" type="application/atom+xml">
@@ -145,234 +149,254 @@
             <canvas data-colors="#eaeaea" data-sectionheight="100" data-contentid="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-超长整数的处理 06ed517ead014b9fb7fccfb08c05799b" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      超长整数的处理
+    </h1>
+  
+
+        
+        <a href="/data-science/python/%E8%B6%85%E9%95%BF%E6%95%B4%E6%95%B0%E7%9A%84%E5%A4%84%E7%90%86%2006ed517ead014b9fb7fccfb08c05799b/" class="archive-article-date">
+  	<time datetime="2021-07-26T12:03:09.686Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-26</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="numpy的数据类型可处理范围"><a href="#numpy的数据类型可处理范围" class="headerlink" title="numpy的数据类型可处理范围"></a>numpy的数据类型可处理范围</h2><p>首先，我们来了解下numpy下整型及浮点数的范围。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(np.iinfo(np.longlong))</span><br><span class="line"><span class="built_in">print</span>(np.iinfo(np.int64))</span><br><span class="line"><span class="built_in">print</span>(np.iinfo(<span class="built_in">int</span>))</span><br><span class="line"><span class="built_in">print</span>(np.finfo(np.clongdouble))</span><br><span class="line"><span class="built_in">print</span>(np.finfo(np.float64))</span><br><span class="line"><span class="built_in">print</span>(np.finfo(<span class="built_in">float</span>))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># output</span></span><br><span class="line"></span><br><span class="line">Machine parameters <span class="keyword">for</span> int64</span><br><span class="line">---------------------------------------------------------------</span><br><span class="line">min = -9223372036854775808</span><br><span class="line">max = 9223372036854775807</span><br><span class="line">---------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">Machine parameters <span class="keyword">for</span> int64</span><br><span class="line">---------------------------------------------------------------</span><br><span class="line">min = -9223372036854775808</span><br><span class="line">max = 9223372036854775807</span><br><span class="line">---------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">Machine parameters <span class="keyword">for</span> int32</span><br><span class="line">---------------------------------------------------------------</span><br><span class="line">min = -2147483648</span><br><span class="line">max = 2147483647</span><br><span class="line">---------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">Machine parameters <span class="keyword">for</span> float64</span><br><span class="line">---------------------------------------------------------------</span><br><span class="line">precision =  15   resolution = 1.0000000000000001e-15</span><br><span class="line">machep =    -52   eps =        2.2204460492503131e-16</span><br><span class="line">negep =     -53   epsneg =     1.1102230246251565e-16</span><br><span class="line">minexp =  -1022   tiny =       2.2250738585072014e-308</span><br><span class="line">maxexp =   1024   max =        1.7976931348623157e+308</span><br><span class="line">nexp =       11   min =        -max</span><br><span class="line">---------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">Machine parameters <span class="keyword">for</span> float64</span><br><span class="line">---------------------------------------------------------------</span><br><span class="line">precision =  15   resolution = 1.0000000000000001e-15</span><br><span class="line">machep =    -52   eps =        2.2204460492503131e-16</span><br><span class="line">negep =     -53   epsneg =     1.1102230246251565e-16</span><br><span class="line">minexp =  -1022   tiny =       2.2250738585072014e-308</span><br><span class="line">maxexp =   1024   max =        1.7976931348623157e+308</span><br><span class="line">nexp =       11   min =        -max</span><br><span class="line">---------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">Machine parameters <span class="keyword">for</span> float64</span><br><span class="line">---------------------------------------------------------------</span><br><span class="line">precision =  15   resolution = 1.0000000000000001e-15</span><br><span class="line">machep =    -52   eps =        2.2204460492503131e-16</span><br><span class="line">negep =     -53   epsneg =     1.1102230246251565e-16</span><br><span class="line">minexp =  -1022   tiny =       2.2250738585072014e-308</span><br><span class="line">maxexp =   1024   max =        1.7976931348623157e+308</span><br><span class="line">nexp =       11   min =        -max</span><br><span class="line">---------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，int64的范围是±2的63次方，而在python3下，通用int类型的整数已经没有上下限了，这导致了有部分python整数转换至numpy（或pandas）时会产生溢出问题，虽然这种情况实际上很少遇到。</p>
+<!--mores-->
+
+<h2 id="超长整型数据的生成"><a href="#超长整型数据的生成" class="headerlink" title="超长整型数据的生成"></a>超长整型数据的生成</h2><p>我们首先来随机生成一串超长整数，这里采用了几种方式：</p>
+<h3 id="random-randint"><a href="#random-randint" class="headerlink" title="random.randint"></a>random.randint</h3><p>这种方式不会受到numpy数据类型的上下限限制，即使是int类型也能正常保存及导出至csv文件。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">randint_list</span>(<span class="params">size=<span class="number">10</span>, num_len=<span class="number">64</span>, return_str=<span class="literal">True</span></span>):</span></span><br><span class="line">    ints_list = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(size):</span><br><span class="line">        ints_list.append(random.randint(-<span class="number">2</span>**num_len, <span class="number">2</span>**num_len))</span><br><span class="line">    <span class="keyword">if</span> return_str:</span><br><span class="line">        <span class="keyword">return</span> [<span class="built_in">str</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> ints_list]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> ints_list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 写入文件</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;test_csv_str.csv&quot;</span>, <span class="string">&quot;w&quot;</span>, newline=<span class="string">&#x27;&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="comment"># print(list_long_str)</span></span><br><span class="line">    writer = csv.writer(f)</span><br><span class="line">    str_int_list = randint_list(<span class="number">10</span>, <span class="number">100</span>)</span><br><span class="line">    writer.writerows([[i] <span class="keyword">for</span> i <span class="keyword">in</span> str_int_list])</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;test_csv_int.csv&quot;</span>, <span class="string">&quot;w&quot;</span>, newline=<span class="string">&#x27;&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="comment"># print(list_long_int)</span></span><br><span class="line">    writer = csv.writer(f)</span><br><span class="line">    int_list = randint_list(<span class="number">10</span>, <span class="number">100</span>, <span class="literal">False</span>)</span><br><span class="line">    writer.writerows([[i] <span class="keyword">for</span> i <span class="keyword">in</span> int_list])</span><br></pre></td></tr></table></figure>
+
+<h3 id="numpy-random-Generator-integers"><a href="#numpy-random-Generator-integers" class="headerlink" title="numpy.random.Generator.integers"></a>numpy.random.Generator.integers</h3><p>最新的官方文档里，numpy.random.randint仍可以使用，但会建议新的代码使用default_rng（即Generator，随机数生成器，可以输入特定种子以便重现）的方式来生成随机数。</p>
+<p>下面的代码也将使用这种方式来生成随机整数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rng = np.random.default_rng(<span class="number">0</span>)</span><br><span class="line">rng_ints = rng.integers(low=-<span class="number">2</span>**<span class="number">63</span>, high=<span class="number">2</span>**<span class="number">63</span>, size=<span class="number">10</span>, dtype=np.int64)  <span class="comment"># OverflowError when comes to 2**63+1</span></span><br><span class="line"><span class="built_in">print</span>(rng_ints)</span><br><span class="line"><span class="built_in">print</span>(rng_ints.dtype)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># output</span></span><br><span class="line">[ <span class="number">2526497193922298463</span> -<span class="number">4246685573565524191</span> -<span class="number">8467543927005779784</span></span><br><span class="line"> -<span class="number">8918490974116450275</span>  <span class="number">5778815928437199163</span>  <span class="number">7613996499038379086</span></span><br><span class="line">  <span class="number">1967082864678646399</span>  <span class="number">4233464326268295749</span>   <span class="number">804739052780421055</span></span><br><span class="line">  <span class="number">8025669655141466093</span>]</span><br><span class="line">int64</span><br></pre></td></tr></table></figure>
+
+<p>可以看到官方所能提供的整数上下限局限于2的63次方内，也就是最大整数类型int64的范围内。超出该范围的将会触发OverflowError。</p>
+<h2 id="超长整数的处理"><a href="#超长整数的处理" class="headerlink" title="超长整数的处理"></a>超长整数的处理</h2><p>毫无疑问，在int64范围的整数是能被numpy准确处理的。我们需要知道的是numpy及pandas中会如何处理那些超出了int64范围的超长整数。</p>
+<p>我们将通过对现有csv文件的读取及通用int类型的数据转换的两种方式来考察这个问题。</p>
+<h3 id="读取csv文件"><a href="#读取csv文件" class="headerlink" title="读取csv文件"></a>读取csv文件</h3><h3 id="numpy-array"><a href="#numpy-array" class="headerlink" title="numpy.array"></a>numpy.array</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">y = np.loadtxt(<span class="string">&#x27;test_csv_int.csv&#x27;</span>, dtype=<span class="built_in">str</span>)</span><br><span class="line"><span class="comment"># OverflowError(int too big to convert): dytpe=np.int64</span></span><br><span class="line"><span class="comment"># OverflowError(Python int too large to convert to C long): dtype=int</span></span><br><span class="line"><span class="built_in">print</span>(y)</span><br><span class="line"><span class="built_in">print</span>(y.dtype)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># output</span></span><br><span class="line">[<span class="string">&#x27;878303398108704504587167840950&#x27;</span> <span class="string">&#x27;777692567718880961708739902253&#x27;</span></span><br><span class="line"> <span class="string">&#x27;298246240262018766378915485887&#x27;</span> <span class="string">&#x27;-1028172785479566745634701785536&#x27;</span></span><br><span class="line"> <span class="string">&#x27;787608539781917486715028510118&#x27;</span> <span class="string">&#x27;1083034612181160037788867789072&#x27;</span></span><br><span class="line"> <span class="string">&#x27;-859283157052774030465276694304&#x27;</span> <span class="string">&#x27;679970808616261717658266150928&#x27;</span></span><br><span class="line"> <span class="string">&#x27;-394890840227298543559276594303&#x27;</span> <span class="string">&#x27;541124013256204188565316298166&#x27;</span>]</span><br><span class="line">&lt;U32</span><br></pre></td></tr></table></figure>
+
+<h3 id="pandas-Series"><a href="#pandas-Series" class="headerlink" title="pandas.Series"></a>pandas.Series</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x = pd.read_csv(<span class="string">&#x27;test_csv_int.csv&#x27;</span>, header=<span class="literal">None</span>, names=[<span class="string">&quot;a&quot;</span>], dtype=&#123;<span class="string">&#x27;a&#x27;</span>: <span class="built_in">object</span>&#125;)  <span class="comment"># or &#x27;dtype=&#123;&#x27;a&#x27;: str&#125;)</span></span><br><span class="line"><span class="comment"># OverflowError: dtype=&#123;&#x27;a&#x27;: np.int64&#125;)</span></span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"><span class="built_in">print</span>(x.dtypes)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># output</span></span><br><span class="line">                                  a</span><br><span class="line"><span class="number">0</span>    <span class="number">878303398108704504587167840950</span></span><br><span class="line"><span class="number">1</span>    <span class="number">777692567718880961708739902253</span></span><br><span class="line"><span class="number">2</span>    <span class="number">298246240262018766378915485887</span></span><br><span class="line"><span class="number">3</span>  -<span class="number">1028172785479566745634701785536</span></span><br><span class="line"><span class="number">4</span>    <span class="number">787608539781917486715028510118</span></span><br><span class="line"><span class="number">5</span>   <span class="number">1083034612181160037788867789072</span></span><br><span class="line"><span class="number">6</span>   -<span class="number">859283157052774030465276694304</span></span><br><span class="line"><span class="number">7</span>    <span class="number">679970808616261717658266150928</span></span><br><span class="line"><span class="number">8</span>   -<span class="number">394890840227298543559276594303</span></span><br><span class="line"><span class="number">9</span>    <span class="number">541124013256204188565316298166</span></span><br><span class="line">a    <span class="built_in">object</span></span><br><span class="line">dtype: <span class="built_in">object</span></span><br></pre></td></tr></table></figure>
+
+<p>可见不管是numpy还是pandas，都会默认读取为str或object格式以避免损失数据精度。同时，如果强制去转换为int64，则会抛出OverflowError。</p>
+<h3 id="整型int数据转换"><a href="#整型int数据转换" class="headerlink" title="整型int数据转换"></a>整型int数据转换</h3><h3 id="numpy-array-1"><a href="#numpy-array-1" class="headerlink" title="numpy.array"></a>numpy.array</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rng_str_np = np.array(randint_list(<span class="number">5</span>, <span class="number">100</span>))</span><br><span class="line">rng_ints_np = np.array(randint_list(<span class="number">5</span>, <span class="number">100</span>, <span class="literal">False</span>))  <span class="comment"># dtype=np.int64, OverflowError</span></span><br><span class="line"><span class="built_in">print</span>(rng_str_np)</span><br><span class="line"><span class="built_in">print</span>(rng_ints_np)</span><br><span class="line"><span class="built_in">print</span>(rng_str_np.dtype)</span><br><span class="line"><span class="built_in">print</span>(rng_ints_np.dtype)  <span class="comment"># &lt;U31 or &lt;U32 when dtype=str</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># output</span></span><br><span class="line">[<span class="string">&#x27;509314451062318121020337684968&#x27;</span> <span class="string">&#x27;-1229791614441015385696865457173&#x27;</span></span><br><span class="line"> <span class="string">&#x27;698137161305507549562750028072&#x27;</span> <span class="string">&#x27;-370270684149532488608600533245&#x27;</span></span><br><span class="line"> <span class="string">&#x27;-187622300106489339576389568760&#x27;</span>]</span><br><span class="line">[<span class="number">1134627636753942973256545072658</span> -<span class="number">494221819999206666746113596861</span></span><br><span class="line"> -<span class="number">726871521241277452461874298619</span> -<span class="number">330717034554905017512193963730</span></span><br><span class="line"> <span class="number">887535365234696776848102888540</span>]</span><br><span class="line">&lt;U32</span><br><span class="line"><span class="built_in">object</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="pandas-Series-1"><a href="#pandas-Series-1" class="headerlink" title="pandas.Series"></a>pandas.Series</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rng_str_pd = pd.DataFrame(randint_list(<span class="number">5</span>, <span class="number">100</span>))</span><br><span class="line">rng_ints_pd = pd.DataFrame(randint_list(<span class="number">5</span>, <span class="number">100</span>, <span class="literal">False</span>))  <span class="comment"># dtype=np.int64, OverflowError</span></span><br><span class="line"><span class="built_in">print</span>(rng_ints_pd)</span><br><span class="line"><span class="built_in">print</span>(rng_str_pd)</span><br><span class="line"><span class="built_in">print</span>(rng_ints_pd.dtypes)</span><br><span class="line"><span class="built_in">print</span>(rng_str_pd.dtypes)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># output</span></span><br><span class="line">                                 <span class="number">0</span></span><br><span class="line"><span class="number">0</span>  -<span class="number">164854407507902657262859761143</span></span><br><span class="line"><span class="number">1</span>   -<span class="number">98159555592678662578854565242</span></span><br><span class="line"><span class="number">2</span>  -<span class="number">160420822961595545345229004438</span></span><br><span class="line"><span class="number">3</span>  -<span class="number">733039027865743949501767193396</span></span><br><span class="line"><span class="number">4</span>   <span class="number">437382763558003726220427124956</span></span><br><span class="line">                                 <span class="number">0</span></span><br><span class="line"><span class="number">0</span>   <span class="number">130725311114662280716407545590</span></span><br><span class="line"><span class="number">1</span>   <span class="number">387063142965725586256759031478</span></span><br><span class="line"><span class="number">2</span>  -<span class="number">281912232116322191438861299184</span></span><br><span class="line"><span class="number">3</span>   <span class="number">311447602990438611590040703907</span></span><br><span class="line"><span class="number">4</span>  -<span class="number">343138014447341818602474948905</span></span><br><span class="line"><span class="number">0</span>    <span class="built_in">object</span></span><br><span class="line">dtype: <span class="built_in">object</span></span><br><span class="line"><span class="number">0</span>    <span class="built_in">object</span></span><br><span class="line">dtype: <span class="built_in">object</span></span><br></pre></td></tr></table></figure>
+
+<p>同样地，即使拿一个int数组直接去转换，也只会得到str或object类型。强制转换仍旧报错。</p>
+<h2 id="超长整型数据的溢出问题"><a href="#超长整型数据的溢出问题" class="headerlink" title="超长整型数据的溢出问题"></a>超长整型数据的溢出问题</h2><p>关于这个问题，目前官方文档只提及了可能会被转换为范围更大但精度更低的浮点数类型，并没有给出进一步的解决方案。</p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://numpy.org/doc/1.21/user/basics.types.html#overflow-errors">Data types - NumPy v1.21 Manual</a></p>
+<h2 id="超长整型数据的储存"><a href="#超长整型数据的储存" class="headerlink" title="超长整型数据的储存"></a>超长整型数据的储存</h2><p>没太大问题，只是numpy需要注意导出的格式参数fmt。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pandas</span></span><br><span class="line">rng_ints_pd.to_csv(<span class="string">&quot;test_pd_int.csv&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># numpy</span></span><br><span class="line">np.savetxt(<span class="string">&quot;test_np_int.csv&quot;</span>, rng_ints_np, fmt=<span class="string">&quot;%d&quot;</span>)  <span class="comment"># must add fmt, default is fmt=&quot;%.18e&quot;</span></span><br></pre></td></tr></table></figure>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/zfb.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wx.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/coding/blog/theme%EF%BC%9Ayilia%E5%AE%9A%E5%88%B6%20d9b0f87daa304b289ea00c6867070da2/" class="archive-article-date">
-  	<time datetime="2021-03-28T13:51:26.761Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/coding/blog/theme%EF%BC%9Ayilia%E5%AE%9A%E5%88%B6%20d9b0f87daa304b289ea00c6867070da2/">theme：yilia定制</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">blog</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">pandas</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
+        			<a href="/categories/data-science//" class="article-tag-list-link color3">data science</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="/categories/coding/blog//" class="article-tag-list-link color5">blog</a>
+        			<a href="/categories/data-science/python//" class="article-tag-list-link color2">python</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://shiratori3.github.io/data-science/python/%E8%B6%85%E9%95%BF%E6%95%B4%E6%95%B0%E7%9A%84%E5%A4%84%E7%90%86%2006ed517ead014b9fb7fccfb08c05799b/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/coding/blog/hexo%E7%BD%91%E7%AB%99%E7%AE%A1%E7%90%86%20f38d067f05564d58acc889806707a701/" class="archive-article-date">
-  	<time datetime="2021-03-28T10:14:28.301Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-28</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/coding/python/%E4%BB%BF%E7%9C%9F%E7%88%AC%E8%99%AB%E7%9A%84selenium+mitmproxy%E5%AE%9E%E7%8E%B0%20ff4dac1beb7e4e57b7c37db01b13b94b/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">仿真爬虫的selenium+mitmproxy实现</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/coding/blog/hexo%E7%BD%91%E7%AB%99%E7%AE%A1%E7%90%86%20f38d067f05564d58acc889806707a701/">hexo网站管理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">blog</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding/blog//" class="article-tag-list-link color5">blog</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#numpy%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%AF%E5%A4%84%E7%90%86%E8%8C%83%E5%9B%B4"><span class="toc-number">1.</span> <span class="toc-text">numpy的数据类型可处理范围</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B6%85%E9%95%BF%E6%95%B4%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%9A%84%E7%94%9F%E6%88%90"><span class="toc-number">2.</span> <span class="toc-text">超长整型数据的生成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#random-randint"><span class="toc-number">2.1.</span> <span class="toc-text">random.randint</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#numpy-random-Generator-integers"><span class="toc-number">2.2.</span> <span class="toc-text">numpy.random.Generator.integers</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B6%85%E9%95%BF%E6%95%B4%E6%95%B0%E7%9A%84%E5%A4%84%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">超长整数的处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%BB%E5%8F%96csv%E6%96%87%E4%BB%B6"><span class="toc-number">3.1.</span> <span class="toc-text">读取csv文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#numpy-array"><span class="toc-number">3.2.</span> <span class="toc-text">numpy.array</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pandas-Series"><span class="toc-number">3.3.</span> <span class="toc-text">pandas.Series</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B4%E5%9E%8Bint%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2"><span class="toc-number">3.4.</span> <span class="toc-text">整型int数据转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#numpy-array-1"><span class="toc-number">3.5.</span> <span class="toc-text">numpy.array</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pandas-Series-1"><span class="toc-number">3.6.</span> <span class="toc-text">pandas.Series</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B6%85%E9%95%BF%E6%95%B4%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%9A%84%E6%BA%A2%E5%87%BA%E9%97%AE%E9%A2%98"><span class="toc-number">4.</span> <span class="toc-text">超长整型数据的溢出问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B6%85%E9%95%BF%E6%95%B4%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%9A%84%E5%82%A8%E5%AD%98"><span class="toc-number">5.</span> <span class="toc-text">超长整型数据的储存</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/coding/blog/hexo%E6%96%87%E7%AB%A0%E7%AE%A1%E7%90%86%208a1aa06fe4a245ea863740a8d4215985/" class="archive-article-date">
-  	<time datetime="2021-03-28T08:55:47.854Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/coding/blog/hexo%E6%96%87%E7%AB%A0%E7%AE%A1%E7%90%86%208a1aa06fe4a245ea863740a8d4215985/">hexo文章管理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">blog</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding/blog//" class="article-tag-list-link color5">blog</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/coding/blog/hexo%E5%BB%BA%E7%AB%99%2093494de9c5fd46b195405302fcb1d81a/" class="archive-article-date">
-  	<time datetime="2021-03-28T08:23:55.696Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-28</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/coding/blog/hexo%E5%BB%BA%E7%AB%99%2093494de9c5fd46b195405302fcb1d81a/">hexo建站</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">blog</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding/blog//" class="article-tag-list-link color5">blog</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -395,10 +419,10 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",

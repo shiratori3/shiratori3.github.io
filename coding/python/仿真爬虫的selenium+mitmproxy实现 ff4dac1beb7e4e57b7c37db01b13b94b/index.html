@@ -18,7 +18,7 @@
 <meta property="og:description" content="问题起源在stackoverflow上，遇到一个需要抓取受CloudFlare服务保护的网站数据（用postman确认了下会弹出CloudFlare的验证页面）的问题，自己尝试了下通常的方式即专门应付CloudFlare防御的cloudscraper，发现开源版本无法击穿对方装甲，需要转换思路。 代码如下： 12345import cloudscraperurl &#x3D; &quot;https:&#x2F;&#x2F;w">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-07-21T15:35:32.740Z">
-<meta property="article:modified_time" content="2021-07-21T15:36:47.636Z">
+<meta property="article:modified_time" content="2021-07-26T12:07:01.485Z">
 <meta property="article:author" content="Billy Zhou">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="coding">
@@ -176,6 +176,7 @@
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># output</span></span><br><span class="line">cloudscraper.exceptions.CloudflareChallengeError: Detected a Cloudflare version <span class="number">2</span> Captcha challenge, This feature <span class="keyword">is</span> <span class="keyword">not</span> available <span class="keyword">in</span> the opensource (free) version.</span><br></pre></td></tr></table></figure>
 
+<span id="more"></span>
 <h2 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h2><p>于是，我打算用selenium直接连现有的浏览器，在此基础上控制现有的浏览器进行浏览，并捕获期间产生的网络流量以实现爬虫的数据抓取。</p>
 <p>这种仿真式爬虫的效率低，但发包数据和浏览行为会更接近真实自然人，也方便在遇到突发情况时手动干预以避免被列入黑名单。</p>
 <h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><h3 id="1、selenium操纵现有浏览器"><a href="#1、selenium操纵现有浏览器" class="headerlink" title="1、selenium操纵现有浏览器"></a>1、selenium操纵现有浏览器</h3><p>selenium本身要连接现有浏览器很简单，windows平台上只需设置一下chrome.exe的启动参数，加上<code>--remote-debugging-port=9222</code>即可。这里的端口号可以自行更改。</p>
@@ -356,6 +357,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/data-science/python/%E8%B6%85%E9%95%BF%E6%95%B4%E6%95%B0%E7%9A%84%E5%A4%84%E7%90%86%2006ed517ead014b9fb7fccfb08c05799b/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          超长整数的处理
+        
+      </div>
+    </a>
   
   
     <a href="/coding/python/python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7%E5%88%97%E8%A1%A8%20b5842bb9ea9f4249a790c1ff3784bc66/" id="article-nav-older" class="article-nav-link-wrap">
@@ -599,6 +609,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">script</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">numpy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">pandas</a>
               </li>
             
             <div class="clearfix"></div>

@@ -147,6 +147,144 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-超长整数的处理 06ed517ead014b9fb7fccfb08c05799b" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/data-science/python/%E8%B6%85%E9%95%BF%E6%95%B4%E6%95%B0%E7%9A%84%E5%A4%84%E7%90%86%2006ed517ead014b9fb7fccfb08c05799b/">超长整数的处理</a>
+    </h1>
+  
+
+        
+        <a href="/data-science/python/%E8%B6%85%E9%95%BF%E6%95%B4%E6%95%B0%E7%9A%84%E5%A4%84%E7%90%86%2006ed517ead014b9fb7fccfb08c05799b/" class="archive-article-date">
+  	<time datetime="2021-07-26T12:03:09.686Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="numpy的数据类型可处理范围"><a href="#numpy的数据类型可处理范围" class="headerlink" title="numpy的数据类型可处理范围"></a>numpy的数据类型可处理范围</h2><p>首先，我们来了解下numpy下整型及浮点数的范围。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(np.iinfo(np.longlong))</span><br><span class="line"><span class="built_in">print</span>(np.iinfo(np.int64))</span><br><span class="line"><span class="built_in">print</span>(np.iinfo(<span class="built_in">int</span>))</span><br><span class="line"><span class="built_in">print</span>(np.finfo(np.clongdouble))</span><br><span class="line"><span class="built_in">print</span>(np.finfo(np.float64))</span><br><span class="line"><span class="built_in">print</span>(np.finfo(<span class="built_in">float</span>))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># output</span></span><br><span class="line"></span><br><span class="line">Machine parameters <span class="keyword">for</span> int64</span><br><span class="line">---------------------------------------------------------------</span><br><span class="line">min = -9223372036854775808</span><br><span class="line">max = 9223372036854775807</span><br><span class="line">---------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">Machine parameters <span class="keyword">for</span> int64</span><br><span class="line">---------------------------------------------------------------</span><br><span class="line">min = -9223372036854775808</span><br><span class="line">max = 9223372036854775807</span><br><span class="line">---------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">Machine parameters <span class="keyword">for</span> int32</span><br><span class="line">---------------------------------------------------------------</span><br><span class="line">min = -2147483648</span><br><span class="line">max = 2147483647</span><br><span class="line">---------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">Machine parameters <span class="keyword">for</span> float64</span><br><span class="line">---------------------------------------------------------------</span><br><span class="line">precision =  15   resolution = 1.0000000000000001e-15</span><br><span class="line">machep =    -52   eps =        2.2204460492503131e-16</span><br><span class="line">negep =     -53   epsneg =     1.1102230246251565e-16</span><br><span class="line">minexp =  -1022   tiny =       2.2250738585072014e-308</span><br><span class="line">maxexp =   1024   max =        1.7976931348623157e+308</span><br><span class="line">nexp =       11   min =        -max</span><br><span class="line">---------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">Machine parameters <span class="keyword">for</span> float64</span><br><span class="line">---------------------------------------------------------------</span><br><span class="line">precision =  15   resolution = 1.0000000000000001e-15</span><br><span class="line">machep =    -52   eps =        2.2204460492503131e-16</span><br><span class="line">negep =     -53   epsneg =     1.1102230246251565e-16</span><br><span class="line">minexp =  -1022   tiny =       2.2250738585072014e-308</span><br><span class="line">maxexp =   1024   max =        1.7976931348623157e+308</span><br><span class="line">nexp =       11   min =        -max</span><br><span class="line">---------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">Machine parameters <span class="keyword">for</span> float64</span><br><span class="line">---------------------------------------------------------------</span><br><span class="line">precision =  15   resolution = 1.0000000000000001e-15</span><br><span class="line">machep =    -52   eps =        2.2204460492503131e-16</span><br><span class="line">negep =     -53   epsneg =     1.1102230246251565e-16</span><br><span class="line">minexp =  -1022   tiny =       2.2250738585072014e-308</span><br><span class="line">maxexp =   1024   max =        1.7976931348623157e+308</span><br><span class="line">nexp =       11   min =        -max</span><br><span class="line">---------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，int64的范围是±2的63次方，而在python3下，通用int类型的整数已经没有上下限了，这导致了有部分python整数转换至numpy（或pandas）时会产生溢出问题，虽然这种情况实际上很少遇到。</p>
+<!--mores-->
+
+<h2 id="超长整型数据的生成"><a href="#超长整型数据的生成" class="headerlink" title="超长整型数据的生成"></a>超长整型数据的生成</h2><p>我们首先来随机生成一串超长整数，这里采用了几种方式：</p>
+<h3 id="random-randint"><a href="#random-randint" class="headerlink" title="random.randint"></a>random.randint</h3><p>这种方式不会受到numpy数据类型的上下限限制，即使是int类型也能正常保存及导出至csv文件。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">randint_list</span>(<span class="params">size=<span class="number">10</span>, num_len=<span class="number">64</span>, return_str=<span class="literal">True</span></span>):</span></span><br><span class="line">    ints_list = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(size):</span><br><span class="line">        ints_list.append(random.randint(-<span class="number">2</span>**num_len, <span class="number">2</span>**num_len))</span><br><span class="line">    <span class="keyword">if</span> return_str:</span><br><span class="line">        <span class="keyword">return</span> [<span class="built_in">str</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> ints_list]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> ints_list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 写入文件</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;test_csv_str.csv&quot;</span>, <span class="string">&quot;w&quot;</span>, newline=<span class="string">&#x27;&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="comment"># print(list_long_str)</span></span><br><span class="line">    writer = csv.writer(f)</span><br><span class="line">    str_int_list = randint_list(<span class="number">10</span>, <span class="number">100</span>)</span><br><span class="line">    writer.writerows([[i] <span class="keyword">for</span> i <span class="keyword">in</span> str_int_list])</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;test_csv_int.csv&quot;</span>, <span class="string">&quot;w&quot;</span>, newline=<span class="string">&#x27;&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="comment"># print(list_long_int)</span></span><br><span class="line">    writer = csv.writer(f)</span><br><span class="line">    int_list = randint_list(<span class="number">10</span>, <span class="number">100</span>, <span class="literal">False</span>)</span><br><span class="line">    writer.writerows([[i] <span class="keyword">for</span> i <span class="keyword">in</span> int_list])</span><br></pre></td></tr></table></figure>
+
+<h3 id="numpy-random-Generator-integers"><a href="#numpy-random-Generator-integers" class="headerlink" title="numpy.random.Generator.integers"></a>numpy.random.Generator.integers</h3><p>最新的官方文档里，numpy.random.randint仍可以使用，但会建议新的代码使用default_rng（即Generator，随机数生成器，可以输入特定种子以便重现）的方式来生成随机数。</p>
+<p>下面的代码也将使用这种方式来生成随机整数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rng = np.random.default_rng(<span class="number">0</span>)</span><br><span class="line">rng_ints = rng.integers(low=-<span class="number">2</span>**<span class="number">63</span>, high=<span class="number">2</span>**<span class="number">63</span>, size=<span class="number">10</span>, dtype=np.int64)  <span class="comment"># OverflowError when comes to 2**63+1</span></span><br><span class="line"><span class="built_in">print</span>(rng_ints)</span><br><span class="line"><span class="built_in">print</span>(rng_ints.dtype)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># output</span></span><br><span class="line">[ <span class="number">2526497193922298463</span> -<span class="number">4246685573565524191</span> -<span class="number">8467543927005779784</span></span><br><span class="line"> -<span class="number">8918490974116450275</span>  <span class="number">5778815928437199163</span>  <span class="number">7613996499038379086</span></span><br><span class="line">  <span class="number">1967082864678646399</span>  <span class="number">4233464326268295749</span>   <span class="number">804739052780421055</span></span><br><span class="line">  <span class="number">8025669655141466093</span>]</span><br><span class="line">int64</span><br></pre></td></tr></table></figure>
+
+<p>可以看到官方所能提供的整数上下限局限于2的63次方内，也就是最大整数类型int64的范围内。超出该范围的将会触发OverflowError。</p>
+<h2 id="超长整数的处理"><a href="#超长整数的处理" class="headerlink" title="超长整数的处理"></a>超长整数的处理</h2><p>毫无疑问，在int64范围的整数是能被numpy准确处理的。我们需要知道的是numpy及pandas中会如何处理那些超出了int64范围的超长整数。</p>
+<p>我们将通过对现有csv文件的读取及通用int类型的数据转换的两种方式来考察这个问题。</p>
+<h3 id="读取csv文件"><a href="#读取csv文件" class="headerlink" title="读取csv文件"></a>读取csv文件</h3><h3 id="numpy-array"><a href="#numpy-array" class="headerlink" title="numpy.array"></a>numpy.array</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">y = np.loadtxt(<span class="string">&#x27;test_csv_int.csv&#x27;</span>, dtype=<span class="built_in">str</span>)</span><br><span class="line"><span class="comment"># OverflowError(int too big to convert): dytpe=np.int64</span></span><br><span class="line"><span class="comment"># OverflowError(Python int too large to convert to C long): dtype=int</span></span><br><span class="line"><span class="built_in">print</span>(y)</span><br><span class="line"><span class="built_in">print</span>(y.dtype)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># output</span></span><br><span class="line">[<span class="string">&#x27;878303398108704504587167840950&#x27;</span> <span class="string">&#x27;777692567718880961708739902253&#x27;</span></span><br><span class="line"> <span class="string">&#x27;298246240262018766378915485887&#x27;</span> <span class="string">&#x27;-1028172785479566745634701785536&#x27;</span></span><br><span class="line"> <span class="string">&#x27;787608539781917486715028510118&#x27;</span> <span class="string">&#x27;1083034612181160037788867789072&#x27;</span></span><br><span class="line"> <span class="string">&#x27;-859283157052774030465276694304&#x27;</span> <span class="string">&#x27;679970808616261717658266150928&#x27;</span></span><br><span class="line"> <span class="string">&#x27;-394890840227298543559276594303&#x27;</span> <span class="string">&#x27;541124013256204188565316298166&#x27;</span>]</span><br><span class="line">&lt;U32</span><br></pre></td></tr></table></figure>
+
+<h3 id="pandas-Series"><a href="#pandas-Series" class="headerlink" title="pandas.Series"></a>pandas.Series</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x = pd.read_csv(<span class="string">&#x27;test_csv_int.csv&#x27;</span>, header=<span class="literal">None</span>, names=[<span class="string">&quot;a&quot;</span>], dtype=&#123;<span class="string">&#x27;a&#x27;</span>: <span class="built_in">object</span>&#125;)  <span class="comment"># or &#x27;dtype=&#123;&#x27;a&#x27;: str&#125;)</span></span><br><span class="line"><span class="comment"># OverflowError: dtype=&#123;&#x27;a&#x27;: np.int64&#125;)</span></span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"><span class="built_in">print</span>(x.dtypes)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># output</span></span><br><span class="line">                                  a</span><br><span class="line"><span class="number">0</span>    <span class="number">878303398108704504587167840950</span></span><br><span class="line"><span class="number">1</span>    <span class="number">777692567718880961708739902253</span></span><br><span class="line"><span class="number">2</span>    <span class="number">298246240262018766378915485887</span></span><br><span class="line"><span class="number">3</span>  -<span class="number">1028172785479566745634701785536</span></span><br><span class="line"><span class="number">4</span>    <span class="number">787608539781917486715028510118</span></span><br><span class="line"><span class="number">5</span>   <span class="number">1083034612181160037788867789072</span></span><br><span class="line"><span class="number">6</span>   -<span class="number">859283157052774030465276694304</span></span><br><span class="line"><span class="number">7</span>    <span class="number">679970808616261717658266150928</span></span><br><span class="line"><span class="number">8</span>   -<span class="number">394890840227298543559276594303</span></span><br><span class="line"><span class="number">9</span>    <span class="number">541124013256204188565316298166</span></span><br><span class="line">a    <span class="built_in">object</span></span><br><span class="line">dtype: <span class="built_in">object</span></span><br></pre></td></tr></table></figure>
+
+<p>可见不管是numpy还是pandas，都会默认读取为str或object格式以避免损失数据精度。同时，如果强制去转换为int64，则会抛出OverflowError。</p>
+<h3 id="整型int数据转换"><a href="#整型int数据转换" class="headerlink" title="整型int数据转换"></a>整型int数据转换</h3><h3 id="numpy-array-1"><a href="#numpy-array-1" class="headerlink" title="numpy.array"></a>numpy.array</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rng_str_np = np.array(randint_list(<span class="number">5</span>, <span class="number">100</span>))</span><br><span class="line">rng_ints_np = np.array(randint_list(<span class="number">5</span>, <span class="number">100</span>, <span class="literal">False</span>))  <span class="comment"># dtype=np.int64, OverflowError</span></span><br><span class="line"><span class="built_in">print</span>(rng_str_np)</span><br><span class="line"><span class="built_in">print</span>(rng_ints_np)</span><br><span class="line"><span class="built_in">print</span>(rng_str_np.dtype)</span><br><span class="line"><span class="built_in">print</span>(rng_ints_np.dtype)  <span class="comment"># &lt;U31 or &lt;U32 when dtype=str</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># output</span></span><br><span class="line">[<span class="string">&#x27;509314451062318121020337684968&#x27;</span> <span class="string">&#x27;-1229791614441015385696865457173&#x27;</span></span><br><span class="line"> <span class="string">&#x27;698137161305507549562750028072&#x27;</span> <span class="string">&#x27;-370270684149532488608600533245&#x27;</span></span><br><span class="line"> <span class="string">&#x27;-187622300106489339576389568760&#x27;</span>]</span><br><span class="line">[<span class="number">1134627636753942973256545072658</span> -<span class="number">494221819999206666746113596861</span></span><br><span class="line"> -<span class="number">726871521241277452461874298619</span> -<span class="number">330717034554905017512193963730</span></span><br><span class="line"> <span class="number">887535365234696776848102888540</span>]</span><br><span class="line">&lt;U32</span><br><span class="line"><span class="built_in">object</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="pandas-Series-1"><a href="#pandas-Series-1" class="headerlink" title="pandas.Series"></a>pandas.Series</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rng_str_pd = pd.DataFrame(randint_list(<span class="number">5</span>, <span class="number">100</span>))</span><br><span class="line">rng_ints_pd = pd.DataFrame(randint_list(<span class="number">5</span>, <span class="number">100</span>, <span class="literal">False</span>))  <span class="comment"># dtype=np.int64, OverflowError</span></span><br><span class="line"><span class="built_in">print</span>(rng_ints_pd)</span><br><span class="line"><span class="built_in">print</span>(rng_str_pd)</span><br><span class="line"><span class="built_in">print</span>(rng_ints_pd.dtypes)</span><br><span class="line"><span class="built_in">print</span>(rng_str_pd.dtypes)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># output</span></span><br><span class="line">                                 <span class="number">0</span></span><br><span class="line"><span class="number">0</span>  -<span class="number">164854407507902657262859761143</span></span><br><span class="line"><span class="number">1</span>   -<span class="number">98159555592678662578854565242</span></span><br><span class="line"><span class="number">2</span>  -<span class="number">160420822961595545345229004438</span></span><br><span class="line"><span class="number">3</span>  -<span class="number">733039027865743949501767193396</span></span><br><span class="line"><span class="number">4</span>   <span class="number">437382763558003726220427124956</span></span><br><span class="line">                                 <span class="number">0</span></span><br><span class="line"><span class="number">0</span>   <span class="number">130725311114662280716407545590</span></span><br><span class="line"><span class="number">1</span>   <span class="number">387063142965725586256759031478</span></span><br><span class="line"><span class="number">2</span>  -<span class="number">281912232116322191438861299184</span></span><br><span class="line"><span class="number">3</span>   <span class="number">311447602990438611590040703907</span></span><br><span class="line"><span class="number">4</span>  -<span class="number">343138014447341818602474948905</span></span><br><span class="line"><span class="number">0</span>    <span class="built_in">object</span></span><br><span class="line">dtype: <span class="built_in">object</span></span><br><span class="line"><span class="number">0</span>    <span class="built_in">object</span></span><br><span class="line">dtype: <span class="built_in">object</span></span><br></pre></td></tr></table></figure>
+
+<p>同样地，即使拿一个int数组直接去转换，也只会得到str或object类型。强制转换仍旧报错。</p>
+<h2 id="超长整型数据的溢出问题"><a href="#超长整型数据的溢出问题" class="headerlink" title="超长整型数据的溢出问题"></a>超长整型数据的溢出问题</h2><p>关于这个问题，目前官方文档只提及了可能会被转换为范围更大但精度更低的浮点数类型，并没有给出进一步的解决方案。</p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://numpy.org/doc/1.21/user/basics.types.html#overflow-errors">Data types - NumPy v1.21 Manual</a></p>
+<h2 id="超长整型数据的储存"><a href="#超长整型数据的储存" class="headerlink" title="超长整型数据的储存"></a>超长整型数据的储存</h2><p>没太大问题，只是numpy需要注意导出的格式参数fmt。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pandas</span></span><br><span class="line">rng_ints_pd.to_csv(<span class="string">&quot;test_pd_int.csv&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># numpy</span></span><br><span class="line">np.savetxt(<span class="string">&quot;test_np_int.csv&quot;</span>, rng_ints_np, fmt=<span class="string">&quot;%d&quot;</span>)  <span class="comment"># must add fmt, default is fmt=&quot;%.18e&quot;</span></span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">pandas</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/data-science//" class="article-tag-list-link color3">data science</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/data-science/python//" class="article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/data-science/python/%E8%B6%85%E9%95%BF%E6%95%B4%E6%95%B0%E7%9A%84%E5%A4%84%E7%90%86%2006ed517ead014b9fb7fccfb08c05799b/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-仿真爬虫的selenium+mitmproxy实现 ff4dac1beb7e4e57b7c37db01b13b94b" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -172,48 +310,9 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cloudscraper</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;https://www.zolo.ca/&quot;</span></span><br><span class="line">scraper = cloudscraper.create_scraper()</span><br><span class="line"><span class="built_in">print</span>(scraper.get(url).text)</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># output</span></span><br><span class="line">cloudscraper.exceptions.CloudflareChallengeError: Detected a Cloudflare version <span class="number">2</span> Captcha challenge, This feature <span class="keyword">is</span> <span class="keyword">not</span> available <span class="keyword">in</span> the opensource (free) version.</span><br></pre></td></tr></table></figure>
-
-<h2 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h2><p>于是，我打算用selenium直接连现有的浏览器，在此基础上控制现有的浏览器进行浏览，并捕获期间产生的网络流量以实现爬虫的数据抓取。</p>
-<p>这种仿真式爬虫的效率低，但发包数据和浏览行为会更接近真实自然人，也方便在遇到突发情况时手动干预以避免被列入黑名单。</p>
-<h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><h3 id="1、selenium操纵现有浏览器"><a href="#1、selenium操纵现有浏览器" class="headerlink" title="1、selenium操纵现有浏览器"></a>1、selenium操纵现有浏览器</h3><p>selenium本身要连接现有浏览器很简单，windows平台上只需设置一下chrome.exe的启动参数，加上<code>--remote-debugging-port=9222</code>即可。这里的端口号可以自行更改。</p>
-<p>同时，为了避免干预以往的浏览数据，另外弄了用于存放chrome数据的文件夹并加入启动参数<code>-user-data-dir=&quot;D:\pycharm\mitmscraper\chrome_files&quot;</code>。</p>
-<p>在启动浏览器后，通过设置<code>chrome_opts.add_experimental_option(&#39;debuggerAddress&#39;, &quot;127.0.0.1:9222&quot;)</code>便可实现selenium和现有浏览器的连接，然后启动driver实例即可。</p>
-<p>这样，我们便可以开始考虑如何捕获期间产生的网络流量了。</p>
-<p>下面的代码为具体实现，其中包括了不使用现有浏览器，直接新开chromedriver的方式：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.chrome.options <span class="keyword">import</span> Options</span><br><span class="line"><span class="comment"># chromedriver: https://chromedriver.chromium.org/downloads</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># run the selenium driver</span></span><br><span class="line">chrome_opts = Options()</span><br><span class="line"></span><br><span class="line"><span class="comment"># two diff ways to capture network traffic by mitmproxy</span></span><br><span class="line"><span class="comment"># connect to existing chrome on debug mode</span></span><br><span class="line">chrome_opts.add_experimental_option(<span class="string">&#x27;debuggerAddress&#x27;</span>, <span class="string">&quot;127.0.0.1:9222&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># start a new chromedriver</span></span><br><span class="line"><span class="comment"># chrome_opts.add_argument(&quot;--user-data-dir=&quot; + r&quot;D:\pycharm\mitmscraper\chrome_files&quot;)</span></span><br><span class="line"><span class="comment"># chrome_opts.add_argument(&#x27;--ignore-certificate-errors&#x27;)</span></span><br><span class="line"><span class="comment"># chrome_opts.add_argument(&#x27;--ignore-ssl-errors&#x27;)</span></span><br><span class="line"><span class="comment"># chrome_opts.add_experimental_option(&#x27;excludeSwitches&#x27;, [&#x27;enable-automation&#x27;, &#x27;load-extension&#x27;])  # don&#x27;t show the bar of automation</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set proxy in SwitchyOmega extension or add argument for network traffic capturing</span></span><br><span class="line"><span class="comment"># chrome_opts.add_argument(&#x27;--proxy-server=127.0.0.1:8080&#x27;)</span></span><br><span class="line"></span><br><span class="line">driver = webdriver.Chrome(executable_path=<span class="string">&quot;chromedriver&quot;</span>, options=chrome_opts)</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;https://www.google.com/&quot;</span></span><br><span class="line">driver.get(url)</span><br><span class="line"><span class="built_in">print</span>(driver.title)</span><br><span class="line"></span><br><span class="line">a = <span class="built_in">input</span>(<span class="string">&#x27;Wait for inputing.\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">driver.quit()</span><br></pre></td></tr></table></figure>
-
-<h3 id="2、selenium流量监控"><a href="#2、selenium流量监控" class="headerlink" title="2、selenium流量监控"></a>2、selenium流量监控</h3><p>一开始通过查阅资料，确定了捕获selenium爬虫期间网络流量的工具主要如下：</p>
-<ul>
-<li><strong>selenium-wire</strong>：与selenium类似但有api来操作相应request和response</li>
-<li><strong>browsermob-proxy</strong>：一个独立的代理服务器用于捕获流量并操作相应request和response，可以方便地嵌入selenium测试</li>
-<li><strong>mitmproxy</strong>：如名称所言，mitmproxy是一款中间人（man in the middle）代理服务器，以原理类似于中间人攻击的方法捕获网络流量。其实现以python为主，比起fiddler等流量监控软件更容易于嵌入python代码中。</li>
-</ul>
-<p>很显然，selenium-wire对那些selenium本身并不起作用的网站毫无帮助，直接可以不计入考虑。后文主要也是围绕browsermob-proxy与mitmproxy进行讨论。</p>
-<ul>
-<li><strong>browsermob-proxy</strong></li>
-</ul>
-<p>最初我先尝试使用browsermob-proxy来实现浏览器的流量监控。</p>
-<p>在正常的selenium模式（不连接现有服务器，配置并启动chromedriver）下，它的确运行得很好，但当我尝试连接到现有的服务器时，我就发现怎么都不行了。</p>
-<p>而且，这个在Windows平台上会存在Java进程杀不干净，导致端口一直被占用的问题（Github上的issue也有提过，目前好像还未得到解决），使得调试过程也十分痛苦，需要不停修改客户端的代理端口号。</p>
-<p>还有一点，pypi上的版本已经很久未更新，是0.8.0，而目前github上最新版是2.1.4（调试过程也是用最新版2.1.4，pip安装的是0.8.0）</p>
-<p>所以，最终我还是放弃了这套方式，转投了更嵌合python的mitmproxy。</p>
-<p>这部分的实现代码如下。需要把对应的bin文件放入项目文件夹然后在python中启动对应proxy服务器进行监听，监听结果会在proxy.har中得到体现：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> browsermobproxy <span class="keyword">import</span> Server</span><br><span class="line"><span class="keyword">import</span> psutil</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> proc <span class="keyword">in</span> psutil.process_iter():</span><br><span class="line">    <span class="comment"># check whether the process name matches</span></span><br><span class="line">    <span class="keyword">if</span> proc.name() == <span class="string">&quot;browsermob-proxy&quot;</span>:</span><br><span class="line">        proc.kill()</span><br><span class="line"></span><br><span class="line">port_dict = &#123;<span class="string">&#x27;port&#x27;</span>: <span class="number">8090</span>&#125;</span><br><span class="line">server = Server(path=<span class="string">&quot;./browsermob-proxy-2.1.4/bin/browsermob-proxy&quot;</span>, options=port_dict)</span><br><span class="line">server.start()</span><br><span class="line">proxy = server.create_proxy()</span><br><span class="line"><span class="built_in">print</span>(proxy.proxy)</span><br><span class="line"></span><br><span class="line"><span class="comment"># create a selenium driver here </span></span><br><span class="line"></span><br><span class="line">proxy.new_har(<span class="string">&quot;google&quot;</span>, options=&#123;<span class="string">&#x27;captureHeaders&#x27;</span>: <span class="literal">True</span>, <span class="string">&#x27;captureContent&#x27;</span>: <span class="literal">True</span>&#125;)</span><br><span class="line">driver.get(<span class="string">&quot;http://www.google.com&quot;</span>)</span><br><span class="line"><span class="comment"># print(proxy.har)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> entry <span class="keyword">in</span> proxy.har[<span class="string">&#x27;log&#x27;</span>][<span class="string">&#x27;entries&#x27;</span>]:</span><br><span class="line">    _url = entry[<span class="string">&#x27;request&#x27;</span>][<span class="string">&#x27;url&#x27;</span>]</span><br><span class="line">    <span class="built_in">print</span>(_url)</span><br><span class="line"></span><br><span class="line">server.stop()</span><br><span class="line">driver.quit()</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>mitmproxy</strong></li>
-</ul>
-<p>mitmproxy有多种代理方式：正向代理、反向代理、透明代理、Upstream Proxy（正向代理套一层娃）等，这里我用了上游代理（Upstream Proxy），因为要抓的部分网站需要科学上网。</p>
-<p>具体模式差异可见以下链接：</p>
-<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.mitmproxy.org/stable/concepts-modes/">Modes of operation</a></p>
-<p>配置mitmproxy本身其实并不难，最大难点是在于它居然没有一个成体系的python api文档（readthedocs上的含python api版本是0.18，最新版是7.0.0）。我是通过谷歌去查阅相关文章以及直接看源代码来了解部分功能是怎么实现的。</p>
-<p>另外，我这里使用的是6.0.2，因为7.0.0下部分api做了更改，新版本根本不能启动proxy服务器，但又找不到对应文档去实现新版的代码。</p>
-<p>简单而言，通过mitmproxy监控网络流量只需启动对应程序（mitmdump或mitmweb，mitmproxy在Windows平台下无法使用）并添加你需要的模块（addon）即可。</p>
-<p>下面代码不通过cmd.exe启动proxy服务器，而是在python中启动对应服务，并处于后台持续收集数据。需要加载的Addons模块另外放置于MitmAddons.py中以便修改，这里加载的是一个简单的计数模块，实际爬虫过程中可以把这里的数据抓取出来放入数据库以便后续处理。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># MitmProxifier.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">from</span> mitmproxy <span class="keyword">import</span> proxy, options</span><br><span class="line"><span class="keyword">from</span> mitmproxy.tools.dump <span class="keyword">import</span> DumpMaster</span><br><span class="line"><span class="keyword">from</span> mitmproxy.tools.web.master <span class="keyword">import</span> WebMaster</span><br><span class="line"><span class="keyword">from</span> MitmAddons <span class="keyword">import</span> my_addons</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MitmProxifier</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.thread = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">loop_in_thread</span>(<span class="params">self, loop, m</span>):</span></span><br><span class="line">        asyncio.set_event_loop(loop)</span><br><span class="line">        self.m.run()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">start</span>(<span class="params">self, addons, web_client=<span class="literal">False</span></span>):</span></span><br><span class="line">        <span class="comment"># set the mitmproxy config</span></span><br><span class="line">        mitm_opts = options.Options(</span><br><span class="line">            listen_host=<span class="string">&#x27;127.0.0.1&#x27;</span>, listen_port=<span class="number">8080</span>, mode=<span class="string">&#x27;upstream:http://127.0.0.1:7890&#x27;</span>)</span><br><span class="line">        <span class="comment"># mitmdump --mode upstream:http://127.0.0.1:7890</span></span><br><span class="line">        pconf = proxy.config.ProxyConfig(mitm_opts)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> web_client:</span><br><span class="line">            self.m = WebMaster(mitm_opts)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.m = DumpMaster(mitm_opts, with_termlog=<span class="literal">False</span>, with_dumper=<span class="literal">True</span>)</span><br><span class="line">        self.m.server = proxy.server.ProxyServer(pconf)</span><br><span class="line">        <span class="keyword">for</span> addon <span class="keyword">in</span> addons:</span><br><span class="line">            self.m.addons.add(addon)</span><br><span class="line">        <span class="comment"># print(self.m.addons)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># create thread</span></span><br><span class="line">        loop = asyncio.get_event_loop()</span><br><span class="line">        self.thread = threading.Thread(</span><br><span class="line">            target=self.loop_in_thread, args=(loop, self.m))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            self.thread.start()</span><br><span class="line">        <span class="keyword">except</span> KeyboardInterrupt:</span><br><span class="line">            self.m.shutdown()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    my_mitmdump = MitmProxifier()</span><br><span class="line">    my_mitmdump.start(my_addons, web_client=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># MitmAddons.py</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CountNum</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.request_num = <span class="number">0</span></span><br><span class="line">        self.response_num = <span class="number">0</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;inited&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">request</span>(<span class="params">self, flow</span>):</span></span><br><span class="line">        self.request_num += <span class="number">1</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;send request. count: &#123;0&#125;&#x27;</span>.<span class="built_in">format</span>(self.request_num))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">response</span>(<span class="params">self, flow</span>):</span></span><br><span class="line">        self.response_num += <span class="number">1</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;get response. count: &#123;0&#125;&#x27;</span>.<span class="built_in">format</span>(self.response_num))</span><br><span class="line"></span><br><span class="line">my_addons = [</span><br><span class="line">    CountNum()</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
+        
+          <a class="article-more-a" href="/coding/python/%E4%BB%BF%E7%9C%9F%E7%88%AC%E8%99%AB%E7%9A%84selenium+mitmproxy%E5%AE%9E%E7%8E%B0%20ff4dac1beb7e4e57b7c37db01b13b94b/#more">more >></a>
+        
       
 
       
@@ -1073,104 +1172,6 @@
 
 
   
-    <article id="post-wsl2设置proxy b8d2ea03c29e42bc8e6ce9c1a5d8c464" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/coding/linux/wsl2%E8%AE%BE%E7%BD%AEproxy%20b8d2ea03c29e42bc8e6ce9c1a5d8c464/">wsl2设置proxy</a>
-    </h1>
-  
-
-        
-        <a href="/coding/linux/wsl2%E8%AE%BE%E7%BD%AEproxy%20b8d2ea03c29e42bc8e6ce9c1a5d8c464/" class="archive-article-date">
-  	<time datetime="2021-04-07T13:02:28.146Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 把下面的代码放入并重载</span></span><br><span class="line"><span class="comment"># 这里用的是zsh，默认的bash请用~/.bashrc</span></span><br><span class="line">vim ~/.zshrc</span><br><span class="line"><span class="built_in">source</span> ~/.zshrc</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># set proxy and unset</span></span><br><span class="line"><span class="comment"># 适用于apt部分、docker部分</span></span><br><span class="line"><span class="function"><span class="title">proxy</span></span>() &#123;</span><br><span class="line">    <span class="built_in">export</span> hostip=$(cat /etc/resolv.conf |grep -oP <span class="string">&#x27;(?&lt;=nameserver\ ).*&#x27;</span>)</span><br><span class="line">    <span class="built_in">export</span> ALL_PROXY=<span class="string">&quot;socks5://<span class="variable">$&#123;hostip&#125;</span>:7890&quot;</span></span><br><span class="line">    <span class="built_in">export</span> all_proxy=<span class="string">&quot;socks5://<span class="variable">$&#123;hostip&#125;</span>:7890&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">&quot;Acquire::http::Proxy \&quot;http://<span class="variable">$&#123;hostip&#125;</span>:7890\&quot;;&quot;</span> | sudo tee -a /etc/apt/apt.conf &gt; /dev/null</span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">&quot;Acquire::https::Proxy \&quot;http://<span class="variable">$&#123;hostip&#125;</span>:7890\&quot;;&quot;</span> | sudo tee -a /etc/apt/apt.conf &gt; /dev/null</span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">&quot;Environment=\&quot;HTTP_PROXY=http://<span class="variable">$&#123;hostip&#125;</span>:7890\&quot;&quot;</span> | sudo tee -a /etc/systemd/system/docker.service.d/http-proxy.conf &gt; /dev/null</span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">&quot;Environment=\&quot;HTTPS_PROXY=http://<span class="variable">$&#123;hostip&#125;</span>:7890\&quot;&quot;</span> | sudo tee -a /etc/systemd/system/docker.service.d/http-proxy.conf &gt; /dev/null</span><br><span class="line">    curl https://ip.gs</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">noproxy</span></span>() &#123;</span><br><span class="line">    <span class="built_in">unset</span> ALL_PROXY</span><br><span class="line">    <span class="built_in">unset</span> all_proxy</span><br><span class="line">    sudo sed -i -e <span class="string">&#x27;/Acquire::http::Proxy/d&#x27;</span> /etc/apt/apt.conf</span><br><span class="line">    sudo sed -i -e <span class="string">&#x27;/Acquire::https::Proxy/d&#x27;</span> /etc/apt/apt.conf</span><br><span class="line">    sudo sed -i -e <span class="string">&#x27;/Environment=&quot;HTTP_PROXY=/d&#x27;</span> /etc/systemd/system/docker.service.d/http-proxy.conf</span><br><span class="line">    sudo sed -i -e <span class="string">&#x27;/Environment=&quot;HTTPS_PROXY=/d&#x27;</span> /etc/systemd/system/docker.service.d/http-proxy.conf</span><br><span class="line">    curl https://ip.gs</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">proxy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">wsl</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding/linux//" class="article-tag-list-link color1">linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/coding/linux/wsl2%E8%AE%BE%E7%BD%AEproxy%20b8d2ea03c29e42bc8e6ce9c1a5d8c464/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1369,6 +1370,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">script</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">numpy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">pandas</a>
               </li>
             
             <div class="clearfix"></div>

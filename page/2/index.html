@@ -147,6 +147,104 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-wsl2设置proxy b8d2ea03c29e42bc8e6ce9c1a5d8c464" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/coding/linux/wsl2%E8%AE%BE%E7%BD%AEproxy%20b8d2ea03c29e42bc8e6ce9c1a5d8c464/">wsl2设置proxy</a>
+    </h1>
+  
+
+        
+        <a href="/coding/linux/wsl2%E8%AE%BE%E7%BD%AEproxy%20b8d2ea03c29e42bc8e6ce9c1a5d8c464/" class="archive-article-date">
+  	<time datetime="2021-04-07T13:02:28.146Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 把下面的代码放入并重载</span></span><br><span class="line"><span class="comment"># 这里用的是zsh，默认的bash请用~/.bashrc</span></span><br><span class="line">vim ~/.zshrc</span><br><span class="line"><span class="built_in">source</span> ~/.zshrc</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># set proxy and unset</span></span><br><span class="line"><span class="comment"># 适用于apt部分、docker部分</span></span><br><span class="line"><span class="function"><span class="title">proxy</span></span>() &#123;</span><br><span class="line">    <span class="built_in">export</span> hostip=$(cat /etc/resolv.conf |grep -oP <span class="string">&#x27;(?&lt;=nameserver\ ).*&#x27;</span>)</span><br><span class="line">    <span class="built_in">export</span> ALL_PROXY=<span class="string">&quot;socks5://<span class="variable">$&#123;hostip&#125;</span>:7890&quot;</span></span><br><span class="line">    <span class="built_in">export</span> all_proxy=<span class="string">&quot;socks5://<span class="variable">$&#123;hostip&#125;</span>:7890&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">&quot;Acquire::http::Proxy \&quot;http://<span class="variable">$&#123;hostip&#125;</span>:7890\&quot;;&quot;</span> | sudo tee -a /etc/apt/apt.conf &gt; /dev/null</span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">&quot;Acquire::https::Proxy \&quot;http://<span class="variable">$&#123;hostip&#125;</span>:7890\&quot;;&quot;</span> | sudo tee -a /etc/apt/apt.conf &gt; /dev/null</span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">&quot;Environment=\&quot;HTTP_PROXY=http://<span class="variable">$&#123;hostip&#125;</span>:7890\&quot;&quot;</span> | sudo tee -a /etc/systemd/system/docker.service.d/http-proxy.conf &gt; /dev/null</span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">&quot;Environment=\&quot;HTTPS_PROXY=http://<span class="variable">$&#123;hostip&#125;</span>:7890\&quot;&quot;</span> | sudo tee -a /etc/systemd/system/docker.service.d/http-proxy.conf &gt; /dev/null</span><br><span class="line">    curl https://ip.gs</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">noproxy</span></span>() &#123;</span><br><span class="line">    <span class="built_in">unset</span> ALL_PROXY</span><br><span class="line">    <span class="built_in">unset</span> all_proxy</span><br><span class="line">    sudo sed -i -e <span class="string">&#x27;/Acquire::http::Proxy/d&#x27;</span> /etc/apt/apt.conf</span><br><span class="line">    sudo sed -i -e <span class="string">&#x27;/Acquire::https::Proxy/d&#x27;</span> /etc/apt/apt.conf</span><br><span class="line">    sudo sed -i -e <span class="string">&#x27;/Environment=&quot;HTTP_PROXY=/d&#x27;</span> /etc/systemd/system/docker.service.d/http-proxy.conf</span><br><span class="line">    sudo sed -i -e <span class="string">&#x27;/Environment=&quot;HTTPS_PROXY=/d&#x27;</span> /etc/systemd/system/docker.service.d/http-proxy.conf</span><br><span class="line">    curl https://ip.gs</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">proxy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">wsl</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/coding/linux//" class="article-tag-list-link color1">linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/coding/linux/wsl2%E8%AE%BE%E7%BD%AEproxy%20b8d2ea03c29e42bc8e6ce9c1a5d8c464/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-flake8全局忽略E501 8f67305f41614be185d302ff2233cbb8" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1015,113 +1113,6 @@
 
 
   
-    <article id="post-xlwings离线安装（conda-pack） 40b5a6358f784003905305b652ed91f8" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/coding/python/xlwings%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%EF%BC%88conda-pack%EF%BC%89%2040b5a6358f784003905305b652ed91f8/">xlwings离线安装（conda-pack）</a>
-    </h1>
-  
-
-        
-        <a href="/coding/python/xlwings%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%EF%BC%88conda-pack%EF%BC%89%2040b5a6358f784003905305b652ed91f8/" class="archive-article-date">
-  	<time datetime="2021-04-07T08:39:06.214Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="需求："><a href="#需求：" class="headerlink" title="需求："></a>需求：</h2><ul>
-<li>miniconda</li>
-<li>conda的xlwings环境包</li>
-</ul>
-<p>如何制作conda环境包详见《用conda-pack制作离线可移植python环境》</p>
-        
-          <a class="article-more-a" href="/coding/python/xlwings%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%EF%BC%88conda-pack%EF%BC%89%2040b5a6358f784003905305b652ed91f8/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">excel</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">xlwings</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">conda</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding/python//" class="article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/coding/python/xlwings%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%EF%BC%88conda-pack%EF%BC%89%2040b5a6358f784003905305b652ed91f8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1320,6 +1311,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">script</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">numpy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">pandas</a>
               </li>
             
             <div class="clearfix"></div>
