@@ -147,6 +147,203 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-理解多条件的复合查询 b8075f9f12324e69bd28c0b7460fc484" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/data-science/sql/%E7%90%86%E8%A7%A3%E5%A4%9A%E6%9D%A1%E4%BB%B6%E7%9A%84%E5%A4%8D%E5%90%88%E6%9F%A5%E8%AF%A2%20b8075f9f12324e69bd28c0b7460fc484/">理解多条件的复合查询</a>
+    </h1>
+  
+
+        
+        <a href="/data-science/sql/%E7%90%86%E8%A7%A3%E5%A4%9A%E6%9D%A1%E4%BB%B6%E7%9A%84%E5%A4%8D%E5%90%88%E6%9F%A5%E8%AF%A2%20b8075f9f12324e69bd28c0b7460fc484/" class="archive-article-date">
+  	<time datetime="2021-04-07T08:46:06.130Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>SQL对一个字段或一条记录（行）进行一次查询。如果想同时查询某个字段中多个不同的属性，如同时满足长度以及数值上的要求，则需要用AND以及OR来进行条件的拼接。</p>
+<p>如希望查询某个存放各种终止时间的字段ENDTIME，查询条件为长度小于11，且为数值，则可以写成LEN(NUM) ≤ 11 AND ISNUMERIC(NUM) = 1。</p>
+<p>但如果希望进一步查询NUM里不同条件下具体的异常值，如当长度小于等于11时，NUM不符合该长度区间内的一系列正常表达（2019.01、2019.12.31等），当长度大于11时，NUM不符合该长度区间内的一系列正常表达（2019.01.01至2019.12.31、2019/01/01至2019/12/31等），情况会变得相对复杂，需要写成如下形式：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">    (</span><br><span class="line">        (</span><br><span class="line">            LEN(NUM) <span class="operator">&lt;=</span> <span class="number">11</span></span><br><span class="line">            <span class="keyword">AND</span> (NUM <span class="keyword">NOT</span> <span class="keyword">LIKE</span> <span class="string">&#x27;该范围内的各种正常表达&#x27;</span>)</span><br><span class="line">    ) <span class="keyword">OR</span> (</span><br><span class="line">            LEN(NUM) <span class="operator">&gt;</span> <span class="number">11</span></span><br><span class="line">            <span class="keyword">AND</span> (NUM <span class="keyword">NOT</span> <span class="keyword">LIKE</span> <span class="string">&#x27;该范围内的各种正常表达&#x27;</span>)</span><br><span class="line">    )</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>如果再加入之前的数值判断，则写成如下形式：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">    (</span><br><span class="line">        (</span><br><span class="line">            LEN(NUM) <span class="operator">&lt;=</span> <span class="number">11</span></span><br><span class="line">            <span class="keyword">AND</span> (NUM <span class="keyword">NOT</span> <span class="keyword">LIKE</span> <span class="string">&#x27;该范围内的各种正常表达&#x27;</span>)</span><br><span class="line">    ) <span class="keyword">OR</span> (</span><br><span class="line">            LEN(NUM) <span class="operator">&gt;</span> <span class="number">11</span></span><br><span class="line">            <span class="keyword">AND</span> (NUM <span class="keyword">NOT</span> <span class="keyword">LIKE</span> <span class="string">&#x27;该范围内的各种正常表达&#x27;</span>)</span><br><span class="line">    ) </span><br><span class="line">) <span class="keyword">AND</span> (</span><br><span class="line">        (</span><br><span class="line">            ISNUMERIC(NUM) <span class="operator">=</span> <span class="number">0</span></span><br><span class="line">            <span class="keyword">AND</span> (NUM <span class="keyword">NOT</span> <span class="keyword">LIKE</span> <span class="string">&#x27;该范围内的各种正常表达&#x27;</span>)</span><br><span class="line">    ) <span class="keyword">OR</span> (</span><br><span class="line">            ISNUMERIC(NUM) <span class="operator">=</span> <span class="number">1</span></span><br><span class="line">            <span class="keyword">AND</span> (NUM <span class="keyword">NOT</span> <span class="keyword">LIKE</span> <span class="string">&#x27;该范围内的各种正常表达&#x27;</span>)</span><br><span class="line">    ) </span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/data-science/sql/%E7%90%86%E8%A7%A3%E5%A4%9A%E6%9D%A1%E4%BB%B6%E7%9A%84%E5%A4%8D%E5%90%88%E6%9F%A5%E8%AF%A2%20b8075f9f12324e69bd28c0b7460fc484/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">sql</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">math</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/data-science//" class="article-tag-list-link color3">data science</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/data-science/sql//" class="article-tag-list-link color4">sql</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/data-science/sql/%E7%90%86%E8%A7%A3%E5%A4%9A%E6%9D%A1%E4%BB%B6%E7%9A%84%E5%A4%8D%E5%90%88%E6%9F%A5%E8%AF%A2%20b8075f9f12324e69bd28c0b7460fc484/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-查询表结构和字段注释 d7450b3d5226466f9df3ddbcba57332b" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/data-science/sql/%E6%9F%A5%E8%AF%A2%E8%A1%A8%E7%BB%93%E6%9E%84%E5%92%8C%E5%AD%97%E6%AE%B5%E6%B3%A8%E9%87%8A%20d7450b3d5226466f9df3ddbcba57332b/">查询表结构和字段注释</a>
+    </h1>
+  
+
+        
+        <a href="/data-science/sql/%E6%9F%A5%E8%AF%A2%E8%A1%A8%E7%BB%93%E6%9E%84%E5%92%8C%E5%AD%97%E6%AE%B5%E6%B3%A8%E9%87%8A%20d7450b3d5226466f9df3ddbcba57332b/" class="archive-article-date">
+  	<time datetime="2021-04-07T08:44:40.168Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="SQL-Server"><a href="#SQL-Server" class="headerlink" title="SQL Server"></a>SQL Server</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 方法一</span><br><span class="line">sp_help <span class="string">&#x27;sheetname&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># 方法二</span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    (<span class="keyword">case</span> <span class="keyword">when</span> a.colorder<span class="operator">=</span><span class="number">1</span> <span class="keyword">then</span> d.name <span class="keyword">else</span> <span class="string">&#x27;&#x27;</span> <span class="keyword">end</span>) [数据表名称],</span><br><span class="line">    a.colorder [列顺序],</span><br><span class="line">    a.name [列名称],</span><br><span class="line">    b.name <span class="keyword">as</span> [列类型],</span><br><span class="line">		a.iscomputed [Computed],</span><br><span class="line">    b.length <span class="keyword">as</span> [列长度],</span><br><span class="line">		a.xprec [Prec],</span><br><span class="line">		a.xscale [Scale],</span><br><span class="line">		a.isnullable [Nullable],</span><br><span class="line">		a.collation [<span class="keyword">Collation</span>],</span><br><span class="line">    g.[<span class="keyword">value</span>] <span class="keyword">AS</span> [列说明信息]</span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">    syscolumns a </span><br><span class="line">    <span class="keyword">left</span> <span class="keyword">join</span> systypes b <span class="keyword">on</span> a.xtype<span class="operator">=</span>b.xusertype</span><br><span class="line">    <span class="keyword">inner</span> <span class="keyword">join</span> sysobjects d <span class="keyword">on</span> a.id<span class="operator">=</span>d.id <span class="keyword">and</span> d.xtype<span class="operator">=</span><span class="string">&#x27;U&#x27;</span> <span class="keyword">and</span> d.name<span class="operator">&lt;&gt;</span><span class="string">&#x27;dtproperties&#x27;</span></span><br><span class="line">    <span class="keyword">left</span> <span class="keyword">join</span> sys.extended_properties g <span class="keyword">on</span> a.id<span class="operator">=</span>g.major_id <span class="keyword">AND</span> a.colid <span class="operator">=</span> g.minor_id </span><br><span class="line"><span class="keyword">WHERE</span> d.[name] <span class="operator">=</span><span class="string">&#x27;sheetname&#x27;</span><span class="comment">--数据表名称</span></span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> a.id,a.colorder</span><br></pre></td></tr></table></figure>
+
+<h2 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 方法一</span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">FULL</span> COLUMNS <span class="keyword">FROM</span> <span class="string">&#x27;sheet_name&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 方法二</span><br><span class="line">USE information_schema;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> information_schema.COLUMNS <span class="keyword">WHERE</span> table_schema <span class="operator">=</span><span class="string">&#x27;db_name&#x27;</span>; # 所有表</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> information_schema.COLUMNS <span class="keyword">WHERE</span> table_schema <span class="operator">=</span><span class="string">&#x27;db_name&#x27;</span> <span class="keyword">AND</span> table_name <span class="operator">=</span> <span class="string">&#x27;sheet_name&#x27;</span>; # 单表</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 方法三</span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">&#x27;sheet_name&#x27;</span></span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">sql</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/data-science//" class="article-tag-list-link color3">data science</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/data-science/sql//" class="article-tag-list-link color4">sql</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/data-science/sql/%E6%9F%A5%E8%AF%A2%E8%A1%A8%E7%BB%93%E6%9E%84%E5%92%8C%E5%AD%97%E6%AE%B5%E6%B3%A8%E9%87%8A%20d7450b3d5226466f9df3ddbcba57332b/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-xlwings安装及配置 f6a07dce195c4c07a72076b158f95afc" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -939,209 +1136,9 @@
 
 
   
-    <article id="post-hexo文章管理 8a1aa06fe4a245ea863740a8d4215985" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/coding/blog/hexo%E6%96%87%E7%AB%A0%E7%AE%A1%E7%90%86%208a1aa06fe4a245ea863740a8d4215985/">hexo文章管理</a>
-    </h1>
-  
-
-        
-        <a href="/coding/blog/hexo%E6%96%87%E7%AB%A0%E7%AE%A1%E7%90%86%208a1aa06fe4a245ea863740a8d4215985/" class="archive-article-date">
-  	<time datetime="2021-03-28T08:55:47.854Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io/zh-cn/docs/writing">写作</a></p>
-<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io/zh-cn/docs/front-matter">Front-matter</a></p>
-<h2 id="1、新建文章"><a href="#1、新建文章" class="headerlink" title="1、新建文章"></a>1、新建文章</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new [layout] &lt;title&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="布局（layout）"><a href="#布局（layout）" class="headerlink" title="布局（layout）"></a>布局（layout）</h3><p>Hexo 有三种默认布局：post、page 和 draft。在创建这三种不同类型的文件时，它们将会被保存到不同的路径；而您自定义的其他布局和 post 相同，都将储存到 source/_posts 文件夹。</p>
-<ul>
-<li>post：source/_posts</li>
-<li>page：source</li>
-<li>draft：source/_draft</li>
-</ul>
-<h3 id="草稿"><a href="#草稿" class="headerlink" title="草稿"></a>草稿</h3><p>刚刚提到了 Hexo 的一种特殊布局：draft，这种布局在建立时会被保存到 source/_drafts 文件夹，您可通过 publish 命令将草稿移动到 source/_posts 文件夹，该命令的使用方式与 new 十分类似，您也可在命令中指定 layout 来指定布局。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo publish [layout] &lt;title&gt;</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/coding/blog/hexo%E6%96%87%E7%AB%A0%E7%AE%A1%E7%90%86%208a1aa06fe4a245ea863740a8d4215985/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">blog</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding/blog//" class="article-tag-list-link color5">blog</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/coding/blog/hexo%E6%96%87%E7%AB%A0%E7%AE%A1%E7%90%86%208a1aa06fe4a245ea863740a8d4215985/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hexo建站 93494de9c5fd46b195405302fcb1d81a" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/coding/blog/hexo%E5%BB%BA%E7%AB%99%2093494de9c5fd46b195405302fcb1d81a/">hexo建站</a>
-    </h1>
-  
-
-        
-        <a href="/coding/blog/hexo%E5%BB%BA%E7%AB%99%2093494de9c5fd46b195405302fcb1d81a/" class="archive-article-date">
-  	<time datetime="2021-03-28T08:23:55.696Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.csdn.net/Xiong_IT/article/details/55193816">Hexo建站：部署到github_MichaelX的专栏-CSDN博客</a></p>
-<p>工具列表</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git v2.28.0.windows.1</span><br><span class="line">node.js v14.16.0</span><br><span class="line">hexo-cli v4.2.0</span><br></pre></td></tr></table></figure>
-
-<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io/zh-cn/docs/">官方文档</a></p>
-<h2 id="1、安装"><a href="#1、安装" class="headerlink" title="1、安装"></a>1、安装</h2><p>node.js安装：直接下载安装包，运行即可</p>
-<p>hexo安装：powershell执行以下指令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装cnmp</span></span><br><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br><span class="line"><span class="comment"># 需设置用户环境变量</span></span><br><span class="line"><span class="variable">$addPath</span>=<span class="string">&#x27;D:\Program Files\nodejs\node_global&#x27;</span>; <span class="variable">$target</span>=<span class="string">&#x27;User&#x27;</span>;</span><br><span class="line"><span class="variable">$path</span>=[Environment]::GetEnvironmentVariable(<span class="string">&#x27;Path&#x27;</span>, <span class="variable">$target</span>);</span><br><span class="line"><span class="variable">$newPath</span> = <span class="variable">$path</span> + <span class="string">&quot;;&quot;</span> + <span class="variable">$addPath</span>;</span><br><span class="line">[Environment]::SetEnvironmentVariable(<span class="string">&quot;Path&quot;</span>, <span class="variable">$newPath</span>, <span class="variable">$target</span>)</span><br><span class="line"><span class="comment"># 查看环境变量</span></span><br><span class="line">[Environment]::GetEnvironmentVariable(<span class="string">&#x27;Path&#x27;</span>, <span class="string">&#x27;User&#x27;</span>) -split<span class="string">&quot;;&quot;</span></span><br><span class="line"></span><br><span class="line">cnpm -v </span><br><span class="line"><span class="comment"># cnpm指令需执行以上步骤</span></span><br><span class="line">cnpm install -g hexo-cli </span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/coding/blog/hexo%E5%BB%BA%E7%AB%99%2093494de9c5fd46b195405302fcb1d81a/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">blog</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding/blog//" class="article-tag-list-link color5">blog</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/coding/blog/hexo%E5%BB%BA%E7%AB%99%2093494de9c5fd46b195405302fcb1d81a/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+      <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
     </nav>
   
 
