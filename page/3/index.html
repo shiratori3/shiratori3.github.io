@@ -147,6 +147,97 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-查询结果拼接 ddfd423c0fc14c8d9f6778247e8844c5" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/data-science/sql/%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E6%8B%BC%E6%8E%A5%20ddfd423c0fc14c8d9f6778247e8844c5/">查询结果拼接</a>
+    </h1>
+  
+
+        
+        <a href="/data-science/sql/%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E6%8B%BC%E6%8E%A5%20ddfd423c0fc14c8d9f6778247e8844c5/" class="archive-article-date">
+  	<time datetime="2021-04-07T08:47:44.937Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>通过把查询结果转换成XML，实现查询结果的字符串拼接</p>
+<h1 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># sqlserver</span><br><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">	COLUMN_NAME_1, </span><br><span class="line">	COLUMN_NAME_2_JOINED <span class="operator">=</span> (<span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> <span class="keyword">CONVERT</span>(<span class="type">VARCHAR</span>, COLUMN_NAME_2)<span class="operator">+</span><span class="string">&#x27;,&#x27;</span> <span class="keyword">FROM</span> sheet1 <span class="keyword">WHERE</span> COLUMN_NAME_1 <span class="operator">=</span> A.COLUMN_NAME_1 <span class="keyword">FOR</span> XML PATH(<span class="string">&#x27;&#x27;</span>))</span><br><span class="line"><span class="keyword">FROM</span> (</span><br><span class="line">	<span class="keyword">SELECT</span> COLUMN_NAME_1, COLUMN_NAME_2 <span class="keyword">FROM</span> sheet1 </span><br><span class="line">) A</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># mysql</span><br><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">	COLUMN_NAME_1, </span><br><span class="line">	COLUMN_NAME_2_JOINED <span class="operator">=</span> GROUP_CONCAT(COLUMN_NAME_2)</span><br><span class="line"><span class="keyword">FROM</span> sheet1</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> COLUMN_NAME_1</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">sql</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/data-science//" class="article-tag-list-link color3">data science</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/data-science/sql//" class="article-tag-list-link color4">sql</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/data-science/sql/%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E6%8B%BC%E6%8E%A5%20ddfd423c0fc14c8d9f6778247e8844c5/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-理解多条件的复合查询 b8075f9f12324e69bd28c0b7460fc484" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1016,97 +1107,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/coding/blog/theme%EF%BC%9Ayilia%E5%AE%9A%E5%88%B6%20d9b0f87daa304b289ea00c6867070da2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hexo网站管理 f38d067f05564d58acc889806707a701" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/coding/blog/hexo%E7%BD%91%E7%AB%99%E7%AE%A1%E7%90%86%20f38d067f05564d58acc889806707a701/">hexo网站管理</a>
-    </h1>
-  
-
-        
-        <a href="/coding/blog/hexo%E7%BD%91%E7%AB%99%E7%AE%A1%E7%90%86%20f38d067f05564d58acc889806707a701/" class="archive-article-date">
-  	<time datetime="2021-03-28T10:14:28.301Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动服务器</span></span><br><span class="line">hexo server</span><br><span class="line"><span class="comment"># 默认地址：http://localhost:4000</span></span><br><span class="line"><span class="comment"># 更改端口</span></span><br><span class="line">hexo server -p 5000</span><br><span class="line"><span class="comment"># 静态模式</span></span><br><span class="line">hexo server -s  </span><br><span class="line"><span class="comment"># 在静态模式下，服务器只处理 public 文件夹内的文件，而不会处理文件变动，在执行时，您应该先自行执行 hexo generate，此模式通常用于生产环境（production mode）下。</span></span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/coding/blog/hexo%E7%BD%91%E7%AB%99%E7%AE%A1%E7%90%86%20f38d067f05564d58acc889806707a701/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">blog</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding/blog//" class="article-tag-list-link color5">blog</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/coding/blog/hexo%E7%BD%91%E7%AB%99%E7%AE%A1%E7%90%86%20f38d067f05564d58acc889806707a701/">展开全文 >></a>
         </p>
       
 

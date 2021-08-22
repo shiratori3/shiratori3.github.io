@@ -147,6 +147,131 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-python自学过程的一些总结 57673e89f6894d5ab3e4ff0e25ea0b92" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/coding/python/python%E8%87%AA%E5%AD%A6%E8%BF%87%E7%A8%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93%2057673e89f6894d5ab3e4ff0e25ea0b92/">python自学过程的一些总结</a>
+    </h1>
+  
+
+        
+        <a href="/coding/python/python%E8%87%AA%E5%AD%A6%E8%BF%87%E7%A8%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93%2057673e89f6894d5ab3e4ff0e25ea0b92/" class="archive-article-date">
+  	<time datetime="2021-08-22T09:02:34.318Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><h3 id="package及开发环境管理"><a href="#package及开发环境管理" class="headerlink" title="package及开发环境管理"></a>package及开发环境管理</h3><p>毫无疑问，conda是最佳的选择。对新手而言，anaconda可能会比较好入门，但从长远而言，从miniconda开始一步步学习如何管理开发所需要的package会对后续的学习更有帮助。不过如果是data science相关的话，从anaconda开始的确是个不错的选择，毕竟一开始就附带了相对多所需的工具，如R语言环境、ipython、jupyter以及一些常用的库。</p>
+<h3 id="IDE"><a href="#IDE" class="headerlink" title="IDE"></a>IDE</h3><p>一般对新手而言，首选会推荐Jetbrains下的PyCharm，特别是Web开发方面会更便利些。不过，个人还是更推荐从Visual studio code（下文简称vscode）这类文本编辑器入手。vim和eclipse这两套经典工具当然也可以，但对于初学者而言可能显得有点难以入手，特别是vim那套有一定门槛的编辑模式。我个人是比较推崇vscode的。</p>
+<p>以文本编辑器为入门IDE的好处，一方面是轻便，相比于PyCharm而言，其打开速度是占优的，对于初学者开发一些简单的小项目而言无疑是更方便。当然插件多了之后还是会卡，且大项目的调试等复杂功能还是PyCharm会更好用些。</p>
+<p>另一方面则是可拓展性，刚也说了，相比于大型IDE而言，vscode等文本编辑器更轻便，但相对地功能上自然会有一定的不足。对此，我们可以通过安装插件来弥补这方面的问题，如特定文件格式的支持、数据库连接等。vscode、vim、eclipse都有比较成熟的插件社区，对于主流需求而言都从插件中得到实现，实在不行还能自行开发对应插件。</p>
+<p>还有就是，使用简洁的文本编辑器可以让你在相对原始的开发过程中更关注代码本身如何实现以及调试，特别是调试这块。这样可以帮助你在后续的开发过程中更快地成长。</p>
+<h2 id="开发过程"><a href="#开发过程" class="headerlink" title="开发过程"></a>开发过程</h2><h3 id="项目版本管理"><a href="#项目版本管理" class="headerlink" title="项目版本管理"></a>项目版本管理</h3><p>Git无疑是最佳选择。同时，对应的GitHub社区是一个庞大的免费资源库。GitHub上有无数已经造好了的轮子，且代码都是可见的，可以让你学习到大牛写代码都是怎么样的一个写法。虽然我看不懂，但我大受震撼。</p>
+<p>学习如何利用好Git是项目版本管理的一部分，同时也是团队开发过程中不可或缺的一个必经之路。</p>
+<h3 id="项目组织架构"><a href="#项目组织架构" class="headerlink" title="项目组织架构"></a>项目组织架构</h3><p>这个没有具体的工具，全靠个人在项目中的实践。从自身经历而言，初学者开发的项目规模不大，也就那么几个文件之类的，对项目组织架构的需求并不高。但当你开始接触一些大项目或者项目规模逐渐扩大的时候，如何有效的组织好项目文件的组织架构则开始成为一个必须考虑的问题。</p>
+<p>和衣柜一样，一个好的组织架构要把文件分门别类地放置到对应的文件夹中，并基于恰当的命名，这样方便没有项目经验的新来者一看就知道，每个文件夹大概会放什么，每个文件大概的功能又是什么。</p>
+<p>简单地说，根目录下可以放置有bin、src、res、conf、docs、tests等文件夹，同时有requirements.txt、setup.py、README.md、LICENSE等项目描述文件。bin存储项目核心运行文件，src存储源码，res存储项目中用到的一些静态资源文件，docs放置项目文档，conf放置项目配置文件、docs放置项目文档说明、tests放置项目测试样例；而requirements.txt、setup.py则是项目的依赖以及安装文件，README.md是项目的整体介绍，LICENSE是开源项目的许可说明和授权。</p>
+<p>有这一套架构，无疑会更方便后续的开发者理解整个项目。</p>
+<p>另外需要提到的一点则是在python中如何根据项目组织结构导入其他模块。</p>
+<p>在同时开发多个项目时，难免会遇到根目录的问题，特别是在vscode工作区存在多项目的环境中容易就出现某个终端启动时根目录误选到另一个项目上的情况。对于这种情况，网上搜寻了许久，终究也还是最老套的方法，在每个文件中定义根目录。可见下面的4行代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">from pathlib import Path</span><br><span class="line">cwdPath = Path(__file__).parents[0]  <span class="comment"># 根据当前文件的层级，0为当前文件夹，1为上一级</span></span><br><span class="line">sys.path.append(str(cwdPath))  <span class="comment"># 加入环境变量</span></span><br></pre></td></tr></table></figure>
+
+<p>之前尝试过用配置文件保存根目录的方式，还写了个配置文件的管理器，但后面使用时仔细一想，我导入管理器的实例那不还是得通过路径寻找？所以绕了一圈还是回到了最原始的方法上了。</p>
+<h3 id="知识库"><a href="#知识库" class="headerlink" title="知识库"></a>知识库</h3><p>对于知识库的建立，我觉得一方面要适当保存自己以往写的代码，后续回来可以根据现有的知识进行重构，也可以进一步加固自身所学的新知识，另一方面则是要对一些不怎么常用但必需的资料做好保存，比如说有用的网站、库的文档、网上的经典文章之类。</p>
+<p>这个保存目前我一方面是用Chrome的书签功能来保存一些网址相关的内容，另一方面则是用笔记应用Notion来保存自己写的一些文章以及一些知识点的摘要。顺便一提，这篇文章也是我在用Notion写下来的。Notion是一款十分强大的笔记应用软件，网上也有不少详细的介绍，至少用了之后我马上就抛弃了以前用过的Evernote转投Notion的怀抱了，而且Notion的个人用户还是永久免费。</p>
+<p>一些常用的网站如，Python的官方文档、代码宝库GitHub、问答社区Stack Overflow、算法刷题LeetCode等这些就不提了，网上还有很多更全面的推荐清单。</p>
+<h3 id="实际开发"><a href="#实际开发" class="headerlink" title="实际开发"></a>实际开发</h3><p>首先需要牢记的一点是，Python是一门面向对象的编程语言（OOP）。这类语言的设计思想是，我们应该尽可能地把对象从具体的业务中抽象出来，形成一个具备数据以及操作数据方法的类，然后从类再去构造实体，在不同的实体之间实现数据交互来达成需求。</p>
+<p>与之相对应地则有面向过程的编程语言，或者说函数式编程。这种强调用函数或者说方法的堆叠去实现最终需求，用函数去替代了类，强调最终得到的结果。</p>
+<p>我在自学过程中就常犯下用多种function去实现某个需求的错误，而非把它们汇集成一个类。从结果而言，这可能是一样的，但从设计思路上而言，Python会更推崇我们去用面向对象的方式来解决一个问题。</p>
+<p>其后，就是要学会运用好Python提供的标准库。这个可以看以下的官方清单：</p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.python.org/zh-cn/3/library/index.html">The Python Standard Library - Python 3.9.6 documentation</a></p>
+<p>另外，我想强调的几个我觉得在开发调试中比较重要的标准库：logging及unittest、doctest。</p>
+<p>前者是控制信息输出的，可以想象为print功能的超级加强版。关于如何用好logging可以去看我的另外一篇logging项目实践优化的文章，也可以去看官方的HOW TO文档；而后两者则是Python自带的测试模块，能帮助你判断程序是否能如你预期地那样运行。不过对于unittest而言有更好的第三方库pytest可以帮你更方便地实现同样的目标。</p>
+<p>还有就是，写代码的同时别忘了养成良好的代码习惯：遵循通用格式以及多加注释。</p>
+<p>对于其他开发人员而言，在没有文档的情况下，代码就是你们之间沟通的桥梁。所以，一个良好的代码习惯相当于一口标准的口音，有利于你们之间进行顺畅的交流。</p>
+<p>一个没有任何注释的函数和类会让人看起来很心烦，即使它只做了一些很简单的操作。而且也不利于你后续的维护及更新。在这点上，我也并不是做得很好，但也在要求自己多加注释。关于Python的代码规范及如何去写一个类或者函数的注释可以看以下的这个文档：</p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh-google-styleguide.readthedocs.io/en/latest/google-python-styleguide/python_style_rules/">Python风格规范</a></p>
+<p>在Python3.5版本中新加入了Typing标准库，以帮助开发者标识函数及变量的类型，这与注释一样，并不是一个强制的要求，但最好还是能尽量加上。</p>
+<h2 id="尾言"><a href="#尾言" class="headerlink" title="尾言"></a>尾言</h2><p>这篇文章算是个人学习的一个阶段性总结吧。虽然感觉前面的路还很长，但至少地基是开始逐渐牢固了，希望自己能在这方面继续深造，最终得到一个不错的结果。</p>
+<p>也感谢你看到最后，希望这篇文章能对你有所帮助吧。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">coding</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/coding/python//" class="article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/coding/python/python%E8%87%AA%E5%AD%A6%E8%BF%87%E7%A8%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93%2057673e89f6894d5ab3e4ff0e25ea0b92/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-向GitHub添加访问验证 875cf51c98004e638a283060c37b3ad6" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1013,107 +1138,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/data-science/sql/%E6%96%87%E6%9C%AC%E6%8C%89%E5%85%B3%E9%94%AE%E8%AF%8D%E6%A0%87%E8%AF%86%E5%88%86%E7%B1%BB%2067aa4dde9c664fb2ab9dc003410c7a76/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hexo seo优化 4625de9518864ab9b85ade1e9a2873b9" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/coding/web/hexo%20seo%E4%BC%98%E5%8C%96%204625de9518864ab9b85ade1e9a2873b9/">hexo seo优化</a>
-    </h1>
-  
-
-        
-        <a href="/coding/web/hexo%20seo%E4%BC%98%E5%8C%96%204625de9518864ab9b85ade1e9a2873b9/" class="archive-article-date">
-  	<time datetime="2021-04-11T14:48:33.331Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>参考资料：</p>
-<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.csdn.net/lzy98/article/details/81140704">HEXO SEO 高级优化_浪子燕青的博客-CSDN博客_hexo seo</a></p>
-<h2 id="1、安装"><a href="#1、安装" class="headerlink" title="1、安装"></a>1、安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="string">&quot;E:\\myblog&quot;</span></span><br><span class="line">cnpm install hexo-generator-sitemap --save <span class="comment">#sitemap.xml适合提交给谷歌搜素引擎</span></span><br><span class="line">cnpm install hexo-generator-baidu-sitemap --save <span class="comment">#baidusitemap.xml适合提交百度搜索引擎</span></span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/coding/web/hexo%20seo%E4%BC%98%E5%8C%96%204625de9518864ab9b85ade1e9a2873b9/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">web</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">seo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding//" class="article-tag-list-link color2">coding</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/coding/web//" class="article-tag-list-link color4">web</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/coding/web/hexo%20seo%E4%BC%98%E5%8C%96%204625de9518864ab9b85ade1e9a2873b9/">展开全文 >></a>
         </p>
       
 
